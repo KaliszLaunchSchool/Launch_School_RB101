@@ -13,6 +13,10 @@ def valid_number(num)
   num.to_i() != 0 # Has a valid numerical representation
 end
 
+def integer?(input)
+  input.to_i.to_s == input # Handles "0 correctly"
+end
+
 def operation_to_message(op)
   case op
   when '1'
@@ -47,7 +51,7 @@ loop do # main loop
     prompt("What's the first number?")
     number1 = Kernel.gets().chomp()
 
-    if valid_number(number1)
+    if integer?(number1)
       break
     else
       prompt("Hmm... that doesn't look like a valid number")
