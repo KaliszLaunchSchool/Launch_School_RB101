@@ -17,6 +17,10 @@ def integer?(input)
   input.to_i.to_s == input # Handles "0 correctly"
 end
 
+def number?(input)
+  input.to_f.to_s == input || input.to_i.to_s == input
+end
+
 def operation_to_message(op)
   case op
   when '1'
@@ -51,7 +55,7 @@ loop do # main loop
     prompt("What's the first number?")
     number1 = Kernel.gets().chomp()
 
-    if integer?(number1)
+    if number?(number1)
       break
     else
       prompt("Hmm... that doesn't look like a valid number")
@@ -94,11 +98,11 @@ loop do # main loop
 
   result =  case operator
             when '1'
-              number1.to_i() + number2.to_i()
+              number1.to_f() + number2.to_f()
             when '2'
-              number1.to_i() - number2.to_i()
+              number1.to_f() - number2.to_f()
             when '3'
-              number1.to_i() * number2.to_i()
+              number1.to_f() * number2.to_f()
             when '4'
               number1.to_f() / number2.to_f()
             end
