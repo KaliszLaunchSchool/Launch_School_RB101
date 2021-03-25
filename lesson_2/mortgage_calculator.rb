@@ -8,7 +8,6 @@
   # monthly payment
 # Formula
   # monthly_payment = loan_amount * (monthly_interest_rate / (1 - (1 + monthly_interest_rate)**(-loan_duration)))
-require "pry"  
 
 def prompt(message)
   Kernel.puts(">> #{message}")
@@ -36,69 +35,79 @@ loop do
 end
 
 prompt("Hello, #{name}. Let's get started!")
-prompt("Please enter the loan amount (dollars):")
 
-loan_amount = ''
-loan_amount_plain = ''
-loan_amount_num = ''
-loop do
-  loan_amount = Kernel.gets().chomp
-  loan_amount_plain = loan_amount.delete("$").delete(",") || loan_amount
-  loan_amount_num = loan_amount_plain.to_f
-  if number?(loan_amount_plain)
-    break
-  else
-    prompt("Not a valid dollar amount. Please try again.")
+loop do #main loop
+  prompt("Please enter the loan amount (dollars):")
+  
+  loan_amount = ''
+  loan_amount_plain = ''
+  loan_amount_num = ''
+  loop do
+    loan_amount = Kernel.gets().chomp
+    loan_amount_plain = loan_amount.delete("$").delete(",") || loan_amount
+    loan_amount_num = loan_amount_plain.to_f
+    if number?(loan_amount_plain)
+      break
+    else
+      prompt("Not a valid dollar amount. Please try again.")
+    end
   end
+  
+  prompt("Please enter your APR (Annual Percentage Rate):")
+  
+  apr = ''
+  apr_plain = ''
+  apr_num = ''
+  loop do
+    apr = Kernel.gets().chomp
+    apr_plain = apr.delete!("%") || apr
+    apr_num = apr_plain.to_f
+    if number?(apr_plain)
+      break
+    else
+      prompt("Not a valid percentage. Please try again")
+    end
+  end
+  
+  prompt("Please enter the loan duration")
+  prompt("Years:")
+  
+  years = ''
+  loop do
+    years = Kernel.gets().chomp
+    if integer?(years)
+      break
+    else
+      prompt("Not a valid year. Please provide the years for your loan. You may input months in the next step!")
+    end
+  end
+  
+  prompt("Months:")
+  
+  months = ''
+  loop do
+    months = Kernel.gets().chomp
+    if integer?(months)
+      break
+    else
+      prompt("Not a valid number of months. Please try again")
+    end
+  end
+  
+  
+  prompt("Thank you.")
+  
+  monthly_interest_rate = (apr_num / 100.0) / 12.0
+  loan_duration = (years * 12.0) + months
+  monthly_payment = loan_amount_num * (monthly_interest_rate / (1.0 - (1.0 + monthly_interest_rate)**(-loan_duration.to_f)))
+  monthly_payment_rounded = monthly_payment.to_f.round(2.0)
+  
+  prompt("#{name}'s monthly payment is $#{monthly_payment_rounded}")
+  
+  prompt("Would you like to do another calculation?")
+  another = Kernel.gets().chomp
+  
+  break unless another.downcase().start_with?('y')
 end
 
-prompt("Please enter your APR (Annual Percentage Rate):")
-
-apr = ''
-apr_plain = ''
-apr_num = ''
-loop do
-  apr = Kernel.gets().chomp
-  apr_plain = apr.delete!("%") || apr
-  apr_num = apr_plain.to_f
-  if number?(apr_plain)
-    break
-  else
-    prompt("Not a valid percentage. Please try again")
-  end
-end
-
-prompt("Please enter the loan duration")
-prompt("Years:")
-
-years = ''
-loop do
-  years = Kernel.gets().chomp
-  if integer?(years)
-    break
-  else
-    prompt("Not a valid year. Please provide the years for your loan. You may input months in the next step!")
-  end
-end
-
-prompt("Months:")
-
-months = ''
-loop do
-  months = Kernel.gets().chomp
-  if integer?(months)
-    break
-  else
-    prompt("Not a valid number of months. Please try again")
-  end
-end
-
-
-prompt("Thank you.")
-
-monthly_interest_rate = (apr_num / 100.0) / 12.0
-loan_duration = (years * 12.0) + months
-monthly_payment = loan_amount_num * (monthly_interest_rate / (1.0 - (1.0 + monthly_interest_rate)**(-loan_duration.to_f)))
-monthly_payment_rounded = monthly_payment.to_f.round(2.0)
-
-prompt("#{name}'s monthly payment is $#{monthly_payment_rounded}")
+prompt("Thank you for using the Mortgage Calculator! Goodbye!")
