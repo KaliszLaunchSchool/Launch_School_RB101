@@ -105,9 +105,9 @@ loop do #main loop
   prompt("#{name}'s monthly payment is $#{monthly_payment_rounded}")
   
   prompt("Would you like to do another calculation?")
-  another = Kernel.gets().chomp
+  calculate_again = Kernel.gets().chomp
   
-  break unless another.downcase().start_with?('y')
+  break unless calculate_again.downcase().start_with?('y')
 end
 
 prompt("Thank you for using the Mortgage Calculator! Goodbye!")
