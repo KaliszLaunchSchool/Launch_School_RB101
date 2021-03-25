@@ -43,7 +43,7 @@ loop do
   loan_amount = Kernel.gets().chomp
   loan_amount_plain = loan_amount.delete("$").delete(",")
   loan_amount_num = loan_amount_plain.to_f
-  if number?(loan_amount_num)
+  if number?(loan_amount_plain)
     break
   else
     prompt("Not a valid dollar amount. Please try again.")
@@ -56,9 +56,9 @@ apr = ''
 apr_num = ''
 loop do
   apr = Kernel.gets().chomp
-  apr.delete!("%")
+  apr_plain = apr.delete!("%") || apr
   apr_num = apr.to_f
-  if number?(apr_num)
+  if number?(apr_plain)
     break
   else
     prompt("Not a valid percentage. Please try again")
@@ -70,7 +70,7 @@ prompt("Years:")
 
 years = ''
 loop do
-  years = Kernel.gets().chomp.to_i
+  years = Kernel.gets().chomp
   if integer?(years)
     break
   else
@@ -82,7 +82,7 @@ prompt("Months:")
 
 months = ''
 loop do
-  months = Kernel.gets().chomp.to_i
+  months = Kernel.gets().chomp
   if integer?(months)
     break
   else
