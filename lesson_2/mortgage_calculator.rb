@@ -8,7 +8,8 @@
   # monthly payment
 # Formula
   # monthly_payment = loan_amount * (monthly_interest_rate / (1 - (1 + monthly_interest_rate)**(-loan_duration)))
-  
+require "pry"  
+
 def prompt(message)
   Kernel.puts(">> #{message}")
 end
@@ -38,10 +39,11 @@ prompt("Hello, #{name}. Let's get started!")
 prompt("Please enter the loan amount (dollars):")
 
 loan_amount = ''
+loan_amount_plain = ''
 loan_amount_num = ''
 loop do
   loan_amount = Kernel.gets().chomp
-  loan_amount_plain = loan_amount.delete("$").delete(",")
+  loan_amount_plain = loan_amount.delete("$").delete(",") || loan_amount
   loan_amount_num = loan_amount_plain.to_f
   if number?(loan_amount_plain)
     break
@@ -53,11 +55,12 @@ end
 prompt("Please enter your APR (Annual Percentage Rate):")
 
 apr = ''
+apr_plain = ''
 apr_num = ''
 loop do
   apr = Kernel.gets().chomp
   apr_plain = apr.delete!("%") || apr
-  apr_num = apr.to_f
+  apr_num = apr_plain.to_f
   if number?(apr_plain)
     break
   else
@@ -93,9 +96,9 @@ end
 
 prompt("Thank you.")
 
-monthly_interest_rate = (apr_num / 100) / 12
-loan_duration = (years * 12) + months
-monthly_payment = loan_amount_num * (monthly_interest_rate / (1 - (1 + monthly_interest_rate)**(-loan_duration)))
-monthly_payment_rounded = monthly_payment.to_f.round(2)
+monthly_interest_rate = (apr_num / 100.0) / 12.0
+loan_duration = (years * 12.0) + months
+monthly_payment = loan_amount_num * (monthly_interest_rate / (1.0 - (1.0 + monthly_interest_rate)**(-loan_duration.to_f)))
+monthly_payment_rounded = monthly_payment.to_f.round(2.0)
 
 prompt("#{name}'s monthly payment is $#{monthly_payment_rounded}")
