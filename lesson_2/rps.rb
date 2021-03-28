@@ -8,7 +8,7 @@ def display_results(player, computer)
   if (player == 'rock' && computer == 'scissors') ||
       (player== 'paper' && computer == 'rock') ||
       (player== 'scissors' && computer == 'paper')
-    propmpt("You won!")
+    prompt("You won!")
   elsif (player == 'rock' && computer == 'paper') ||
         (player == 'paper' && computer == 'scissors') ||
         (player == 'scissors' && computer == 'rock')
