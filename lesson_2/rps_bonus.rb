@@ -1,16 +1,8 @@
-VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard']
-
-def test_method
-  prompt('test message')
-end
-
-# test_method
+VALID_CHOICES = {'rock': 'r', 'paper': 'p', 'scissors': 's', 'spock': 'sp', 'lizard': 'l'}
 
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
-
-test_method
 
 def win?(first, second)
   (first == 'scissors' && second == 'paper') ||
@@ -39,9 +31,15 @@ loop do
   # player's turn
   choice = ''
   loop do
-    prompt("Choose one: #{VALID_CHOICES.join(', ')}")
+    
+    prompt("Choose one: ")
+    VALID_CHOICES.each do |word, shorthand|
+      puts "   #{word} (#{shorthand})"
+    end
+    
+    
     choice = Kernel.gets().chomp()
-
+    
     if VALID_CHOICES.include?(choice)
       break
     else
