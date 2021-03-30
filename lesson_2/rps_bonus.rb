@@ -1,4 +1,4 @@
-VALID_CHOICES = {'rock': 'r', 'paper': 'p', 'scissors': 's', 'spock': 'sp', 'lizard': 'l'}
+VALID_CHOICES = { "rock": 'r', "paper": 'p', "scissors": 's', "spock": 'sp', "lizard": 'l'}
 
 def prompt(message)
   Kernel.puts("=> #{message}")
@@ -38,9 +38,12 @@ loop do
     end
     
     
-    choice = Kernel.gets().chomp()
+    p choice = Kernel.gets().chomp()
     
-    if VALID_CHOICES.include?(choice)
+    if VALID_CHOICES.has_key?(choice)
+      break
+    elsif VALID_CHOICES.values.include?(choice)
+      choice = VALID_CHOICES.key(choice)
       break
     else
       prompt("That's not a valid choice.")
@@ -48,7 +51,7 @@ loop do
   end
 
   # computer's turn
-  computer_choice = VALID_CHOICES.sample
+  computer_choice = VALID_CHOICES.keys.sample
 
   Kernel.puts("You chose: #{choice}; Computer chose: #{computer_choice}")
 
