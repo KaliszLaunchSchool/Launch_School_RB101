@@ -56,7 +56,9 @@ loop do # main loop
     loan_amt = Kernel.gets().chomp
     loan_amt_plain = loan_amt.delete("$").delete(",") || loan_amt
     loan_amt_num = loan_amt_plain.to_f
-    if number?(loan_amt_plain)
+    if loan_amt_num <= 0
+      prompt("Please enter a loan amount greater than zero.")
+    elsif number?(loan_amt_plain)
       break
     else
       prompt("Not a valid dollar amount. Please try again.")
