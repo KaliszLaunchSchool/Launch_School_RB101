@@ -25,6 +25,10 @@ def integer?(input)
   input.to_i.to_s == input
 end
 
+def clear_screen
+  system('clear') || system('cls')
+end
+
 prompt("Welcome to the Morgage Calculator!")
 prompt("Let's calculate your monthly payment. First, please enter your name:")
 
@@ -37,6 +41,8 @@ loop do
     break
   end
 end
+
+clear_screen
 
 prompt("Hello, #{name}. Let's get started!")
 
@@ -73,7 +79,7 @@ loop do # main loop
     end
   end
 
-  prompt("Please enter the loan duration")
+  prompt("Please enter the loan duration (enter years, then months)")
   prompt("Years:")
 
   years = ''
@@ -99,6 +105,8 @@ loop do # main loop
     end
   end
 
+  clear_screen
+
   prompt("Thank you.")
 
   monthly_int_rate = (apr_num / 100.0) / 12.0
@@ -112,6 +120,8 @@ loop do # main loop
 
   prompt("Would you like to do another calculation?")
   calculate_again = Kernel.gets().chomp
+
+  clear_screen
 
   break unless calculate_again.downcase().start_with?('y')
 end
