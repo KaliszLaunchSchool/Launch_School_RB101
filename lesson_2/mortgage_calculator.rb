@@ -37,19 +37,22 @@ def clear_screen
   system('clear') || system('cls')
 end
 
+def get_name
+  prompt("Let's calculate your monthly payment. First, please enter your name:")
+
+  name = ''
+  loop do
+    name = gets.chomp
+    break unless name.empty?
+    prompt("Please enter a valid name")
+  end
+
+  name
+end
 
 prompt("Welcome to the Morgage Calculator!")
-prompt("Let's calculate your monthly payment. First, please enter your name:")
 
-name = ''
-loop do
-  name = Kernel.gets().chomp
-  if name.empty?
-    prompt("Please enter a valid name")
-  else
-    break
-  end
-end
+name = get_name
 
 clear_screen
 
@@ -134,7 +137,8 @@ loop do # main loop
   
   monthly_payment =
     loan_amt_num * (monthly_int_rate /
-    (1.0 - (1.0 + monthly_int_rate)**(-loan_duration.to_f)))
+    (1.0 - (1.0 + monthly_int_rate)**(-loan_duration)))
+  
   monthly_payment_rounded = monthly_payment.to_f.round(2.0)
 
   prompt("#{name}'s monthly payment is $#{monthly_payment_rounded}")
@@ -144,7 +148,9 @@ loop do # main loop
 
   clear_screen
 
-  break unless calculate_again.downcase().start_with?('y')
+  break unless 
+    calculate_again.downcase() == 'y' || calculate_again.downcase() == 'yes'
+
 end
 
 prompt("Thank you for using the Mortgage Calculator! Goodbye!")
