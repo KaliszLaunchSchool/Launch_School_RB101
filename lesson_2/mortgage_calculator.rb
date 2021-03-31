@@ -25,9 +25,18 @@ def integer?(input)
   input.to_i.to_s == input
 end
 
+def greater_than_zero?(input)
+  input <= 0
+end
+
+def not_negative?(input)
+  input <0
+end
+
 def clear_screen
   system('clear') || system('cls')
 end
+
 
 prompt("Welcome to the Morgage Calculator!")
 prompt("Let's calculate your monthly payment. First, please enter your name:")
@@ -56,7 +65,7 @@ loop do # main loop
     loan_amt = Kernel.gets().chomp
     loan_amt_plain = loan_amt.delete("$").delete(",") || loan_amt
     loan_amt_num = loan_amt_plain.to_f
-    if loan_amt_num <= 0
+    if greater_than_zero?(loan_amt_num)
       prompt("Please enter a loan amount greater than zero.")
     elsif number?(loan_amt_plain)
       break
@@ -74,7 +83,12 @@ loop do # main loop
     apr = Kernel.gets().chomp
     apr_plain = apr.delete!("%") || apr
     apr_num = apr_plain.to_f
-    if number?(apr_plain)
+    if not_negative?(apr_num)
+      prompt("Please enter a positive APR")
+#    elsif apr_plain == '0'
+#      apr_num = 0 #need to figure out what to do if APR is 0
+#      break
+    elsif number?(apr_plain)
       break
     else
       prompt("Not a valid percentage. Please try again")
@@ -87,7 +101,9 @@ loop do # main loop
   years = ''
   loop do
     years = Kernel.gets().chomp
-    if integer?(years)
+    if not_negative?(years.to_i)
+      prompt("Please enter a positive number of years")
+    elsif integer?(years)
       break
     else
       prompt("Not a valid year. Please provide the years for your loan.
@@ -100,7 +116,9 @@ loop do # main loop
   months = ''
   loop do
     months = Kernel.gets().chomp
-    if integer?(months)
+    if not_negative?(months.to_i) || months.to_i >= 12
+      prompt("Please enter a valid number of months (between 0 and 11)")
+    elsif integer?(months)
       break
     else
       prompt("Not a valid number of months. Please try again")
