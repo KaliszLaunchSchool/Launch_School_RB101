@@ -75,9 +75,30 @@ def get_apr
 #    elsif apr_plain == '0'
 #      apr_num = 0 #need to figure out what to do if APR is 0
 #      break
-    end
-    apr_num
   end
+    apr_num
+end
+
+def get_years
+  years = ''
+  loop do
+    years = Kernel.gets().chomp
+    break if greater_than_zero?(years.to_i) && integer?(years)
+    prompt("Not a valid number of years. Please provide a positive number of years 
+    for your loan. You may input months in the next step!")
+  end
+  years
+end
+
+def get_months
+  months = ''
+  loop do
+    months = Kernel.gets().chomp
+    break if greater_than_zero?(months.to_i) && months.to_i < 12 && integer?(months)
+    prompt("Please enter a valid number of months (between 0 and 11)")
+  end
+  months
+end
 
 prompt("Welcome to the Morgage Calculator!")
 
@@ -98,33 +119,9 @@ loop do # main loop
 
   prompt("Please enter the loan duration (enter years, then months)")
   prompt("Years:")
-
-  years = ''
-  loop do
-    years = Kernel.gets().chomp
-    if not_negative?(years.to_i)
-      prompt("Please enter a positive number of years")
-    elsif integer?(years)
-      break
-    else
-      prompt("Not a valid year. Please provide the years for your loan.
-              You may input months in the next step!")
-    end
-  end
-
+  years = get_years
   prompt("Months:")
-
-  months = ''
-  loop do
-    months = Kernel.gets().chomp
-    if not_negative?(months.to_i) || months.to_i >= 12
-      prompt("Please enter a valid number of months (between 0 and 11)")
-    elsif integer?(months)
-      break
-    else
-      prompt("Not a valid number of months. Please try again")
-    end
-  end
+  months = get_months
 
   clear_screen
 
