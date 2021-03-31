@@ -130,7 +130,8 @@ loop do # main loop
   prompt("Thank you.")
 
   monthly_int_rate = (apr_num / 100.0) / 12.0
-  loan_duration = (years * 12.0) + months
+  loan_duration = (years.to_i * 12.0) + months.to_i
+  
   monthly_payment =
     loan_amt_num * (monthly_int_rate /
     (1.0 - (1.0 + monthly_int_rate)**(-loan_duration.to_f)))
