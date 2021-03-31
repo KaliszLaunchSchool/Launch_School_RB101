@@ -103,7 +103,6 @@ end
 prompt("Welcome to the Morgage Calculator!")
 
 prompt("Let's calculate your monthly payment. First, please enter your name:")
-
 name = get_name
 
 clear_screen
@@ -127,8 +126,9 @@ loop do # main loop
 
   prompt("Thank you.")
 
-  monthly_int_rate = (apr_num / 100.0) / 12.0
-  loan_duration = (years.to_i * 12.0) + months.to_i
+  #Calculations
+  monthly_int_rate = ( apr_num / 100.0 ) / 12.0
+  loan_duration = ( years.to_i * 12.0 ) + months.to_i
   
   monthly_payment =
     loan_amt_num * (monthly_int_rate /
@@ -138,6 +138,7 @@ loop do # main loop
 
   prompt("#{name}'s monthly payment is $#{monthly_payment_rounded}")
 
+  # Calculate again?
   prompt("Would you like to do another calculation?")
   calculate_again = Kernel.gets().chomp
 
@@ -149,3 +150,22 @@ loop do # main loop
 end
 
 prompt("Thank you for using the Mortgage Calculator! Goodbye!")
+
+=begin
+Could pull out calculations into its own method, however getting error that
+the method was unable to assess apr_num when attempted
+
+Could refactor calculate again loop:
+def calculate_again?
+  prompt("Would you like to do another calculation?")
+  calculate_again = ''
+
+  loop do
+    calculate_again = gets.chomp.downcase
+    break if ['y', 'yes', 'n', 'no'].include?(calculate_again)
+    prompt('Please enter valid input (y/yes or n/no)')
+  end
+
+  ['y', 'yes'].include?(calculate_again)
+end
+=end
