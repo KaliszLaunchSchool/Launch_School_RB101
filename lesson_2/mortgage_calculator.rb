@@ -26,7 +26,7 @@ def integer?(input)
 end
 
 def greater_than_zero?(input)
-  input <= 0
+  input >= 0
 end
 
 def not_negative?(input)
@@ -47,6 +47,24 @@ def get_name
   name
 end
 
+def get_loan
+  loan_amt = ''
+  loan_amt_plain = ''
+  loan_amt_num = ''
+  loop do
+    loan_amt = Kernel.gets().chomp
+    loan_amt_plain = loan_amt.delete("$").delete(",") || loan_amt
+    loan_amt_num = loan_amt_plain.to_f
+    if greater_than_zero?(loan_amt_num) && number?(loan_amt_plain)
+      break
+    else
+      prompt("Not a valid dollar amount. Please try again with a number greater than zero.")
+    end
+  end
+  loan_amt_plain
+  loan_amt_num
+end
+
 prompt("Welcome to the Morgage Calculator!")
 
 prompt("Let's calculate your monthly payment. First, please enter your name:")
@@ -60,21 +78,7 @@ prompt("Hello, #{name}. Let's get started!")
 loop do # main loop
   prompt("Please enter the loan amount (dollars):")
 
-  loan_amt = ''
-  loan_amt_plain = ''
-  loan_amt_num = ''
-  loop do
-    loan_amt = Kernel.gets().chomp
-    loan_amt_plain = loan_amt.delete("$").delete(",") || loan_amt
-    loan_amt_num = loan_amt_plain.to_f
-    if greater_than_zero?(loan_amt_num)
-      prompt("Please enter a loan amount greater than zero.")
-    elsif number?(loan_amt_plain)
-      break
-    else
-      prompt("Not a valid dollar amount. Please try again.")
-    end
-  end
+  loan_amt_num = get_loan
 
   prompt("Please enter your APR (Annual Percentage Rate):")
 
