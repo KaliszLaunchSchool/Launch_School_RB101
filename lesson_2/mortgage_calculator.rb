@@ -30,7 +30,7 @@ def greater_than_zero?(input)
 end
 
 def not_negative?(input)
-  input <0
+  input > 0
 end
 
 def clear_screen
@@ -55,15 +55,29 @@ def get_loan
     loan_amt = Kernel.gets().chomp
     loan_amt_plain = loan_amt.delete("$").delete(",") || loan_amt
     loan_amt_num = loan_amt_plain.to_f
-    if greater_than_zero?(loan_amt_num) && number?(loan_amt_plain)
-      break
-    else
-      prompt("Not a valid dollar amount. Please try again with a number greater than zero.")
-    end
+    break if greater_than_zero?(loan_amt_num) && number?(loan_amt_plain)
+    prompt("Not a valid dollar amount. Please try again with a number greater than zero.")
   end
   loan_amt_plain
   loan_amt_num
 end
+
+def get_apr
+  apr = ''
+  apr_plain = ''
+  apr_num = ''
+  loop do
+    apr = Kernel.gets().chomp
+    apr_plain = apr.delete!("%") || apr
+    apr_num = apr_plain.to_f
+    break if not_negative?(apr_num) && number?(apr_plain)
+    prompt("Not a valid percentage. Please try again")
+#    elsif apr_plain == '0'
+#      apr_num = 0 #need to figure out what to do if APR is 0
+#      break
+    end
+    apr_num
+  end
 
 prompt("Welcome to the Morgage Calculator!")
 
@@ -77,29 +91,10 @@ prompt("Hello, #{name}. Let's get started!")
 
 loop do # main loop
   prompt("Please enter the loan amount (dollars):")
-
   loan_amt_num = get_loan
 
   prompt("Please enter your APR (Annual Percentage Rate):")
-
-  apr = ''
-  apr_plain = ''
-  apr_num = ''
-  loop do
-    apr = Kernel.gets().chomp
-    apr_plain = apr.delete!("%") || apr
-    apr_num = apr_plain.to_f
-    if not_negative?(apr_num)
-      prompt("Please enter a positive APR")
-#    elsif apr_plain == '0'
-#      apr_num = 0 #need to figure out what to do if APR is 0
-#      break
-    elsif number?(apr_plain)
-      break
-    else
-      prompt("Not a valid percentage. Please try again")
-    end
-  end
+  apr_num = get_apr
 
   prompt("Please enter the loan duration (enter years, then months)")
   prompt("Years:")
