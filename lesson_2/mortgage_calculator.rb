@@ -79,7 +79,7 @@ def get_apr
     apr_num
 end
 
-def get_years
+def get_loan_duration_years
   years = ''
   loop do
     years = Kernel.gets().chomp
@@ -90,7 +90,7 @@ def get_years
   years
 end
 
-def get_months
+def get_loan_duration_months
   months = ''
   loop do
     months = Kernel.gets().chomp
@@ -119,9 +119,9 @@ loop do # main loop
 
   prompt("Please enter the loan duration (enter years, then months)")
   prompt("Years:")
-  years = get_years
+  years = get_loan_duration_years
   prompt("Months:")
-  months = get_months
+  months = get_loan_duration_months
 
   clear_screen
 
