@@ -38,19 +38,18 @@ def clear_screen
 end
 
 def get_name
-  prompt("Let's calculate your monthly payment. First, please enter your name:")
-
   name = ''
   loop do
     name = gets.chomp
     break unless name.empty?
     prompt("Please enter a valid name")
   end
-
   name
 end
 
 prompt("Welcome to the Morgage Calculator!")
+
+prompt("Let's calculate your monthly payment. First, please enter your name:")
 
 name = get_name
 
