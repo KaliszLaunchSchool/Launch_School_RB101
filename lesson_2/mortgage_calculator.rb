@@ -56,9 +56,9 @@ def get_loan
     loan_amt_plain = loan_amt.delete("$").delete(",") || loan_amt
     loan_amt_num = loan_amt_plain.to_f
     break if greater_than_zero?(loan_amt_num) && number?(loan_amt_plain)
-    prompt("Not a valid dollar amount. Please try again with a number greater than zero.")
+    prompt("Not a valid dollar amount. Please try again with a number greater
+    than zero.")
   end
-  loan_amt_plain
   loan_amt_num
 end
 
@@ -73,7 +73,7 @@ def get_apr
     break if not_negative?(apr_num) && number?(apr_plain)
     prompt("Not a valid percentage. Please try again")
   end
-    apr_num
+  apr_num
 end
 
 def get_loan_duration_years
@@ -81,8 +81,8 @@ def get_loan_duration_years
   loop do
     years = Kernel.gets().chomp
     break if not_negative?(years.to_i) && integer?(years)
-    prompt("Not a valid number of years. Please provide a positive number of years 
-    for your loan. You may input months in the next step!")
+    prompt("Not a valid number of years. Please provide a positive number of
+    years for your loan. You may input months in the next step!")
   end
   years
 end
@@ -154,7 +154,9 @@ loop do # main loop
 
   prompt("Thank you.")
 
-  monthly_payment = calculate_monthly_payment(loan_amt_num, apr_num, years, months)
+  monthly_payment =
+    calculate_monthly_payment(loan_amt_num, apr_num, years, months)
+
   display_monthly_payment(name, monthly_payment)
 
   break unless calculate_again?
