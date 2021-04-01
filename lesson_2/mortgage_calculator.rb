@@ -26,11 +26,11 @@ def integer?(input)
 end
 
 def greater_than_zero?(input)
-  input >= 0
+  input > 0
 end
 
 def not_negative?(input)
-  input > 0
+  input >= 0
 end
 
 def clear_screen
@@ -80,7 +80,7 @@ def get_loan_duration_years
   years = ''
   loop do
     years = Kernel.gets().chomp
-    break if greater_than_zero?(years.to_i) && integer?(years)
+    break if not_negative?(years.to_i) && integer?(years)
     prompt("Not a valid number of years. Please provide a positive number of years 
     for your loan. You may input months in the next step!")
   end
@@ -91,7 +91,7 @@ def get_loan_duration_months
   months = ''
   loop do
     months = Kernel.gets().chomp
-    break if greater_than_zero?(months.to_i) && months.to_i < 12 && integer?(months)
+    break if not_negative?(months.to_i) && months.to_i < 12 && integer?(months)
     prompt("Please enter a valid number of months (between 0 and 11)")
   end
   months
@@ -105,6 +105,14 @@ def calculate_monthly_payment(name, loan_amt_num, apr_num, years, months)
     loan_amt_num * (monthly_int_rate /
     (1.0 - (1.0 + monthly_int_rate)**(-loan_duration)))
   
+  monthly_payment_rounded = monthly_payment.to_f.round(2.0)
+
+  prompt("#{name}'s monthly payment is $#{monthly_payment_rounded}")
+end
+
+def calculate_zero_apr(name, loan_amt_num, years, months)
+  loan_duration = ( years.to_i * 12.0 ) + months.to_i
+  monthly_payment = loan_amt_num / loan_duration
   monthly_payment_rounded = monthly_payment.to_f.round(2.0)
 
   prompt("#{name}'s monthly payment is $#{monthly_payment_rounded}")
@@ -149,8 +157,11 @@ loop do # main loop
 
   prompt("Thank you.")
 
-  
-  calculate_monthly_payment(name, loan_amt_num, apr_num, years, months)
+  if apr_num == 0
+    calculate_zero_apr(name, loan_amt_num, years, months)
+  else
+    calculate_monthly_payment(name, loan_amt_num, apr_num, years, months)
+  end
 
   break unless calculate_again?
   
