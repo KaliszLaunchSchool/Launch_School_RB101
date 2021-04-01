@@ -98,20 +98,20 @@ def get_loan_duration_months
 end
 
 def calculate_monthly_payment(name, loan_amt_num, apr_num, years, months)
-  monthly_int_rate = ( apr_num / 100.0 ) / 12.0
-  loan_duration = ( years.to_i * 12.0 ) + months.to_i
-  
+  monthly_int_rate = (apr_num / 100.0) / 12.0
+  loan_duration = (years.to_i * 12.0) + months.to_i
+
   monthly_payment =
     loan_amt_num * (monthly_int_rate /
     (1.0 - (1.0 + monthly_int_rate)**(-loan_duration)))
-  
+
   monthly_payment_rounded = monthly_payment.to_f.round(2.0)
 
   prompt("#{name}'s monthly payment is $#{monthly_payment_rounded}")
 end
 
 def calculate_zero_apr(name, loan_amt_num, years, months)
-  loan_duration = ( years.to_i * 12.0 ) + months.to_i
+  loan_duration = (years.to_i * 12.0) + months.to_i
   monthly_payment = loan_amt_num / loan_duration
   monthly_payment_rounded = monthly_payment.to_f.round(2.0)
 
@@ -164,7 +164,7 @@ loop do # main loop
   end
 
   break unless calculate_again?
-  
+
   clear_screen
 end
 
