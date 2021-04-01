@@ -72,9 +72,6 @@ def get_apr
     apr_num = apr_plain.to_f
     break if not_negative?(apr_num) && number?(apr_plain)
     prompt("Not a valid percentage. Please try again")
-#    elsif apr_plain == '0'
-#      apr_num = 0 #need to figure out what to do if APR is 0
-#      break
   end
     apr_num
 end
@@ -98,6 +95,19 @@ def get_loan_duration_months
     prompt("Please enter a valid number of months (between 0 and 11)")
   end
   months
+end
+
+def calculate_monthly_payment(name, loan_amt_num, apr_num, years, months)
+  monthly_int_rate = ( apr_num / 100.0 ) / 12.0
+  loan_duration = ( years.to_i * 12.0 ) + months.to_i
+  
+  monthly_payment =
+    loan_amt_num * (monthly_int_rate /
+    (1.0 - (1.0 + monthly_int_rate)**(-loan_duration)))
+  
+  monthly_payment_rounded = monthly_payment.to_f.round(2.0)
+
+  prompt("#{name}'s monthly payment is $#{monthly_payment_rounded}")
 end
 
 prompt("Welcome to the Morgage Calculator!")
@@ -126,17 +136,8 @@ loop do # main loop
 
   prompt("Thank you.")
 
-  #Calculations
-  monthly_int_rate = ( apr_num / 100.0 ) / 12.0
-  loan_duration = ( years.to_i * 12.0 ) + months.to_i
   
-  monthly_payment =
-    loan_amt_num * (monthly_int_rate /
-    (1.0 - (1.0 + monthly_int_rate)**(-loan_duration)))
-  
-  monthly_payment_rounded = monthly_payment.to_f.round(2.0)
-
-  prompt("#{name}'s monthly payment is $#{monthly_payment_rounded}")
+  calculate_monthly_payment(name, loan_amt_num, apr_num, years, months)
 
   # Calculate again?
   prompt("Would you like to do another calculation?")
