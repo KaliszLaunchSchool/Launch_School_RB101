@@ -1,20 +1,15 @@
-VALID_CHOICES = { "rock": 'r', "paper": 'p', "scissors": 's', "spock": 'sp', "lizard": 'l'}
+VALID_CHOICES = { "rock" => 'r', "paper" => 'p', "scissors" => 's', "spock" => 'sp', "lizard" => 'l'}
 
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
 def win?(first, second)
-  (first == 'scissors' && second == 'paper') ||
-    (first == 'paper' && second == 'rock') ||
-    (first == 'rock' && second == 'lizard')
-    (first == 'lizard' && second == 'spock') ||
-    (first == 'spock' && second == 'scissors') ||
-    (first == 'scissors' && second == 'lizard') ||
-    (first == 'lizard' && second == 'paper') ||
-    (first == 'paper' && second == 'spock') ||
-    (first == 'spock' && second == 'rock') ||
-    (first == 'rock' && second == 'scissors') 
+  (first == 'scissors' && (second == 'paper' || second == 'lizard')) ||
+    (first == 'paper' && (second == 'rock' || second == 'spock')) ||
+    (first == 'rock' && (second == 'lizard' || second == 'scissors'))
+    (first == 'lizard' && (second == 'spock' || second == 'paper')) ||
+    (first == 'spock' && (second == 'scissors' || second == 'rock')) 
 end
 
 def display_results(player, computer)
@@ -29,7 +24,7 @@ end
 
 loop do
   # player's turn
-  choice = ''
+  player_choice = ''
   loop do
     
     prompt("Choose one: ")
@@ -37,13 +32,12 @@ loop do
       puts "   #{word} (#{shorthand})"
     end
     
+    p player_choice = Kernel.gets().chomp()
     
-    p choice = Kernel.gets().chomp()
-    
-    if VALID_CHOICES.has_key?(choice)
+    if VALID_CHOICES.include?(player_choice)
       break
-    elsif VALID_CHOICES.values.include?(choice)
-      choice = VALID_CHOICES.key(choice)
+    elsif VALID_CHOICES.values.include?(player_choice)
+      player_choice = VALID_CHOICES.key(player_choice)
       break
     else
       prompt("That's not a valid choice.")
@@ -53,9 +47,9 @@ loop do
   # computer's turn
   computer_choice = VALID_CHOICES.keys.sample
 
-  Kernel.puts("You chose: #{choice}; Computer chose: #{computer_choice}")
+  Kernel.puts("You chose: #{player_choice}; Computer chose: #{computer_choice}")
 
-  display_results(choice, computer_choice)
+  display_results(player_choice, computer_choice)
 
   prompt("Do you want to play again?")
   answer = Kernel.gets().chomp
