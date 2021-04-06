@@ -30,6 +30,19 @@ def display_results(player, computer)
   end
 end
 
+def play_again?
+  prompt("Would you like to play again?")
+  play_again = ''
+
+  loop do
+    play_again = gets.chomp.downcase
+    break if ['y', 'yes', 'n', 'no'].include?(play_again)
+    prompt('Please enter valid answer (y/yes or n/no)')
+  end
+
+  ['y', 'yes'].include?(play_again)
+end
+
 loop do
   # player's turn
   player_choice = ''
@@ -59,9 +72,7 @@ loop do
 
   display_results(player_choice, computer_choice)
 
-  prompt("Do you want to play again?")
-  answer = Kernel.gets().chomp
-  break unless answer.downcase().start_with?('y')
+  break unless play_again?
 end
 
 prompt("Thank you for playing. Goodbye!")
