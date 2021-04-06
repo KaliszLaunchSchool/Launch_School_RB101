@@ -49,6 +49,7 @@ end
 
 prompt ("Welcome to the 'Rock, Paper, Scissors, Lizard, Spock' Game!")
 loop do
+  prompt ("The first player to 5 wins, wins the match!")
   # player's turn
   player_choice = ''
   loop do
