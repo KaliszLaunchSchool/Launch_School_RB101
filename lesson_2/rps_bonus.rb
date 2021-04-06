@@ -16,6 +16,10 @@ def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
+def clear_screen
+  system('clear') || system('cls')
+end
+
 def win?(first, second)
   GAME_RULES[first].include?(second)
 end
