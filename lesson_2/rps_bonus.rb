@@ -1,4 +1,16 @@
-VALID_CHOICES = { "rock" => 'r', "paper" => 'p', "scissors" => 's', "spock" => 'sp', "lizard" => 'l'}
+VALID_CHOICES = { "rock" => 'r', 
+                    "paper" => 'p', 
+                    "scissors" => 's', 
+                    "spock" => 'sp', 
+                    "lizard" => 'l'
+                }
+
+GAME_RULES = {  'scissors' => ['paper', 'lizard'],
+                  'paper' => ['rock', 'spock'],
+                  'rock' => ['lizard', 'scissors'],
+                  'lizard' => ['spock', 'paper'],
+                  'spock' => ['scissors', 'rock']
+                }
 
 def prompt(message)
   Kernel.puts("=> #{message}")
