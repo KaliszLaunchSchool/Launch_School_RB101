@@ -47,6 +47,7 @@ def play_again?
   ['y', 'yes'].include?(play_again)
 end
 
+prompt ("Welcome to the 'Rock, Paper, Scissors, Lizard, Spock' Game!")
 loop do
   # player's turn
   player_choice = ''
@@ -77,6 +78,9 @@ loop do
   display_results(player_choice, computer_choice)
 
   break unless play_again?
+  clear_screen
 end
+
+clear_screen
 
 prompt("Thank you for playing. Goodbye!")
