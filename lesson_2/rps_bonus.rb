@@ -40,7 +40,7 @@ loop do
       puts "   #{word} (#{shorthand})"
     end
     
-    player_choice = Kernel.gets().chomp()
+    player_choice = Kernel.gets().chomp().downcase
     
     if VALID_CHOICES.include?(player_choice)
       break
