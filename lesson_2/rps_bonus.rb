@@ -17,11 +17,7 @@ def prompt(message)
 end
 
 def win?(first, second)
-  (first == 'scissors' && (second == 'paper' || second == 'lizard')) ||
-    (first == 'paper' && (second == 'rock' || second == 'spock')) ||
-    (first == 'rock' && (second == 'lizard' || second == 'scissors'))
-    (first == 'lizard' && (second == 'spock' || second == 'paper')) ||
-    (first == 'spock' && (second == 'scissors' || second == 'rock')) 
+  GAME_RULES[first].include?(second)
 end
 
 def display_results(player, computer)
@@ -44,7 +40,7 @@ loop do
       puts "   #{word} (#{shorthand})"
     end
     
-    p player_choice = Kernel.gets().chomp()
+    player_choice = Kernel.gets().chomp()
     
     if VALID_CHOICES.include?(player_choice)
       break
