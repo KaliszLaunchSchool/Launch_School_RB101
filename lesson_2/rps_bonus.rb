@@ -34,6 +34,27 @@ def display_results(player, computer)
   end
 end
 
+def get_results(player, computer)
+  if win?(player, computer)
+    'player'
+  elsif win?(computer, player)
+    'computer'
+  else
+  end
+end
+
+def calculate_match_score(score, winner)
+  p winner
+  p score[winner.to_sym]
+  score[winner.to_sym] += 1 unless winner.nil?
+end
+
+def display_match_results(score)
+  prompt("Current score")
+  prompt("Player: #{score['player'.to_sym]}")
+  prompt("Computer: #{score['computer'.to_sym]}")
+end
+
 def play_again?
   prompt("Would you like to play again?")
   play_again = ''
@@ -48,6 +69,7 @@ def play_again?
 end
 
 prompt ("Welcome to the 'Rock, Paper, Scissors, Lizard, Spock' Game!")
+score = {'player': 0, 'computer': 0}
 loop do
   prompt ("The first player to 5 wins, wins the match!")
   # player's turn
@@ -77,6 +99,10 @@ loop do
   Kernel.puts("You chose: #{player_choice}; Computer chose: #{computer_choice}")
 
   display_results(player_choice, computer_choice)
+  winner =  get_results(player_choice, computer_choice)
+
+  calculate_match_score(score, winner)
+  display_match_results(score)
 
   break unless play_again?
   clear_screen
