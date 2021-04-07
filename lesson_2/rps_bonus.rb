@@ -91,8 +91,10 @@ loop do
     # computer's turn
     computer_choice = VALID_CHOICES.keys.sample
 
-    Kernel.puts
-    ("You chose: #{player_choice}; Computer chose: #{computer_choice}")
+    clear_screen
+
+    prompt("You chose: #{player_choice}")
+    prompt("Computer chose: #{computer_choice}")
 
     display_results(player_choice, computer_choice)
     winner = get_results(player_choice, computer_choice)
