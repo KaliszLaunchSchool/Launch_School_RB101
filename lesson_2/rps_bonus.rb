@@ -1,16 +1,14 @@
-VALID_CHOICES = { "rock" => 'r', 
-                    "paper" => 'p', 
-                    "scissors" => 's', 
-                    "spock" => 'sp', 
-                    "lizard" => 'l'
-                }
+VALID_CHOICES = { "rock" => 'r',
+                  "paper" => 'p',
+                  "scissors" => 's',
+                  "spock" => 'sp',
+                  "lizard" => 'l' }
 
 GAME_RULES = {  'scissors' => ['paper', 'lizard'],
-                  'paper' => ['rock', 'spock'],
-                  'rock' => ['lizard', 'scissors'],
-                  'lizard' => ['spock', 'paper'],
-                  'spock' => ['scissors', 'rock']
-                }
+                'paper' => ['rock', 'spock'],
+                'rock' => ['lizard', 'scissors'],
+                'lizard' => ['spock', 'paper'],
+                'spock' => ['scissors', 'rock'] }
 
 def prompt(message)
   Kernel.puts("=> #{message}")
@@ -39,7 +37,6 @@ def get_results(player, computer)
     'player'
   elsif win?(computer, player)
     'computer'
-  else
   end
 end
 
@@ -66,16 +63,14 @@ def play_again?
   ['y', 'yes'].include?(play_again)
 end
 
-prompt ("Welcome to the 'Rock, Paper, Scissors, Lizard, Spock' Game!")
-score = {'player': 0, 'computer': 0}
+prompt("Welcome to the 'Rock, Paper, Scissors, Lizard, Spock' Game!")
+score = { 'player': 0, 'computer': 0 }
 loop do
   loop do
-    prompt ("The first player to 5 wins, wins the match!")
+    prompt("The first player to 5 wins, wins the match!")
     # player's turn
     player_choice = ''
-    winner = ''
     loop do
-
       prompt("Choose one: ")
       VALID_CHOICES.each do |word, shorthand|
         puts "   #{word} (#{shorthand})"
@@ -96,14 +91,15 @@ loop do
     # computer's turn
     computer_choice = VALID_CHOICES.keys.sample
 
-    Kernel.puts("You chose: #{player_choice}; Computer chose: #{computer_choice}")
+    Kernel.puts
+    ("You chose: #{player_choice}; Computer chose: #{computer_choice}")
 
     display_results(player_choice, computer_choice)
-    winner =  get_results(player_choice, computer_choice)
+    winner = get_results(player_choice, computer_choice)
 
     calculate_match_score(score, winner)
     display_match_results(score)
-    
+
     grand_winner = score.value?(5)
     break if grand_winner
   end
