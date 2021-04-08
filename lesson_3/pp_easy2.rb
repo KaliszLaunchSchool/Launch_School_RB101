@@ -113,8 +113,11 @@ advice.slice!(0, advice.index('house'))
 Question 9
 Write a one-liner to count the number of lower-case 't' characters 
 in the following string:
-
+=end
 statement = "The Flintstones Rock!"
+
+p statement.count('t')
+=begin
 Question 10
 Back in the stone age (before CSS) we used spaces to align things on the screen. If we had a 40 character wide table of Flintstone family members, how could we easily center that title above the table with spaces?
 
