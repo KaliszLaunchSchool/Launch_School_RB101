@@ -11,7 +11,7 @@ GAME_RULES = {  'scissors' => ['paper', 'lizard'],
                 'spock' => ['scissors', 'rock'] }
 
 def prompt(message)
-  Kernel.puts("=> #{message}")
+  puts("=> #{message}")
 end
 
 def clear_screen
@@ -63,6 +63,12 @@ def play_again?
   ['y', 'yes'].include?(play_again)
 end
 
+def reset_score(score)
+  if score.include?(5)
+    score = { 'player': 0, 'computer': 0 }
+  end
+end
+
 prompt("Welcome to the 'Rock, Paper, Scissors, Lizard, Spock' Game!")
 score = { 'player': 0, 'computer': 0 }
 loop do
@@ -76,7 +82,7 @@ loop do
         puts "   #{word} (#{shorthand})"
       end
 
-      player_choice = Kernel.gets().chomp().downcase
+      player_choice = gets().chomp().downcase
 
       if VALID_CHOICES.include?(player_choice)
         break
