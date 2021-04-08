@@ -100,6 +100,15 @@ def display_match_results(score)
   prompt("  Computer: #{score['computer'.to_sym]}")
 end
 
+def display_grand_winner(score)
+  grand_winner = score.key(WINNING_SCORE).to_s.capitalize
+  prompt("#{grand_winner} is the grand winner!")
+end
+
+def match_over?(score)
+  grand_winner = score.value?(WINNING_SCORE)
+end
+
 def play_again?
   prompt("Would you like to play again?")
   play_again = ''
@@ -126,13 +135,11 @@ loop do
   loop do
     player_choice = determine_player_choice
 
-    # computer's turn
     computer_choice = determine_computer_choice
 
     clear_screen
 
     display_choices(player_choice, computer_choice)
-
     display_results(player_choice, computer_choice)
 
     enter_to_continue
@@ -143,12 +150,11 @@ loop do
     calculate_match_score(score, winner)
     display_match_results(score)
 
-    grand_winner = score.value?(WINNING_SCORE)
-    break if grand_winner
+    break if match_over?(score)
   end
   
-  grand_winner = score.key(WINNING_SCORE).to_s.capitalize
-  prompt("#{grand_winner} is the grand winner!")
+  display_grand_winner(score)
+
   reset_score(score)
   break unless play_again?
   clear_screen
