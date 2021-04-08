@@ -15,16 +15,21 @@ p ages.member?('Spot')
 Question 2
 Starting with this string:
 
-Copy Code
-munsters_description = "The Munsters are creepy in a good way."
 Convert the string in the following ways (code will be executed on original munsters_description above):
 
-Copy Code
 "tHE mUNSTERS ARE CREEPY IN A GOOD WAY."
 "The munsters are creepy in a good way."
 "the munsters are creepy in a good way."
 "THE MUNSTERS ARE CREEPY IN A GOOD WAY."
-Solution 2
+
+munsters_description = "The Munsters are creepy in a good way."
+p munsters_description.swapcase
+p munsters_description.capitalize
+p munsters_description.downcase
+p munsters_description.upcase
+#Note: Add ! to mutate the original code
+=end
+=begin
 Question 3
 We have most of the Munster family in our age hash:
 
