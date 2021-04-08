@@ -18,6 +18,11 @@ def clear_screen
   system('clear') || system('cls')
 end
 
+def enter_to_continue
+  prompt('Press enter to continue')
+  STDIN.gets
+end
+
 def win?(first, second)
   GAME_RULES[first].include?(second)
 end
@@ -45,7 +50,7 @@ def calculate_match_score(score, winner)
 end
 
 def display_match_results(score)
-  prompt("  Current score")
+  prompt("Current score")
   prompt("  Player: #{score['player'.to_sym]}")
   prompt("  Computer: #{score['computer'.to_sym]}")
 end
@@ -70,6 +75,9 @@ def reset_score(score)
 end
 
 prompt("Welcome to the 'Rock, Paper, Scissors, Lizard, Spock' Game!")
+enter_to_continue
+clear_screen
+
 score = { 'player': 0, 'computer': 0 }
 loop do
   loop do
@@ -103,6 +111,10 @@ loop do
     prompt("Computer chose: #{computer_choice}")
 
     display_results(player_choice, computer_choice)
+
+    enter_to_continue
+    clear_screen
+   
     winner = get_results(player_choice, computer_choice)
 
     calculate_match_score(score, winner)
