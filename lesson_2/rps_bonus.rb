@@ -89,6 +89,11 @@ def calculate_match_score(score, winner)
   score[winner.to_sym] += 1 unless winner.nil?
 end
 
+def display_choices(player_choice, computer_choice)
+  prompt("You chose: #{player_choice}")
+  prompt("Computer chose: #{computer_choice}")
+end
+
 def display_match_results(score)
   prompt("Current score")
   prompt("  Player: #{score['player'.to_sym]}")
@@ -126,8 +131,7 @@ loop do
 
     clear_screen
 
-    prompt("You chose: #{player_choice}")
-    prompt("Computer chose: #{computer_choice}")
+    display_choices(player_choice, computer_choice)
 
     display_results(player_choice, computer_choice)
 
