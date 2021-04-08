@@ -93,22 +93,28 @@ flintstones.concat(%w(Dino Hoppy))  # concat adds an array rather than one item
 =begin
 Question 8
 Shorten this sentence:
-
-Copy Code
-advice = "Few things in life are as important as house training your pet dinosaur."
 ...remove everything starting from "house".
-
-Review the String#slice! documentation, and use that method to make the return value "Few things in life are as important as ". But leave the advice variable as "house training your pet dinosaur.".
+Review the String#slice! documentation, and use that method to make the return 
+value "Few things in life are as important as ". But leave the advice variable as 
+"house training your pet dinosaur.".
 
 As a bonus, what happens if you use the String#slice method instead?
 
-Solution 8
-Question 9
-Write a one-liner to count the number of lower-case 't' characters in the following string:
+advice = "Few things in life are as important as house training your pet dinosaur."
+#advice.slice!(39..72) #returns "house training ..."
+advice.slice!(0..38)
+p advice
+#if we use string#slice the variable is not modified
 
-Copy Code
+#LS solution
+advice.slice!(0, advice.index('house'))
+=end
+=begin
+Question 9
+Write a one-liner to count the number of lower-case 't' characters 
+in the following string:
+
 statement = "The Flintstones Rock!"
-Solution 9
 Question 10
 Back in the stone age (before CSS) we used spaces to align things on the screen. If we had a 40 character wide table of Flintstone family members, how could we easily center that title above the table with spaces?
 
