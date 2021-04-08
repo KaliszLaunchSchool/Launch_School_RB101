@@ -66,9 +66,14 @@ flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
 Question 6
 How can we add the family pet "Dino" to our usual array:
 
-Copy Code
 flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
-Solution 6
+flintstones.push('Dino')
+p flintstones
+
+#LS solution
+flintstones << "Dino"
+=end
+=begin
 Question 7
 In the previous practice problem we added Dino to our array like this:
 
