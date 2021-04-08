@@ -10,6 +10,8 @@ GAME_RULES = {  'scissors' => ['paper', 'lizard'],
                 'lizard' => ['spock', 'paper'],
                 'spock' => ['scissors', 'rock'] }
 
+WINNING_SCORE = 5
+
 def prompt(message)
   puts("=> #{message}")
 end
@@ -79,7 +81,7 @@ clear_screen
 score = { 'player': 0, 'computer': 0 }
 loop do
   loop do
-    prompt("The first player to 5 wins, wins the match!")
+    prompt("The first player to #{WINNING_SCORE} wins, wins the match!")
     # player's turn
     player_choice = ''
     loop do
@@ -118,14 +120,13 @@ loop do
     calculate_match_score(score, winner)
     display_match_results(score)
 
-    grand_winner = score.value?(5)
-    if grand_winner
-      reset_score(score)
-      break
-    end
+    grand_winner = score.value?(WINNING_SCORE)
+    break if grand_winner
   end
-  grand_winner = score.key(5).to_s.capitalize
+  
+  grand_winner = score.key(WINNING_SCORE).to_s.capitalize
   prompt("#{grand_winner} is the grand winner!")
+  reset_score(score)
   break unless play_again?
   clear_screen
 end
