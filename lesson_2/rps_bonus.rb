@@ -25,6 +25,44 @@ def enter_to_continue
   STDIN.gets
 end
 
+def determine_player_choice
+  player_choice = prompt_player_choice
+  if VALID_CHOICES.value?(player_choice)
+    VALID_CHOICES.key(player_choice)
+  else
+    player_choice
+  end
+end
+
+def display_valid_choices
+  VALID_CHOICES.each do |word, shorthand|
+    puts "   #{word} (#{shorthand})"
+  end
+end
+
+def valid_choice?(choice)
+  VALID_CHOICES.include?(choice) || VALID_CHOICES.value?(choice)
+end
+
+def prompt_player_choice
+  prompt("The first player to 5 wins, wins the match!")
+  player_choice = ''
+
+  loop do
+    prompt("Choose one: ")
+    display_valid_choices
+    player_choice = gets.chomp.downcase
+    break if valid_choice?(player_choice)
+    prompt("That's not a valid choice.")
+  end
+
+  player_choice
+end
+
+def determine_computer_choice
+  computer_choice = VALID_CHOICES.keys.sample
+end
+
 def win?(first, second)
   GAME_RULES[first].include?(second)
 end
@@ -81,29 +119,10 @@ clear_screen
 score = { 'player': 0, 'computer': 0 }
 loop do
   loop do
-    prompt("The first player to #{WINNING_SCORE} wins, wins the match!")
-    # player's turn
-    player_choice = ''
-    loop do
-      prompt("Choose one: ")
-      VALID_CHOICES.each do |word, shorthand|
-        puts "   #{word} (#{shorthand})"
-      end
-
-      player_choice = gets().chomp().downcase
-
-      if VALID_CHOICES.include?(player_choice)
-        break
-      elsif VALID_CHOICES.values.include?(player_choice)
-        player_choice = VALID_CHOICES.key(player_choice)
-        break
-      else
-        prompt("That's not a valid choice.")
-      end
-    end
+    player_choice = determine_player_choice
 
     # computer's turn
-    computer_choice = VALID_CHOICES.keys.sample
+    computer_choice = determine_computer_choice
 
     clear_screen
 
