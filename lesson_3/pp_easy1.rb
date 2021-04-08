@@ -113,22 +113,19 @@ or
 =begin
 Question 7
 If we build an array like this:
-
-Copy Code
+=end
 flintstones = ["Fred", "Wilma"]
 flintstones << ["Barney", "Betty"]
 flintstones << ["BamBam", "Pebbles"]
-We will end up with this "nested" array:
+#We will end up with this "nested" array:
 
-Copy Code
-["Fred", "Wilma", ["Barney", "Betty"], ["BamBam", "Pebbles"]]
-Make this into an un-nested array.
-
-Solution 7
+#["Fred", "Wilma", ["Barney", "Betty"], ["BamBam", "Pebbles"]]
+#Make this into an un-nested array.
+flintstones.flatten
+=begin
 Question 8
 Given the hash below
 
-Copy Code
 flintstones = { "Fred" => 0, "Wilma" => 1, "Barney" => 2, "Betty" => 3, "BamBam" => 4, "Pebbles" => 5 }
 Turn this into an array containing only two elements: Barney's name and Barney's number
 =end
