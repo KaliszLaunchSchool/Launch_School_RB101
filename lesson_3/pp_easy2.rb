@@ -48,9 +48,14 @@ ages.merge!(additional_ages)
 Question 4
 See if the name "Dino" appears in the string below:
 
-Copy Code
 advice = "Few things in life are as important as house training your pet dinosaur."
-Solution 4
+advice.include?('Dino')
+
+#LS Solution
+advice.match?("Dino")
+# Note that this is not a perfect solution, as it would match any substring with Dino in it.
+=end
+=begin
 Question 5
 Show an easier way to write this array:
 
