@@ -69,9 +69,7 @@ def play_again?
 end
 
 def reset_score(score)
-  if score.include?(5)
-    score = { 'player': 0, 'computer': 0 }
-  end
+  score.replace({ 'player': 0, 'computer': 0 })
 end
 
 prompt("Welcome to the 'Rock, Paper, Scissors, Lizard, Spock' Game!")
@@ -121,7 +119,10 @@ loop do
     display_match_results(score)
 
     grand_winner = score.value?(5)
-    break if grand_winner
+    if grand_winner
+      reset_score(score)
+      break
+    end
   end
   grand_winner = score.key(5).to_s.capitalize
   prompt("#{grand_winner} is the grand winner!")
