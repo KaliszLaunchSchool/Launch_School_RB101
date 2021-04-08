@@ -77,14 +77,20 @@ flintstones << "Dino"
 Question 7
 In the previous practice problem we added Dino to our array like this:
 
-Copy Code
 flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
-flintstones << "Dino"
-We could have used either Array#concat or Array#push to add Dino to the family.
+#flintstones << "Dino"
+#We could have used either Array#concat or Array#push to add Dino to the family.
 
-How can we add multiple items to our array? (Dino and Hoppy)
+#How can we add multiple items to our array? (Dino and Hoppy)
+flintstones.push('Dino', 'Hoppy')
+p flintstones
 
-Solution 7
+#LS Solution
+flintstones.push("Dino").push("Hoppy")   # push returns the array so we can chain
+#or
+flintstones.concat(%w(Dino Hoppy))  # concat adds an array rather than one item
+=end
+=begin
 Question 8
 Shorten this sentence:
 
