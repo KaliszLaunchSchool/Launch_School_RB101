@@ -59,9 +59,10 @@ advice.match?("Dino")
 Question 5
 Show an easier way to write this array:
 
-Copy Code
 flintstones = ["Fred", "Barney", "Wilma", "Betty", "BamBam", "Pebbles"]
-Solution 5
+flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
+=end
+=begin
 Question 6
 How can we add the family pet "Dino" to our usual array:
 
