@@ -89,11 +89,28 @@ LS solution: (10..100).cover?(42)
 Question 6
 Starting with the string:
 
-Copy Code
 famous_words = "seven years ago..."
 show two different ways to put the expected "Four score and " in front of it.
 
-Solution 6
+OPTION 1
+famous_words = "seven years ago..."
+add = "Four score and " 
+p add << famous_words
+
+OPTION 2
+famous_words = "seven years ago..."
+p "Four score and #{famous_words}"  
+
+LS SOLUTIONS
+"Four score and " + famous_words
+or
+
+famous_words.prepend("Four score and ")
+or
+
+"Four score and " << famous_words
+=end
+=begin
 Question 7
 If we build an array like this:
 
