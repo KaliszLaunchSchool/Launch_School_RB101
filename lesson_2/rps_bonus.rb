@@ -60,7 +60,7 @@ def prompt_player_choice
 end
 
 def determine_computer_choice
-  computer_choice = VALID_CHOICES.keys.sample
+  VALID_CHOICES.keys.sample
 end
 
 def win?(first, second)
@@ -106,7 +106,7 @@ def display_grand_winner(score)
 end
 
 def match_over?(score)
-  grand_winner = score.value?(WINNING_SCORE)
+  score.value?(WINNING_SCORE)
 end
 
 def play_again?
@@ -144,7 +144,7 @@ loop do
 
     enter_to_continue
     clear_screen
-   
+
     winner = get_results(player_choice, computer_choice)
 
     calculate_match_score(score, winner)
@@ -152,7 +152,7 @@ loop do
 
     break if match_over?(score)
   end
-  
+
   display_grand_winner(score)
 
   reset_score(score)
