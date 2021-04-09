@@ -15,15 +15,21 @@ The Flintstones Rock!
 =begin
 Question 2
 The result of the following statement will be an error:
+Why is this and what are two possible ways to fix this?
+no implicit conversion of Integer into String is the error.
+happens because it is trying to add the string to the integers.
 
 puts "the value of 40 + 2 is " + (40 + 2)
-Why is this and what are two possible ways to fix this?
+Fixes:
 
-Solution 2
+puts "the value of 40 + 2 is " + (40 + 2).to_s
+puts "the value of 40 + 2 is #{(40 + 2)}"
+=end
+=begin
 Question 3
-Alan wrote the following method, which was intended to show all of the factors of the input number:
+Alan wrote the following method, which was intended to show all of the 
+factors of the input number:
 
-Copy Code
 def factors(number)
   divisor = number
   factors = []
