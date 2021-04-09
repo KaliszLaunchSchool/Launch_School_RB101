@@ -1,18 +1,21 @@
 =begin
 Question 1
-Let's do some "ASCII Art" (a stone-age form of nerd artwork from back in the days before computers had video screens).
+Let's do some "ASCII Art" (a stone-age form of nerd artwork from back in the 
+days before computers had video screens).
 
-For this practice problem, write a one-line program that creates the following output 10 times, with the subsequent line indented 1 space to the right:
+For this practice problem, write a one-line program that creates the following 
+output 10 times, with the subsequent line indented 1 space to the right:
 
-Copy Code
 The Flintstones Rock!
  The Flintstones Rock!
   The Flintstones Rock!
-Solution 1
+
+10.times { |number| puts (' ' * number) + 'The Flintstones Rock!' }
+=end
+=begin
 Question 2
 The result of the following statement will be an error:
 
-Copy Code
 puts "the value of 40 + 2 is " + (40 + 2)
 Why is this and what are two possible ways to fix this?
 
