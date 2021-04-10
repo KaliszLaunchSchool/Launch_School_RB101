@@ -215,9 +215,11 @@ munsters hash.
 =end
 =begin
 Question 8
-Method calls can take expressions as arguments. Suppose we define a method called rps as follows, which follows the classic rules of rock-paper-scissors game, but with a slight twist that it declares whatever hand was used in the tie as the result of that tie.
+Method calls can take expressions as arguments. Suppose we define a method called 
+rps as follows, which follows the classic rules of rock-paper-scissors game, 
+but with a slight twist that it declares whatever hand was used in the tie as the 
+result of that tie.
 
-Copy Code
 def rps(fist1, fist2)
   if fist1 == "rock"
     (fist2 == "paper") ? "paper" : "rock"
@@ -227,11 +229,20 @@ def rps(fist1, fist2)
     (fist2 == "rock") ? "rock" : "scissors"
   end
 end
-What is the result of the following call?
+#What is the result of the following call? paper
 
-Copy Code
 puts rps(rps(rps("rock", "paper"), rps("rock", "scissors")), "rock")
-Solution 8
+
+#LS Solution
+The outermost call is evaluated by determining the result of 
+rps(rps("rock", "paper"), rps("rock", "scissors")) versus rock. In turn that means 
+we need to evaluate the two separate results of rps("rock", "paper") and 
+rps("rock", "scissors") and later combine them by calling rps on their individual 
+results. Those innermost expressions will return "paper" and "rock", respectively. 
+Calling rps on that input will return "paper". Which finally when evaluated against 
+"rock" will return "paper".
+=end
+=begin
 Question 9
 Consider these two simple methods:
 
