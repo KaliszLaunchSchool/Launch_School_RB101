@@ -136,7 +136,9 @@ puts "result is #{result}"
 
 The error is undefiened local variable 'limit' and is because limit is not being
 passed into the method
-=end
+
+How would you fix this so that it works?
+
 limit = 15
 
 def fib(first_num, second_num, limit)
@@ -150,13 +152,11 @@ end
 
 result = fib(0, 1, limit)
 puts "result is #{result}"
+=end
 =begin
-How would you fix this so that it works?
-
 Question 6
 What is the output of the following code?
 
-Copy Code
 answer = 42
 
 def mess_with_it(some_number)
@@ -166,11 +166,14 @@ end
 new_answer = mess_with_it(answer)
 
 p answer - 8
-Solution 6
-Question 7
-One day Spot was playing with the Munster family's home computer and he wrote a small program to mess with their demographic data:
 
-Copy Code
+# output is 34
+=end
+=begin
+Question 7
+One day Spot was playing with the Munster family's home computer and he wrote 
+a small program to mess with their demographic data:
+
 munsters = {
   "Herman" => { "age" => 32, "gender" => "male" },
   "Lily" => { "age" => 30, "gender" => "female" },
