@@ -188,13 +188,32 @@ def mess_with_demographics(demo_hash)
     family_member["gender"] = "other"
   end
 end
-After writing this method, he typed the following...and before Grandpa could stop him, he hit the Enter key with his tail:
+After writing this method, he typed the following...and before Grandpa could stop 
+him, he hit the Enter key with his tail:
 
-Copy Code
 mess_with_demographics(munsters)
 Did the family's data get ransacked? Why or why not?
+Yes, the data is messed up because demo_hash is not reassigned so the munster hash
+gets passed through the method and changed
 
-Solution 7
+LS Solution
+Spot will find himself in the "dog" house for this one. The family's data is all 
+in shambles now.
+
+Why? Remember that in Ruby, what gets passed to a method isn't the value of the 
+object. Under the hood, Ruby passes the object_id of each argument to the method. 
+The method stores these object_id's internally in locally scoped (private to the 
+method) variables (named per the method definition's parameter list).
+
+So Spot's demo_hash starts off pointing to the munsters hash. His program could 
+wind up replacing that with some other object id and then the family's data would 
+be safe.
+
+In this case, the program does not reassign demo_hash -- it just uses it as-is. 
+So the actual hash object that is being messed with inside of the method IS the 
+munsters hash.
+=end
+=begin
 Question 8
 Method calls can take expressions as arguments. Suppose we define a method called rps as follows, which follows the classic rules of rock-paper-scissors game, but with a slight twist that it declares whatever hand was used in the tie as the result of that tie.
 
