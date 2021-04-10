@@ -246,7 +246,6 @@ Calling rps on that input will return "paper". Which finally when evaluated agai
 Question 9
 Consider these two simple methods:
 
-Copy Code
 def foo(param = "no")
   "yes"
 end
@@ -254,8 +253,9 @@ end
 def bar(param = "no")
   param == "no" ? "yes" : "no"
 end
-What would be the return value of the following method invocation?
 
-Copy Code
+# What would be the return value? "no"
+#This is because the value returned from the foo method will always be "yes" , 
+#and "yes" == "no" will be false
 bar(foo)
 =end
