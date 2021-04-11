@@ -8,4 +8,14 @@ require 'yaml'
 MESSAGES = YAML.load_file('calculator_messages.yml')
 Find the documentation for YAML::load_file.
 
+https://ruby-doc.org/stdlib-1.8.6/libdoc/yaml/rdoc/YAML.html#method-c-load_file
+
+load_file( filepath )click to toggle source
+Load a document from the file located at filepath.
+
+YAML.load_file( 'animals.yaml' )
+   #=> ['badger', 'elephant', 'tiger']
+
+LS Solution
+
 =end
