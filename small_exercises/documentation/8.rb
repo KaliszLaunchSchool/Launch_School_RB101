@@ -11,5 +11,8 @@ puts a.min
 Find the documentation for the #min method and change the above code to print the 
 two smallest values in the Array.
 
+puts a.min(2)
+
 A solution that uses the #min method alone requires version 2.2.0 or higher of Ruby. 
 If you have an older version of Ruby, you need a different approach.
+=end
