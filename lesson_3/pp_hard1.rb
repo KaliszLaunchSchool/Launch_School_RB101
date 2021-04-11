@@ -47,15 +47,16 @@ which returns a new String object instead of modifying the original object.
 =end
 =begin
 Question 3
-In other practice problems, we have looked at how the scope of variables affects the modification of one "layer" when they are passed to another.
+In other practice problems, we have looked at how the scope of variables affects 
+the modification of one "layer" when they are passed to another.
 
-To drive home the salient aspects of variable scope and modification of one scope by another, consider the following similar sets of code.
+To drive home the salient aspects of variable scope and modification of one scope 
+by another, consider the following similar sets of code.
 
 What will be printed by each of these code groups?
 
 A)
 
-Copy Code
 def mess_with_vars(one, two, three)
   one = two
   two = three
@@ -71,9 +72,14 @@ mess_with_vars(one, two, three)
 puts "one is: #{one}"
 puts "two is: #{two}"
 puts "three is: #{three}"
+
+output:
+one is: one
+two is: two
+three is: three
+
 B)
 
-Copy Code
 def mess_with_vars(one, two, three)
   one = "two"
   two = "three"
@@ -89,9 +95,14 @@ mess_with_vars(one, two, three)
 puts "one is: #{one}"
 puts "two is: #{two}"
 puts "three is: #{three}"
+
+output:
+one is: one
+two is: two
+three is: three
+
 C)
 
-Copy Code
 def mess_with_vars(one, two, three)
   one.gsub!("one","two")
   two.gsub!("two","three")
@@ -107,7 +118,13 @@ mess_with_vars(one, two, three)
 puts "one is: #{one}"
 puts "two is: #{two}"
 puts "three is: #{three}"
-Solution 3
+
+output:
+one is: two
+two is: three
+three is: one
+=end
+=begin
 Question 4
 Ben was tasked to write a simple ruby method to determine if an input string is an IP address representing dot-separated numbers. e.g. "10.4.5.11". He is not familiar with regular expressions. Alyssa supplied Ben with a method called is_an_ip_number? that determines if a string is a numeric string between 0 and 255 as required for IP numbers and asked Ben to use it.
 
