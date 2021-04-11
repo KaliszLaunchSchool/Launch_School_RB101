@@ -394,4 +394,18 @@ def color_valid(color)
     false
   end
 end
+
+def color_valid(color)
+  if color == "blue" || color == "green"
+end
+
+LS solution
+Ruby will automatically evaluate statements.
+The methodan be significantly simplified by changing it to just:
+
+def color_valid(color)
+  color == "blue" || color == "green"
+end
+
+Both of these methods do exactly the same thing - but one is much more complex to read.
 =end
