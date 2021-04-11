@@ -199,6 +199,49 @@ def an_illustrative_method(a_outer, b_outer, c_outer, d_outer, a_outer_id, b_out
   puts
 end
 
+LS solution
+a_outer is 42 with an id of: 85 before the block.
+b_outer is forty two with an id of: 2152753560 before the block.
+c_outer is [42] with an id of: 2152753540 before the block.
+d_outer is 42 with an id of: 85 before the block.
+Notice that this works the same as before. No big surprise.
+
+a_outer id was 85 before the method and is: 85 inside the method.
+b_outer id was 2152753560 before the method and is: 2152753560 inside the method.
+c_outer id was 2152753540 before the method and is: 2152753540 inside the method.
+d_outer id was 85 before the method and is: 85 inside the method.
+This is also the same as before. These "outers" are NOT the same variables as those outside, Ruby is simply re-using the objects, as these new variables have the same values as the ones outside.
+
+a_outer inside after reassignment is 22 with an id of: 85 before and: 45 after.
+b_outer inside after reassignment is thirty three with an id of: 2152753560 before and: 2152752300 after.
+c_outer inside after reassignment is [44] with an id of: 2152753540 before and: 2152752280 after.
+d_outer inside after reassignment is 44 with an id of: 85 before and: 89 after.
+As before with the block version of this practice problem, when we change the values of our "outers", Ruby uses new objects for these variables to deal with their new values.
+
+One important difference to note is that before, we saw Ruby re-using the "42" object and just giving it a new value inside the block. Why the difference? It should become clear a couple of paragraphs later in this solution...
+
+a_inner is 22 with an id of: 45 inside the method (compared to 45 for outer).
+b_inner is thirty three with an id of: 2152752300 inside the method (compared to 2152752300 for outer).
+c_inner is [44] with an id of: 2152752280 inside the method (compared to 2152752280 for outer).
+d_inner is 44 with an id of: 89 inside the method (compared to 89 for outer).
+No big surprise here...Ruby is re-using objects that have the same values...
+
+a_outer is 42 with an id of: 85 BEFORE and: 85 AFTER the method call.
+b_outer is forty two with an id of: 2152753560 BEFORE and: 2152753560 AFTER the method call.
+c_outer is [42] with an id of: 2152753540 BEFORE and: 2152753540 AFTER the method call.
+d_outer is 42 with an id of: 85 BEFORE and: 85 AFTER the method call.
+Wow, look at that. Even though we changed the values of our "outer" variables inside the method call, we still have the same values and the same object id's down here AFTER the method call as we had before it!
+
+This is because our method call accepts VALUES as arguments. The names we give to those values in the definition of our method are SEPARATE from any other use of those same names.
+
+We used the same names there for convenience (and admittedly to build some suspense and allow us to clarify this point). We could just as easily have called the first parameter of our method definition a_Fred instead of a_outer.
+
+The method gets the VALUES of the arguments we pass, but the parameter variables inside the method have no other relationship to those outside of the method. The names were coincidental, and confusing in a useful way.
+
+=> "ugh ohhhhh"
+Our main method STILL has no access to variables that are defined inside of the method.
+=end
+=begin
 Question 3
 Let's call a method, and pass both a string and an array as arguments and see how 
 even though they are treated in the same way by Ruby, the results can be different.
