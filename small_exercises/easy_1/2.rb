@@ -13,4 +13,10 @@ puts is_odd?(0)    # => false
 puts is_odd?(7)    # => true
 
 Keep in mind that you're not allowed to use #odd? or #even? in your solution.
+
+## Problem ##
+## Examples/Test ##
+## Data ##
+## Algorithm ##
+## Code ##
 =end
