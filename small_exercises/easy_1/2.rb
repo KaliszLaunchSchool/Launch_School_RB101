@@ -15,8 +15,30 @@ puts is_odd?(7)    # => true
 Keep in mind that you're not allowed to use #odd? or #even? in your solution.
 
 ## Problem ##
+- Method that takes an integer
+  -Integer may be positive, negative, or 0
+- Reurns "true" if absolute value of integer is odd
+- Assime argument is valid integer
+
+- Is zero considered even or odd? Even (see examples)
+
 ## Examples/Test ##
+Input: Integer
+Output: boolean
+
+puts is_odd?(2)    # => false
+puts is_odd?(5)    # => true
+puts is_odd?(-17)  # => true
+puts is_odd?(-8)   # => false
+puts is_odd?(0)    # => false
+puts is_odd?(7)    # => true
+
 ## Data ##
+Integers
+Boolean
+
 ## Algorithm ##
+
+
 ## Code ##
 =end
