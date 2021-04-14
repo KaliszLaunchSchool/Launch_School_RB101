@@ -60,7 +60,29 @@ def repeat(string, num)
   end
 end
 
+# LS Solution
+def repeat(string, number)
+  number.times do
+    puts string
+  end
+end
+
 repeat('Hello', 3) # Hello Hello Hello
-repeat('Hello, mom', 0) # Please enter a number greater than 0
+repeat('Hello, mom', 0) # Please enter a number greater than 0 or nothing (LS solution)
 repeat('Hi, mom', 1) # Hi, mom
-repeat('Hellooooo', -5) # Please enter a number greater than 0
+repeat('Hellooooo', -5) # Please enter a number greater than 0 or nothing (LS solution)
+
+=begin
+Discussion
+When solving exercises, it can be beneficial to progress in small increments. We started out by defining 
+repeat with two parameters. Then, to ensure everything worked properly, we added puts string inside the method 
+and ran the code.
+
+def repeat(string, number)
+  puts string
+end
+
+This works correctly, however, it only prints string once. Our goal is to print string a specified number of 
+times. One of the more suitable methods for this situation is Integer#times. Using this method, we can execute 
+puts string any number of times. In this case, we want to print string the number of times indicated by number.
+=end
