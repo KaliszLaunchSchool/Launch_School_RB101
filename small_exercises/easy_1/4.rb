@@ -47,5 +47,15 @@ Integer
 Hash
 
 # Algorithm ##
+- Given an array of elements with some elements repeated
+- Interate through the array
+- Array[0] becomes hash key[0] with value of 1
+- Continue to iterate through the array, 
+  - Compare array values with hash keys
+    - If they are the same, the hash key that matches increases its value by 1
+    - If they are different, create a new hash key with value 1
+- Loop breaks when array is empty
+- Print hash/value pairs
+
 ## Code ##
 =end
