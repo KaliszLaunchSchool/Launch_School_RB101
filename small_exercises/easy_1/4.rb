@@ -79,3 +79,48 @@ def count_occurrences(array)
 end
 
 count_occurrences(vehicles)
+
+=begin
+LS Solution
+
+def count_occurrences(array)
+  occurrences = {}
+
+  array.uniq.each do |element|
+    occurrences[element] = array.count(element)
+  end
+
+  occurrences.each do |element, count|
+    puts "#{element} => #{count}"
+  end
+end
+
+Discussion
+As we iterate over each unique element, we create a new key-value pair in occurrences, with the key as the 
+element's value. To count each occurrence, we use Array#count to count the number of elements with the same 
+value.
+
+Lastly, to print the desired output, we call #each on the newly created occurrences, which lets us pass the 
+keys and values as block parameters. Then, inside of the block, we invoke #puts to print each key-value pair.
+
+Further Exploration
+Try to solve the problem when words are case insensitive, e.g. "suv" == "SUV"
+
+#  (case insensitive - when every element in the array is a string)
+def count_occurrences(array)
+  occurrences = {}
+  array.uniq.each do |word|
+    word = word.downcase
+    occurrences[word] = array.count { |ele| ele.casecmp?(word) }
+  end
+  occurrences.each { |word, count| puts "#{word} => #{count}" }
+end
+
+vehicles = [
+  'caR', 'car', 'tRuCk', 'CaR', 'SUV', 'TRUCK',
+  'MOTORcycle', 'motorcycle', 'CAR', 'truck'
+]
+
+count_occurrences(vehicles)
+
+=end
