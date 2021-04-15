@@ -48,6 +48,7 @@ Hash
 
 # Algorithm ##
 - Given an array of elements with some elements repeated
+- Initiate a hash to push values
 - Interate through the array
 - Array[0] becomes hash key[0] with value of 1
 - Continue to iterate through the array, 
@@ -59,3 +60,22 @@ Hash
 
 ## Code ##
 =end
+vehicles = [
+  'car', 'car', 'truck', 'car', 'SUV', 'truck',
+  'motorcycle', 'motorcycle', 'car', 'truck'
+]
+
+def count_occurrences(array)
+  hash = {}
+  loop do
+    element = array.shift.to_s
+    next if hash.include?(element)
+    number = array.count(element)
+    hash[element] = number + 1
+    break if array.empty?
+  end
+  hash.delete("")
+  puts hash.each { |key, value| puts "#{key} => #{value}" }
+end
+
+count_occurrences(vehicles)
