@@ -19,7 +19,6 @@ puts digit_list(444) == [4, 4, 4]             # => true
 ## Examples ##
 Input: positive integer
 Output: Array
-Return: boolean
 
 puts digit_list(12345) == [1, 2, 3, 4, 5]     # => true
 puts digit_list(7) == [7]                     # => true
@@ -32,6 +31,25 @@ array
 boolean
 
 ## Algorithhm ##
-
+- Initiate empty array to add numbers
+- Create digit_list method
+  - Takes an integer 
+  - Validate integer is a positive integer
+  - Iterate through integer
+  - Add each character to array as separate integer
+- Print array
 ## Code ##
 =end
+
+def digit_list(number)
+  if number >= 0
+    number.digits.reverse
+  else
+    puts "Please enter a positive number"
+  end
+end
+
+    puts digit_list(12345) == [1, 2, 3, 4, 5]     
+    puts digit_list(7) == [7]                     
+    puts digit_list(375290) == [3, 7, 5, 2, 9, 0] 
+    puts digit_list(444) == [4, 4, 4] 
