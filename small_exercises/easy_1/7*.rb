@@ -35,8 +35,9 @@ String
 
 ## ALGORITHM ##
 - Create a method which takes 1 argument, an integer
-- Create a string with the same length as the integer
-- String is 1's and 0's alternating, starting with 1
+- Initiate an array
+- Push the correct number of integers (alt 0's and 1's) to the array
+- Turn array back into string
 
 ## CODE ##
 =end
