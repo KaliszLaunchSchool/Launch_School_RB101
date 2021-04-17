@@ -71,6 +71,7 @@ my_numbers = [1, 4, 3, 7, 2, 6]
 p double_numbers!(my_numbers) # => [2, 8, 6, 14, 4, 12]
 p my_numbers
 =end
+=begin
 # Create a method that doubles the numbers that have odd indices
 
 def double_odd_indices(numbers)
@@ -83,10 +84,35 @@ def double_odd_indices(numbers)
     current_number = numbers[counter]
     current_number *= 2 if counter.odd?
     doubled_numbers << current_number
-    
+
     counter += 1
   end
 end
 
 my_numbers = [1, 4, 3, 7, 2, 6]
 double_odd_indices(my_numbers)  # => [1, 8, 3, 14, 2, 12]          
+=end
+=begin
+let's update our double_numbers method to not only be able to double the values in an array, but to multiply 
+by any number. For example, let's create a method called multiply that can take an additional argument to 
+determine the transformation criteria.
+
+=end
+def multiply(numbers, multiplier)
+  multiplied_numbers = []
+  counter = 0
+
+  loop do
+    break if counter == numbers.size
+
+    current_number = numbers[counter]
+    multiplied_numbers << current_number * multiplier
+
+    counter += 1
+  end
+
+  multiplied_numbers
+end
+
+my_numbers = [1, 4, 3, 7, 2, 6]
+p multiply(my_numbers, 3) # => [3, 12, 9, 21, 6, 18]
