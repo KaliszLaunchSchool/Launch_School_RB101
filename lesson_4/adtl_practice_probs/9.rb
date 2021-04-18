@@ -15,3 +15,8 @@ words = "the flintstones rock"
 
 split_strings = words.split.each { |word| word.capitalize! }
 p split_strings.join(" ")
+
+=begin
+LS Solution
+words.split.map { |word| word.capitalize }.join(' ')
+=end
