@@ -9,3 +9,12 @@ flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
 flintstones.each do |name|
   name.slice!(3..) 
 end
+
+=begin
+LS Solution
+
+flintstones.map! do |name|
+  name[0, 3]
+end
+
+=end
