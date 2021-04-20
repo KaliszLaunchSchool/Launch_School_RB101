@@ -42,6 +42,36 @@ String
 ## CODE ##
 =end
 
+def stringy(num)
+  array = []
+  count = 0
+
+  loop do 
+    break if count == num
+    count += 1
+    if count.even?
+      array[count] = '0'
+    else
+      array[count] = '1'
+    end
+  end
+  p array.join
+end
+
+puts stringy(6) == '101010'
+puts stringy(9) == '101010101'
+puts stringy(4) == '1010'
+puts stringy(7) == '1010101'
+
+
+
+
+
+
+
+
+
+=begin
 def stringy(length)
   numbers = []
 
