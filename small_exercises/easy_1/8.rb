@@ -85,3 +85,19 @@ Currently, the return value of average is an Integer. When dividing numbers, som
 whole number, therefore, it might make more sense to return a Float. Can you change the return value of 
 average from an Integer to a Float?
 =end
+
+# Further Exploration
+def average(array)
+  divisor = array.length
+  sum = array.sum
+  average = sum.to_f/divisor.to_f
+end
+
+def average(numbers)
+  sum = numbers.reduce { |sum, number| sum + number }
+  sum.to_f / numbers.count.to_f
+end
+
+puts average([1, 6]) #== 3 # integer division: (1 + 6) / 2 -> 3
+puts average([1, 5, 87, 45, 8, 8]) #== 25
+puts average([9, 47, 23, 95, 16, 52]) #== 40
