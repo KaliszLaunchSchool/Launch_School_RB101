@@ -22,7 +22,7 @@ The tests above should print true.
 Input: array containing integers
 Output: integer
 
-Integer or floaat division? Integer!
+Integer or float division? Integer!
 
 ## Examples ##
 
@@ -35,5 +35,26 @@ Array
 Integer
 
 ## Algorithm ##
+- Initiate method which takes one argument (an array)
+- Create a 'sum' variable
+  - count the length of the array, 
+  - add to 'sum' variable 
+  - Sum the numbers from the array 
+- assign thhe length of the array to 'divisor' variable
+- Divide the sum by the length 
+
+#Problem
+- Count the lent
+
 ## Code ##
 =end
+
+def average(array)
+  divisor = array.length
+  sum = array.sum
+  average = sum/divisor
+end
+
+puts average([1, 6]) == 3 # integer division: (1 + 6) / 2 -> 3
+puts average([1, 5, 87, 45, 8, 8]) == 25
+puts average([9, 47, 23, 95, 16, 52]) == 40
