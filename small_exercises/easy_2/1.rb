@@ -59,3 +59,14 @@ Modify this program to ask for a name, and then print the age for that person. F
 "Teddy" as the name if no name is entered.
 =end
 
+prompt = "What is the name of your bear?"
+
+age_range = (20..200).to_a
+teddys_age = age_range.sample
+
+puts prompt
+name = gets.chomp 
+if name == ''
+  name = "Teddy" 
+end
+p "#{name} is #{teddys_age} years old!"
