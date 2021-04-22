@@ -56,3 +56,33 @@ total_amount = bill_amount + tip_amount
 
 puts "The tip is $#{tip_amount}"
 puts "The total is $#{total_amount}"
+
+=begin
+LS Solution
+Solution
+
+print 'What is the bill? '
+bill = gets.chomp
+bill = bill.to_f
+
+print 'What is the tip percentage? '
+percentage = gets.chomp
+percentage = percentage.to_f
+
+tip   = (bill * (percentage / 100)).round(2)
+total = (bill + tip).round(2)
+
+puts "The tip is $#{tip}"
+puts "The total is $#{total}"
+Discussion
+We first obtain the amount of the bill from the user, not worrying too much about data validity for this simple problem. Then we get 
+the tip percentage.
+
+Next, we calculate the actual tip, and the total bill, then output the results.
+
+Further Exploration
+Our solution prints the results as $30.0 and $230.0 instead of the more usual $30.00 and $230.00. Modify your solution so it always 
+prints the results with 2 decimal places.
+
+Hint: You will likely need Kernel#format for this.
+=end
