@@ -39,6 +39,7 @@ Output: String? Integers?
 
 # Data 
 Float
+hash
 String? Integer?
 
 # Algo
@@ -49,3 +50,28 @@ String? Integer?
 
 # Code
 =end
+
+puts "==> Enter a postive number:"
+number_1 = gets.chomp.to_f
+puts "==> Enter the second positive number:"
+number_2 = gets.chomp.to_f
+
+addition = number_1 + number_2
+puts "#{number_1} + #{number_2} = #{addition}"
+
+subtraction = number_1 - number_2
+puts "#{number_1} - #{number_2} = #{subtraction}"
+
+product = number_1 * number_2
+puts "#{number_1} * #{number_2} = #{product}"
+
+quotent = number_1 / number_2
+puts "#{number_1} / #{number_2} = #{quotent}"
+
+remainder = number_1 % number_2
+puts "#{number_1} % #{number_2} = #{remainder}"
+
+power = number_1 ** number_2
+puts "#{number_1} ** #{number_2} = #{power}"
+
+operators = {addition, subtraction, product, quotient, remainder, and power }
