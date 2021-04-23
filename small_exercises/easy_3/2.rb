@@ -74,4 +74,29 @@ puts "#{number_1} % #{number_2} = #{remainder}"
 power = number_1 ** number_2
 puts "#{number_1} ** #{number_2} = #{power}"
 
-operators = {addition, subtraction, product, quotient, remainder, and power }
+#operators = {'addition': '+', 'subtraction': '-', 'product': '*', 'quotient': '/', 'remainder': '%', 'power': '**' }
+=begin
+LS Solution
+
+Solution
+
+def prompt(message)
+  puts "==> #{message}"
+end
+
+prompt("Enter the first number:")
+first_number = gets.chomp.to_i
+prompt("Enter the second number:")
+second_number = gets.chomp.to_i
+
+prompt("#{first_number} + #{second_number} = #{first_number + second_number}")
+prompt("#{first_number} - #{second_number} = #{first_number - second_number}")
+prompt("#{first_number} * #{second_number} = #{first_number * second_number}")
+prompt("#{first_number} / #{second_number} = #{first_number / second_number}")
+prompt("#{first_number} % #{second_number} = #{first_number % second_number}")
+prompt("#{first_number} ** #{second_number} = #{first_number**second_number}")
+
+Discussion
+There are some edge cases to consider in this exercise. We have to be careful of not having a second number 
+that is zero. What if we wanted to use floats instead of integers? How does this change this problem?
+=end
