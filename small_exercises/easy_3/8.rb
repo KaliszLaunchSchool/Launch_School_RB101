@@ -52,3 +52,17 @@ puts palindrome?('Madam') == false
 puts palindrome?("madam i'm adam") == false 
 puts palindrome?("madam im adam") == false
 puts palindrome?('356653') == true
+
+=begin
+LS Solution
+
+def palindrome?(string)
+  string == string.reverse
+end
+
+Further Exploration
+Write a method that determines whether an array is palindromic; that is, the element values appear in the same 
+sequence both forwards and backwards in the array. Now write a method that determines whether an array or a 
+string is palindromic; that is, write a method that can take either an array or a string argument, and 
+determines whether that argument is a palindrome. You may not use an if, unless, or case statement or modifier.
+=end
