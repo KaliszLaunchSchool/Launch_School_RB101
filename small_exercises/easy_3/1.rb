@@ -105,13 +105,45 @@ number_2 = gets.chomp.to_i
 prompt("Enter the 3rd number:")
 number_3 = gets.chomp.to_i
 
+prompt("Enter the 4th number:")
+number_4 = gets.chomp.to_i
+
+prompt("Enter the 5th number:")
+number_5 = gets.chomp.to_i
+
 prompt("Enter the last number:")
 last_number = gets.chomp.to_i
 
-first_five_numbers = [number_1, number_2, number_3]
+first_five_numbers = [number_1, number_2, number_3, number_4, number_5]
 
 if first_five_numbers.include?(last_number)
   puts "The number #{last_number} appears in #{first_five_numbers}."
 else
   puts "The number #{last_number} does not appear in #{first_five_numbers}."
 end
+
+=begin
+LS Solution
+
+numbers = []
+
+puts "Enter the 1st number:"
+numbers << gets.chomp.to_i
+puts "Enter the 2nd number:"
+numbers << gets.chomp.to_i
+puts "Enter the 3rd number:"
+numbers << gets.chomp.to_i
+puts "Enter the 4th number:"
+numbers << gets.chomp.to_i
+puts "Enter the 5th number:"
+numbers << gets.chomp.to_i
+puts "Enter the last number:"
+last_number = gets.chomp.to_i
+
+if numbers.include? last_number
+  puts "The number #{last_number} appears in #{numbers}."
+else
+  puts "The number #{last_number} does not appear in #{numbers}."
+end
+
+=end
