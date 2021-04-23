@@ -93,4 +93,33 @@ determine if the cleaned up string is a palindrome.
 Further Exploration
 Read the documentation for String#delete, and the closely related String#count (you need to read count to get 
 all of the information you need for delete.)
+
+Other solutions by Students
+
+def real_palindrome?(string)
+  string = string.delete('^a-zA-Z0-9').downcase
+  string == string.reverse ? true : false
+end
+---------------------------------------------------
+def palindrome?(string_or_array)
+  string_or_array == string_or_array
+end
+
+def real_palindrome?(string)
+  no_cap_only_alpha = string.downcase.delete("a-z0-9")
+
+  palindrome?(no_cap_only_alpha)
+end
+---------------------------------------------------
+def real_palindrome?(str)
+  str = str.downcase.gsub(/[^0-9a-z]/i, '')
+  str == str.reverse
+end
+---------------------------------------------------
+def real_palindrome?(string)
+  new_string = string.downcase.gsub(/[^a-z0-9]/i, '')
+  new_string_reverse = new_string.reverse
+  new_string.reverse == new_string
+
+end
 =end
