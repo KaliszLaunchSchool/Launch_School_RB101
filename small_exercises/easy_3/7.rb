@@ -46,6 +46,19 @@ first value, or 0th index), push that value to new array.
 def oddities(array)
   odd_list = []
 
+  array.each_index do |index| 
+    if index.even?
+      odd_list << array[index]
+    end
+  end
+  odd_list
+end
+
+# OR
+
+def oddities(array)
+  odd_list = []
+
   array.each_index { |index| odd_list << array[index] if index.even? }
   odd_list
 end
