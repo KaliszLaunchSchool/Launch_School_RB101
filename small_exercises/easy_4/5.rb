@@ -63,3 +63,33 @@ puts multisum(5) #== 8
 puts multisum(10) #== 33
 puts multisum(20) #== 98
 puts multisum(1000) #== 234168
+
+=begin
+LS Solution
+
+def multiple?(number, divisor)
+  number % divisor == 0
+end
+
+def multisum(max_value)
+  sum = 0
+  1.upto(max_value) do |number|
+    if multiple?(number, 3) || multiple?(number, 5)
+      sum += number
+    end
+  end
+  sum
+end
+
+Discussion
+Our solution begins with a multiple? method that returns true if the given number is an exact multiple of 
+divisor, false if it's not. This method isn't necessary, but it makes the multisum a bit more readable.
+
+multisum does nothing fancy; it rushes headlong into the problem, and comes out the other end with the correct 
+result. It adds each value that is a multiple of 3 or 5 in the range to the sum variable.
+
+Further Exploration
+Investigate Enumerable.inject (also known as Enumerable.reduce), How might this method be useful in solving 
+this problem? (Note that Enumerable methods are available when working with Arrays.) Try writing such a 
+solution. Which is clearer? Which is more succinct?
+=end
