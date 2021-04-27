@@ -54,10 +54,30 @@ DIGITS = {
   '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9
 }
 
-def string_to_integer(string)
-  digits = string.chars.map { |char| DIGITS[char] }
+def string_to_signed_integer(string)
+  if string.include?("-")
+    no_sign_string = string.chars.pop(string.size - 1)
+    no_sign_string = no_sign_string.map { |char| DIGITS[char] }
 
-  value = 0
-  digits.each { |digit| value = 10 * value + digit }
-  value
+    value = 0
+    no_sign_string.each { |digit| value = (10 * value + digit) }
+    value * -1
+  elsif string.include?("+")
+    no_sign_string = string.chars.pop(string.size - 1)
+    no_sign_string = no_sign_string.map { |char| DIGITS[char] }
+
+    value = 0
+    no_sign_string.each { |digit| value = 10 * value + digit }
+    value
+  else
+    digits = string.chars.map { |char| DIGITS[char] }
+
+    value = 0
+    digits.each { |digit| value = 10 * value + digit }
+    value
+  end
 end
+
+p string_to_signed_integer('4321') == 4321
+p string_to_signed_integer('-570') == -570
+p string_to_signed_integer('+100') == 100
