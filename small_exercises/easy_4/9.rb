@@ -31,7 +31,24 @@ Integer
 Array
 
 # Algo
-- Create a hash to translate integer to string
+- Create a constant hash to translate integer to string
+- Create a method, break up digit into each integer
+- translate it to string via hash values
+- join the string
+- return the string
 
 # Code
 =end
+
+DIGITS = { 0 => '0', 1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5', 6 => '6', 7 => '7', 8 => '8', 9 => '9' }
+
+def integer_to_string(integer)
+  integer_array = integer.digits.reverse
+  string_array = integer_array.map { |chars| DIGITS[chars]}
+  p string_array.join
+end
+
+integer_to_string(4321) #== '4321'
+integer_to_string(0) #== '0'
+integer_to_string(5000) #== '5000'
+  
