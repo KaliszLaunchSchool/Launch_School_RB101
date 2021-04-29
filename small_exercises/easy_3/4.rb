@@ -69,9 +69,11 @@ expression is. For example:
 
 5 * 2       # => 10
 "hi" * 2   # => "hihi"
+
 Therefore, our method implementation also suffers from this behavior since we're using the * operator.
 
 Further Exploration
 For fun: what happens if the first argument is an Array? What do you think is happening here?
   Displays the array n2 number of times
+  p [5, 3] * 2   # => "[5, 3, 5, 3]
 =end
