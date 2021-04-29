@@ -85,8 +85,8 @@ One thing to note here is the String#prepend method; unlike most string mutating
 method does not end with a !. However, it is still a mutating method - it changes the string in place.
 
 This is actually pretty common with mutating methods that do not have a corresponding non-mutating form. 
-  chomp! ends with a ! because the non-mutating chomp is also defined. prepend does not end with a ! because 
-  there is no non-mutating form of prepend.
+chomp! ends with a ! because the non-mutating chomp is also defined. prepend does not end with a ! because 
+there is no non-mutating form of prepend.
 
 How many mutating String methods can you find that do not end with a !. Can you find any that end with a !, 
 but don't have a non-mutating form? Does the Array class have any methods that fit this pattern? How about 
