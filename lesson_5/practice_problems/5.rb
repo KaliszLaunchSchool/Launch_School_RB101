@@ -59,3 +59,19 @@ munsters.each_value do |value|
 end
 
 p male_ages.sum
+
+=begin
+
+total_male_age = 0
+munsters.each_value do |details|
+  total_male_age += details["age"] if details["gender"] == "male"
+end
+
+total_male_age # => 444
+
+In this example, within each key-value pair in the outer hash the value is itself a hash. When iterating 
+through the outer hash, we need to access two values from each inner hash.
+
+Since we're not referencing the key (each family member's name) from the key-value pairs in the outer hash, we 
+can use Hash#each_value with a single block parameter.
+=end
