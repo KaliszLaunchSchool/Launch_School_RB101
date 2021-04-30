@@ -17,3 +17,30 @@ p hsh1['b'][1]
 
 hsh2 = {first: {'d' => 3}, second: {'e' => 2, 'f' => 1}, third: {'g' => 0}}
 p hsh2[:third].key(0)
+
+=begin
+LS Solution
+
+arr1[2][1][3] # => "g"
+
+arr2[1][:third][0] # => "g"
+
+arr3[2][:third][0][0] # => "g"
+
+hsh1['b'][1] # => "g"
+
+hsh2[:third].key(0) # => "g"
+
+Note: the Hash#key method returns the key of an occurrence of a given value. A couple of things to note when 
+using this method:
+
+If more than one key has the same value the method returns the key for the first occurrence of that value.
+If the requested value does not exist in the hash then nil is returned.
+For this example you could also have done the following:
+
+hsh2[:third].keys[0] # => 'g'
+
+Although this looks very similar to the initial solution, Hash#key and Hash#keys are actually two completely 
+different methods. Hash#key returns a single key based on a value passed to the method. Hash#keys returns an 
+array of all the keys in the hash, and the [0] is then referencing the object at index 0 of that returned array.
+=end
