@@ -11,3 +11,28 @@ arr.map do |subarray|
   p mult_of_three
 end
 p arr
+
+=begin
+LS Solution
+
+arr.map do |element|
+  element.select do |num|
+    num % 3 == 0
+  end
+end
+# => [[], [3], [9], [15]]
+
+We know that we want to return a new array, so map is a good choice to call on the original array. Technically you could 
+use either select or reject for the nested arrays as both would work, however choosing to use select makes the code a 
+bit more readable. This is what the same solution would look like with reject:
+
+arr.map do |element|
+  element.reject do |num|
+    num % 3 != 0
+  end
+end
+# => [[], [3], [9], [15]]
+
+Since the method rejects elements based on the truthiness of the evaluated condition, combining reject with the != 
+operator seems somewhat like a double negative and is more difficult to parse than select combined with ==.
+=end
