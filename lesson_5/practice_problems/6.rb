@@ -57,3 +57,14 @@ munsters.each do |munster|
   gender = munster[1]["gender"]
   puts "#{name} is a #{age} year old #{gender}."
 end
+
+=begin
+LS Solution
+
+munsters.each_pair do |name, details|
+  puts "#{name} is a #{details['age']} year old #{details['gender']}"
+end
+
+In this case we need to access both the key (each family member's name) and the value (the inner hashes 
+containing the details), so we need to use Hash#each_pair or Hash#each with two block parameters.
+=end
