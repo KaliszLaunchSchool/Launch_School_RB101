@@ -31,3 +31,13 @@ arr_of_i = arr.map { |string| string.to_i }
 arr_of_i.sort! { |a, b| b <=> a }
 arr = arr_of_i.map { |integer| integer.to_s }
 p arr
+
+=begin
+LS Solution
+
+arr.sort do |a,b|
+  b.to_i <=> a.to_i
+end
+# => ["11", "10", "9", "8", "7"]
+
+=end
