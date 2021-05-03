@@ -10,3 +10,17 @@
 9. If yes, go to #1
 10. Good bye!
 =end
+
+puts ""
+puts "     |     |"
+puts "     |     |"
+puts "     |     |"
+puts "-----+-----+-----"
+puts "     |     |"
+puts "     |     |"
+puts "     |     |"
+puts "-----+-----+-----"
+puts "     |     |"
+puts "     |     |"
+puts "     |     |"
+puts ""
