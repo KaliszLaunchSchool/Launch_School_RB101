@@ -11,16 +11,27 @@
 10. Good bye!
 =end
 
-puts ""
-puts "     |     |"
-puts "     |     |"
-puts "     |     |"
-puts "-----+-----+-----"
-puts "     |     |"
-puts "     |     |"
-puts "     |     |"
-puts "-----+-----+-----"
-puts "     |     |"
-puts "     |     |"
-puts "     |     |"
-puts ""
+def display_board(sq1='', sq2='')
+  puts ""
+  puts "     |     |"
+  puts "  #{brd[1]}  |     |"
+  puts "     |     |"
+  puts "-----+-----+-----"
+  puts "     |     |"
+  puts "     |     |"
+  puts "     |     |"
+  puts "-----+-----+-----"
+  puts "     |     |"
+  puts "     |     |"
+  puts "     |     |"
+  puts ""
+end
+# Board data structure will be a hash
+def initialize_board
+  new_board = {}
+  (1..9).each { |num| new_board[num] = "X"}
+  new_board
+end
+
+board = initialize_board #will keep track of state of the game
+display_board(board)
