@@ -11,6 +11,14 @@
 10. Good bye!
 =end
 
+INITIAL_MARKER = ' '
+PLAYER_MARKER = 'X'
+COMPUTER_MARKER = 'O'
+
+def prompt(msg)
+  puts "=> #{msg}"
+end
+
 def display_board(brd)
   puts ""
   puts "     |     |"
@@ -26,12 +34,33 @@ def display_board(brd)
   puts "     |     |"
   puts ""
 end
+
 # Board data structure will be a hash
 def initialize_board
   new_board = {}
-  (1..9).each { |num| new_board[num] = ""}
+  (1..9).each { |num| new_board[num] = "#{num}"}
   new_board
 end
 
+def empty_squares(brd)
+  brd.keys.select{ |num| brd[num] == "#{num}" }
+end
+
+def player_places_piece(brd)
+  square = ''
+  loop do
+    prompt "Choose a square (#{empty_squares(brd).join(", ")}):"
+    square = gets.chomp.to_i
+    break if empty_squares(brd).include?(square) #if the user inputs a valid/avaiable choice
+    prompt "Sorry, that's not a valid choice"
+  end
+  brd[square] = PLAYER_MARKER  # Save into board hash
+
+end
+
 board = initialize_board #will keep track of state of the game
+display_board(board)
+
+player_places_piece(board)
+puts board.inspect
 display_board(board)
