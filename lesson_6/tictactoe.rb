@@ -11,6 +11,8 @@
 10. Good bye!
 =end
 
+require 'pry'
+
 INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
 COMPUTER_MARKER = 'O'
@@ -20,6 +22,7 @@ def prompt(msg)
 end
 
 def display_board(brd)
+  system 'clear'
   puts ""
   puts "     |     |"
   puts "  #{brd[1]}  |  #{brd[2]}  |  #{brd[3]}"
@@ -38,12 +41,12 @@ end
 # Board data structure will be a hash
 def initialize_board
   new_board = {}
-  (1..9).each { |num| new_board[num] = "#{num}"}
+  (1..9).each { |num| new_board[num] = INITIAL_MARKER}
   new_board
 end
 
 def empty_squares(brd)
-  brd.keys.select{ |num| brd[num] == "#{num}" }
+  brd.keys.select{ |num| brd[num] == INITIAL_MARKER }
 end
 
 def player_places_piece(brd)
@@ -55,12 +58,29 @@ def player_places_piece(brd)
     prompt "Sorry, that's not a valid choice"
   end
   brd[square] = PLAYER_MARKER  # Save into board hash
+end
 
+def computer_places_piece(brd)
+  square = empty_squares(brd).sample #Represents an array of integers of what is available on the bord
+  brd[square] = COMPUTER_MARKER
+end
+
+def board_full?(brd)
+  empty_squares(brd) == [] # or empty_squares(brd).empty?
+end
+
+def someone_won?(brd)
+  false
 end
 
 board = initialize_board #will keep track of state of the game
 display_board(board)
 
-player_places_piece(board)
-puts board.inspect
+loop do
+  player_places_piece(board)
+  computer_places_piece(board)
+  display_board(board)
+  break if someone_won?(board) || board_full?(board)
+end
+
 display_board(board)
