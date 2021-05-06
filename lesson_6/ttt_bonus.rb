@@ -65,6 +65,28 @@ def joinor(array, joiner = ', ', word = 'or')
   end
 end
 
+=begin
+LS solution for joinor
+def joinor(arr, delimiter=', ', word='or')
+  case arr.size
+  when 0 then ''
+  when 1 then arr.first
+  when 2 then arr.join(" #{word} ")
+  else
+    arr[-1] = "#{word} #{arr.last}"
+    arr.join(delimiter)
+  end
+end
+Using a case statement works well here because we need to 
+perform different actions based on the number of elements in arr. 
+If arr has 2 elements, then a delimiter isn't required and we can 
+just print the 2 elements, separated by the value of word. If 
+arr has more than 2 elements, then we permanently mutate the 
+last element with arr[-1] = and prepend the value of word. After 
+we've modified the last array element, we can just use Array#join 
+to join the elements.
+=end
+
 def player_places_piece(brd)
   square = ''
   loop do
