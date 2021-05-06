@@ -55,10 +55,20 @@ def empty_squares(brd)
   brd.keys.select { |num| brd[num] == INITIAL_MARKER }
 end
 
+def joinor(array, joiner = ', ', word = 'or')
+  if array.length == 2
+    array.join(" #{word} ")
+  elsif array.length < 2
+    array.join(joiner)
+  else
+    array.join(joiner).insert(-2, "#{word} ")
+  end
+end
+
 def player_places_piece(brd)
   square = ''
   loop do
-    prompt "Choose a square (#{empty_squares(brd).join(', ')}):"
+    prompt "Choose a square to place a piece: #{joinor(empty_squares(brd))}"
     square = gets.chomp.to_i
     break if empty_squares(brd).include?(square)
     prompt "Sorry, that's not a valid choice"
@@ -92,13 +102,12 @@ def detect_winner(brd)
     #   return 'Computer'
     # end
     if brd.values_at(*line).count(PLAYER_MARKER) == 3
-      # * line is splat operator... works same as below
       return 'Player'
     elsif brd.values_at(*line).count(COMPUTER_MARKER) == 3
       return 'Computer'
     end
   end
-  nil # represents no one has won yet
+  nil
 end
 
 loop do
