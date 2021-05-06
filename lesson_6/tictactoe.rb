@@ -70,17 +70,45 @@ def board_full?(brd)
 end
 
 def someone_won?(brd)
-  false
+  !!detect_winner(brd) #detect winner should return boolean, so use !! to be a boolean
+end
+
+def detect_winner(brd)
+  winning_lines = [[1,2,3], [4,5,6], [7,8,9]] + # rows
+                  [[1,4,7], [2,5,8], [3,6,9]] + # coumns
+                  [[1,5,9], [3,5,7]]            # diagonals
+  
+  winning_lines.each do |line| # line is an array
+    if brd[line[0]] == PLAYER_MARKER && 
+       brd[line[1]] == PLAYER_MARKER &&
+       brd[line[2]] == PLAYER_MARKER
+       return 'Player'
+    elsif brd[line[0]] == PLAYER_MARKER && 
+      brd[line[1]] == PLAYER_MARKER &&
+      brd[line[2]] == PLAYER_MARKER
+      return 'Computer'
+    end
+  end
+  nil # represents no one has won yet
 end
 
 board = initialize_board #will keep track of state of the game
-display_board(board)
 
 loop do
-  player_places_piece(board)
-  computer_places_piece(board)
   display_board(board)
+
+  player_places_piece(board)
+  break if someone_won?(board) || board_full?(board)
+
+  computer_places_piece(board)
   break if someone_won?(board) || board_full?(board)
 end
 
 display_board(board)
+
+if someone_won?(board)
+  prompt "#{detect_winner(board)} won!" # detect winner should return a string
+else
+  prompt "It's a tie!"
+end
+
