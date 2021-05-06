@@ -95,6 +95,7 @@ def detect_winner(brd)
     #   return 'Computer'
     # end
     if brd.values_at(*line).count(PLAYER_MARKER) == 3
+      # * line is splat operator... works same as below
       return 'Player'
     elsif brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 3
       return 'Computer'
