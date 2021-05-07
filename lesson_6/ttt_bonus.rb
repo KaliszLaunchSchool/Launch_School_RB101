@@ -113,6 +113,10 @@ def someone_won?(brd)
   !!detect_winner(brd)
 end
 
+def welcome
+  prompt("Welcome to Tic Tac Toe! The first player to #{WINNING_SCORE} wins, wins!")
+end
+
 def detect_winner(brd)
   winner = WINNING_LINES.each do |line| 
     # if brd[line[0]] == PLAYER_MARKER &&
@@ -176,6 +180,8 @@ def enter_to_continue
 end
 
 scoreboard = { 'Player': 0, 'Computer': 0 }
+welcome
+enter_to_continue
  loop do 
   loop do
     board = initialize_board
@@ -203,6 +209,8 @@ scoreboard = { 'Player': 0, 'Computer': 0 }
     calculate_match_score(scoreboard, winner)
     display_match_results(scoreboard)
     enter_to_continue
+    system 'clear'
+    
     break if match_over?(scoreboard)
   end
   display_grand_winner(scoreboard)
