@@ -21,7 +21,7 @@ WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
                 [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + 
                 [[1, 5, 9], [3, 5, 7]] 
 
-WINNING_NUMBER = 2
+WINNING_SCORE = 2
 
 def prompt(msg)
   puts "=> #{msg}"
@@ -167,10 +167,16 @@ def play_again?
 end
 
 def reset_score(score)
-  score.replace({ 'player': 0, 'computer': 0 })
+  score.replace({ 'Player': 0, 'Computer': 0 })
+end
+
+def enter_to_continue
+  prompt('Press enter to continue')
+  STDIN.gets
 end
 
 scoreboard = { 'Player': 0, 'Computer': 0 }
+ loop do 
   loop do
     board = initialize_board
 
@@ -196,10 +202,13 @@ scoreboard = { 'Player': 0, 'Computer': 0 }
 
     calculate_match_score(scoreboard, winner)
     display_match_results(scoreboard)
+    enter_to_continue
+    break if match_over?(scoreboard)
+  end
+  display_grand_winner(scoreboard)
 
-  prompt "Play again? (y or n)?"
-  answer = gets.chomp
-  break unless answer.downcase.start_with?('y')
+  reset_score(scoreboard)
+  break unless play_again?
 end
 
 prompt "Thanks for playing Tic Tac Toe! Goodbye!"
