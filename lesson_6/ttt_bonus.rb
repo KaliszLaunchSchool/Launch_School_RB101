@@ -21,6 +21,8 @@ WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
                 [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + 
                 [[1, 5, 9], [3, 5, 7]] 
 
+WINNING_NUMBER = 2
+
 def prompt(msg)
   puts "=> #{msg}"
 end
@@ -109,11 +111,10 @@ end
 
 def someone_won?(brd)
   !!detect_winner(brd)
-  
 end
 
 def detect_winner(brd)
-  WINNING_LINES.each do |line| 
+  winner = WINNING_LINES.each do |line| 
     # if brd[line[0]] == PLAYER_MARKER &&
     #    brd[line[1]] == PLAYER_MARKER &&
     #    brd[line[2]] == PLAYER_MARKER
@@ -129,29 +130,72 @@ def detect_winner(brd)
       return 'Computer'
     end
   end
+  winner
   nil
 end
 
-loop do
-  board = initialize_board
+def calculate_match_score(scoreboard, winner)
+  scoreboard[winner.to_sym] += 1 unless winner.nil?
+end
+
+def display_match_results(scoreboard)
+  prompt("Current score")
+  prompt("  Player: #{scoreboard['Player'.to_sym]}")
+  prompt("  Computer: #{scoreboard['Computer'.to_sym]}")
+end
+
+def display_grand_winner(score)
+  grand_winner = score.key(WINNING_SCORE).to_s.capitalize
+  prompt("#{grand_winner} is the grand winner!")
+end
+
+def match_over?(score)
+  score.value?(WINNING_SCORE)
+end
+
+def play_again?
+  prompt("Would you like to play again?")
+  play_again = ''
 
   loop do
+    play_again = gets.chomp.downcase
+    break if ['y', 'yes', 'n', 'no'].include?(play_again)
+    prompt('Please enter valid answer (y/yes or n/no)')
+  end
+
+  ['y', 'yes'].include?(play_again)
+end
+
+def reset_score(score)
+  score.replace({ 'player': 0, 'computer': 0 })
+end
+
+scoreboard = { 'Player': 0, 'Computer': 0 }
+  loop do
+    board = initialize_board
+
+    loop do
+      display_board(board)
+
+      player_places_piece(board)
+      break if someone_won?(board) || board_full?(board)
+
+      computer_places_piece(board)
+      break if someone_won?(board) || board_full?(board)
+    end
+
     display_board(board)
 
-    player_places_piece(board)
-    break if someone_won?(board) || board_full?(board)
+    if someone_won?(board)
+      prompt "#{detect_winner(board)} won!"
+    else
+      prompt "It's a tie!"
+    end
+    
+    winner = detect_winner(board)
 
-    computer_places_piece(board)
-    break if someone_won?(board) || board_full?(board)
-  end
-
-  display_board(board)
-
-  if someone_won?(board)
-    prompt "#{detect_winner(board)} won!"
-  else
-    prompt "It's a tie!"
-  end
+    calculate_match_score(scoreboard, winner)
+    display_match_results(scoreboard)
 
   prompt "Play again? (y or n)?"
   answer = gets.chomp
