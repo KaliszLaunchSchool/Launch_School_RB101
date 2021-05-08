@@ -102,11 +102,14 @@ end
 
 def computer_places_piece!(brd)
   square = nil
+
+  # Defense
   WINNING_LINES.each do |line|
-    square = find_at_risk_square(line, brd)
+    square = find_at_risk_square(line, brd, PLAYER_MARKER)
     break if square
   end
 
+  # Random square
   if !square
     square = empty_squares(brd).sample
   end
@@ -114,9 +117,8 @@ def computer_places_piece!(brd)
   brd[square] = COMPUTER_MARKER
 end
 
-def find_at_risk_square(line, board)
-  if board.values_at(*line).count(PLAYER_MARKER) == 2
-    binding.pry
+def find_at_risk_square(line, board, marker)
+  if board.values_at(*line).count(marker) == 2
     board.select{|k,v| line.include?(k) && v == INITIAL_MARKER}.keys.first
   else
     nil
