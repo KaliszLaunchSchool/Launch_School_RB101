@@ -47,17 +47,6 @@ def display_board(brd)
 end
 # rubocop:enable Metrics/AbcSize
 
-def who_goes_first?
-  prompt("Who would you like to go first: player or computer?")
-  player = ''
-
-  loop do
-    player = gets.chomp.downcase
-    break if ['player', 'p', 'computer', 'comp', 'c'].include?(player)
-    prompt("Please enter a valid response: player/p or computer/c")
-  end
-end
-
 def initialize_board
   new_board = {}
   (1..9).each { |num| new_board[num] = INITIAL_MARKER }
@@ -99,6 +88,18 @@ last element with arr[-1] = and prepend the value of word. After
 we've modified the last array element, we can just use Array#join 
 to join the elements.
 =end
+
+def who_goes_first?
+  prompt("Who would you like to go first: player or computer?")
+  player_1 = ''
+
+  loop do
+    player_1 = gets.chomp.downcase
+    break if ['player', 'p', 'computer', 'comp', 'c'].include?(player_1)
+    prompt("Please enter a valid response: player/p or computer/c")
+  end
+  player_1
+end
 
 def player_places_piece(brd)
   square = ''
@@ -226,19 +227,29 @@ end
 scoreboard = { 'Player': 0, 'Computer': 0 }
 welcome
 enter_to_continue
+system 'clear'
  loop do 
   loop do
-    who_goes_first?
+    first_player = who_goes_first?
     board = initialize_board
 
     loop do
       display_board(board)
 
-      player_places_piece(board)
-      break if someone_won?(board) || board_full?(board)
+      if first_player == 'player' || first_player == 'p'
+        player_places_piece(board)
+        break if someone_won?(board) || board_full?(board)
 
-      computer_places_piece!(board)
-      break if someone_won?(board) || board_full?(board)
+        computer_places_piece!(board)
+        break if someone_won?(board) || board_full?(board)
+      else
+        computer_places_piece!(board)
+        display_board(board)
+        break if someone_won?(board) || board_full?(board)
+
+        player_places_piece(board)
+        break if someone_won?(board) || board_full?(board)
+      end
     end
 
     display_board(board)
