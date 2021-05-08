@@ -30,7 +30,6 @@ end
 # rubocop:disable Metrics/AbcSize
 def display_board(brd, player)
   system 'clear'
-  prompt "#{player.capitalize} goes first."
   prompt "You're #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
   puts ""
   puts "     |     |"
@@ -92,25 +91,43 @@ to join the elements.
 
 def who_goes_first?
   prompt("Who would you like to go first: player, computer, or random?")
-  player_1 = ''
+  current_player = ''
   options = ['player', 'p', 'computer', 'comp', 'c', 'random', 'rand', 'r']
 
   loop do
-    player_1 = gets.chomp.downcase
-    break if options.include?(player_1)
+    current_player = gets.chomp.downcase
+    break if options.include?(current_player)
     prompt("Please enter a valid response: player/p, computer/c, or random/r")
   end
 
-  if player_1 == 'random' || player_1 == 'rand' || player_1 == 'r'
-    player_1 = ['player', 'computer'].sample
-  elsif player_1 == 'player' || player_1 == 'p'
-    player_1 = 'player'
+  if current_player == 'random' || current_player == 'rand' || current_player == 'r'
+    current_player = ['player', 'computer'].sample
+  elsif current_player == 'player' || current_player == 'p'
+    current_player = 'player'
   else 
-    player_1 = 'computer'
+    current_player = 'computer'
+  end
+  current_player
+end
+
+def place_piece!(board, current_player)
+  if current_player == 'player'
+    player_places_piece!(board)
+  else
+    computer_places_piece!(board)
   end
 end
 
-def player_places_piece(brd)
+def alternate_player (current_player)
+  if current_player == 'player'
+    current_player = 'computer'
+  else
+    current_player = 'player'
+  end
+  current_player
+end
+
+def player_places_piece!(brd)
   square = ''
   loop do
     prompt "Choose a square to place a piece: #{joinor(empty_squares(brd))}"
@@ -239,6 +256,17 @@ enter_to_continue
 system 'clear'
  loop do 
   loop do
+    current_player = who_goes_first?
+    board = initialize_board
+
+    loop do
+      display_board(board, current_player)
+      place_piece!(board, current_player)
+      current_player = alternate_player(current_player)
+      break if someone_won?(board) || board_full?(board)
+    end
+
+=begin
     first_player = who_goes_first?
     board = initialize_board
 
@@ -246,7 +274,7 @@ system 'clear'
       display_board(board, first_player)
 
       if first_player == 'player' || first_player == 'p'
-        player_places_piece(board)
+        player_places_piece!(board)
         break if someone_won?(board) || board_full?(board)
 
         computer_places_piece!(board)
@@ -256,12 +284,13 @@ system 'clear'
         display_board(board, first_player)
         break if someone_won?(board) || board_full?(board)
 
-        player_places_piece(board)
+        player_places_piece!(board)
         break if someone_won?(board) || board_full?(board)
       end
     end
+=end
 
-    display_board(board, first_player)
+    display_board(board, current_player)
 
     if someone_won?(board)
       prompt "#{detect_winner(board)} won!"
