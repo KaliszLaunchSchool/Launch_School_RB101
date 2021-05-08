@@ -28,8 +28,9 @@ def prompt(msg)
 end
 
 # rubocop:disable Metrics/AbcSize
-def display_board(brd)
+def display_board(brd, player)
   system 'clear'
+  prompt "#{player.capitalize} goes first."
   prompt "You're #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
   puts ""
   puts "     |     |"
@@ -90,15 +91,23 @@ to join the elements.
 =end
 
 def who_goes_first?
-  prompt("Who would you like to go first: player or computer?")
+  prompt("Who would you like to go first: player, computer, or random?")
   player_1 = ''
+  options = ['player', 'p', 'computer', 'comp', 'c', 'random', 'rand', 'r']
 
   loop do
     player_1 = gets.chomp.downcase
-    break if ['player', 'p', 'computer', 'comp', 'c'].include?(player_1)
-    prompt("Please enter a valid response: player/p or computer/c")
+    break if options.include?(player_1)
+    prompt("Please enter a valid response: player/p, computer/c, or random/r")
   end
-  player_1
+
+  if player_1 == 'random' || player_1 == 'rand' || player_1 == 'r'
+    player_1 = ['player', 'computer'].sample
+  elsif player_1 == 'player' || player_1 == 'p'
+    player_1 = 'player'
+  else 
+    player_1 = 'computer'
+  end
 end
 
 def player_places_piece(brd)
@@ -234,7 +243,7 @@ system 'clear'
     board = initialize_board
 
     loop do
-      display_board(board)
+      display_board(board, first_player)
 
       if first_player == 'player' || first_player == 'p'
         player_places_piece(board)
@@ -244,7 +253,7 @@ system 'clear'
         break if someone_won?(board) || board_full?(board)
       else
         computer_places_piece!(board)
-        display_board(board)
+        display_board(board, first_player)
         break if someone_won?(board) || board_full?(board)
 
         player_places_piece(board)
@@ -252,7 +261,7 @@ system 'clear'
       end
     end
 
-    display_board(board)
+    display_board(board, first_player)
 
     if someone_won?(board)
       prompt "#{detect_winner(board)} won!"
