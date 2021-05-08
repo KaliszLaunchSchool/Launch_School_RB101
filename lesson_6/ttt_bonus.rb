@@ -114,6 +114,11 @@ def computer_places_piece!(brd)
     square = find_at_risk_square(line, brd, PLAYER_MARKER)
     break if square
   end
+
+  # Pick square 5 if available
+  if empty_squares(brd).include?(5)
+    square = 5
+  end
     
   # Random square
   if !square
