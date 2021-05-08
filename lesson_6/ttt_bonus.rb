@@ -100,9 +100,27 @@ def player_places_piece(brd)
   brd[square] = PLAYER_MARKER 
 end
 
-def computer_places_piece(brd)
-  square = empty_squares(brd).sample
+def computer_places_piece!(brd)
+  square = nil
+  WINNING_LINES.each do |line|
+    square = find_at_risk_square(line, brd)
+    break if square
+  end
+
+  if !square
+    square = empty_squares(brd).sample
+  end
+
   brd[square] = COMPUTER_MARKER
+end
+
+def find_at_risk_square(line, board)
+  if board.values_at(*line).count(PLAYER_MARKER) == 2
+    binding.pry
+    board.select{|k,v| line.include?(k) && v == INITIAL_MARKER}.keys.first
+  else
+    nil
+  end
 end
 
 def board_full?(brd)
@@ -192,7 +210,7 @@ enter_to_continue
       player_places_piece(board)
       break if someone_won?(board) || board_full?(board)
 
-      computer_places_piece(board)
+      computer_places_piece!(board)
       break if someone_won?(board) || board_full?(board)
     end
 
@@ -203,14 +221,14 @@ enter_to_continue
     else
       prompt "It's a tie!"
     end
-    
+
     winner = detect_winner(board)
 
     calculate_match_score(scoreboard, winner)
     display_match_results(scoreboard)
     enter_to_continue
     system 'clear'
-    
+
     break if match_over?(scoreboard)
   end
   display_grand_winner(scoreboard)
