@@ -266,30 +266,6 @@ system 'clear'
       break if someone_won?(board) || board_full?(board)
     end
 
-=begin
-    first_player = who_goes_first?
-    board = initialize_board
-
-    loop do
-      display_board(board, first_player)
-
-      if first_player == 'player' || first_player == 'p'
-        player_places_piece!(board)
-        break if someone_won?(board) || board_full?(board)
-
-        computer_places_piece!(board)
-        break if someone_won?(board) || board_full?(board)
-      else
-        computer_places_piece!(board)
-        display_board(board, first_player)
-        break if someone_won?(board) || board_full?(board)
-
-        player_places_piece!(board)
-        break if someone_won?(board) || board_full?(board)
-      end
-    end
-=end
-
     display_board(board, current_player)
 
     if someone_won?(board)
@@ -314,3 +290,30 @@ system 'clear'
 end
 
 prompt "Thanks for playing Tic Tac Toe! Goodbye!"
+
+=begin
+
+Alternative loop (before refacotring recommended by LS): 
+
+    first_player = who_goes_first?
+    board = initialize_board
+
+    loop do
+      display_board(board, first_player)
+
+      if first_player == 'player' || first_player == 'p'
+        player_places_piece!(board)
+        break if someone_won?(board) || board_full?(board)
+
+        computer_places_piece!(board)
+        break if someone_won?(board) || board_full?(board)
+      else
+        computer_places_piece!(board)
+        display_board(board, first_player)
+        break if someone_won?(board) || board_full?(board)
+
+        player_places_piece!(board)
+        break if someone_won?(board) || board_full?(board)
+      end
+    end
+=end
