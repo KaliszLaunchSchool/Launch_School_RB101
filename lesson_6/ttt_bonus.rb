@@ -108,6 +108,13 @@ def computer_places_piece!(brd)
     square = find_at_risk_square(line, brd, PLAYER_MARKER)
     break if square
   end
+    
+  #Offense
+  WINNING_LINES.each do |line|
+    square = find_at_risk_square(line, brd, COMPUTER_MARKER)
+    break if square
+  end
+
 
   # Random square
   if !square
