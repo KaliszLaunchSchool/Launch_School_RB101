@@ -47,6 +47,17 @@ def display_board(brd)
 end
 # rubocop:enable Metrics/AbcSize
 
+def who_goes_first?
+  prompt("Who would you like to go first: player or computer?")
+  player = ''
+
+  loop do
+    player = gets.chomp.downcase
+    break if ['player', 'p', 'computer', 'comp', 'c'].include?(player)
+    prompt("Please enter a valid response: player/p or computer/c")
+  end
+end
+
 def initialize_board
   new_board = {}
   (1..9).each { |num| new_board[num] = INITIAL_MARKER }
@@ -217,6 +228,7 @@ welcome
 enter_to_continue
  loop do 
   loop do
+    who_goes_first?
     board = initialize_board
 
     loop do
