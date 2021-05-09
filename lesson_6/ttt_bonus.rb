@@ -17,9 +17,9 @@ INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
 COMPUTER_MARKER = 'O'
 
-WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + 
-                [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + 
-                [[1, 5, 9], [3, 5, 7]] 
+WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
+                [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
+                [[1, 5, 9], [3, 5, 7]]
 
 WINNING_SCORE = 2
 
@@ -28,7 +28,7 @@ def prompt(msg)
 end
 
 # rubocop:disable Metrics/AbcSize
-def display_board(brd, player)
+def display_board(brd, _player)
   system 'clear'
   prompt "You're #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
   puts ""
@@ -79,13 +79,13 @@ def joinor(arr, delimiter=', ', word='or')
     arr.join(delimiter)
   end
 end
-Using a case statement works well here because we need to 
-perform different actions based on the number of elements in arr. 
-If arr has 2 elements, then a delimiter isn't required and we can 
-just print the 2 elements, separated by the value of word. If 
-arr has more than 2 elements, then we permanently mutate the 
-last element with arr[-1] = and prepend the value of word. After 
-we've modified the last array element, we can just use Array#join 
+Using a case statement works well here because we need to
+perform different actions based on the number of elements in arr.
+If arr has 2 elements, then a delimiter isn't required and we can
+just print the 2 elements, separated by the value of word. If
+arr has more than 2 elements, then we permanently mutate the
+last element with arr[-1] = and prepend the value of word. After
+we've modified the last array element, we can just use Array#join
 to join the elements.
 =end
 
@@ -100,12 +100,14 @@ def who_goes_first?
     prompt("Please enter a valid response: player/p, computer/c, or random/r")
   end
 
-  if current_player == 'random' || current_player == 'rand' || current_player == 'r'
-    current_player = ['player', 'computer'].sample
+  if current_player == 'random' ||
+     current_player == 'rand' ||
+     current_player == 'r'
+    ['player', 'computer'].sample
   elsif current_player == 'player' || current_player == 'p'
-    current_player = 'player'
-  else 
-    current_player = 'computer'
+    'player'
+  else
+    'computer'
   end
   current_player
 end
@@ -118,13 +120,12 @@ def place_piece!(board, current_player)
   end
 end
 
-def alternate_player (current_player)
+def alternate_player(current_player)
   if current_player == 'player'
-    current_player = 'computer'
+    'computer'
   else
-    current_player = 'player'
+    'player'
   end
-  current_player
 end
 
 def player_places_piece!(brd)
@@ -135,13 +136,13 @@ def player_places_piece!(brd)
     break if empty_squares(brd).include?(square)
     prompt "Sorry, that's not a valid choice"
   end
-  brd[square] = PLAYER_MARKER 
+  brd[square] = PLAYER_MARKER
 end
 
 def computer_places_piece!(brd)
   square = nil
-    
-  #Offense
+
+  # Offense
   WINNING_LINES.each do |line|
     square = find_at_risk_square(line, brd, COMPUTER_MARKER)
     break if square
@@ -159,7 +160,7 @@ def computer_places_piece!(brd)
   if empty_squares(brd).include?(5)
     square = 5
   end
-    
+
   # Random square
   if !square
     square = empty_squares(brd).sample
@@ -170,7 +171,7 @@ end
 
 def find_at_risk_square(line, board, marker)
   if board.values_at(*line).count(marker) == 2
-    board.select{|k,v| line.include?(k) && v == INITIAL_MARKER}.keys.first
+    board.select { |k, v| line.include?(k) && v == INITIAL_MARKER }.keys.first
   else
     nil
   end
@@ -185,11 +186,12 @@ def someone_won?(brd)
 end
 
 def welcome
-  prompt("Welcome to Tic Tac Toe! The first player to #{WINNING_SCORE} wins, wins!")
+  prompt("Welcome to Tic Tac Toe!")
+  prompt("The first player to #{WINNING_SCORE} points, wins!")
 end
 
 def detect_winner(brd)
-  winner = WINNING_LINES.each do |line| 
+  WINNING_LINES.each do |line|
     # if brd[line[0]] == PLAYER_MARKER &&
     #    brd[line[1]] == PLAYER_MARKER &&
     #    brd[line[2]] == PLAYER_MARKER
@@ -205,7 +207,6 @@ def detect_winner(brd)
       return 'Computer'
     end
   end
-  winner
   nil
 end
 
@@ -254,7 +255,7 @@ scoreboard = { 'Player': 0, 'Computer': 0 }
 welcome
 enter_to_continue
 system 'clear'
- loop do 
+loop do
   loop do
     current_player = who_goes_first?
     board = initialize_board
@@ -293,7 +294,7 @@ prompt "Thanks for playing Tic Tac Toe! Goodbye!"
 
 =begin
 
-Alternative loop (before refacotring recommended by LS): 
+Alternative loop (before refacotring recommended by LS):
 
     first_player = who_goes_first?
     board = initialize_board
