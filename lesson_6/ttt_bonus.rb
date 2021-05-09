@@ -126,7 +126,7 @@ def player_places_piece!(brd)
   square = ''
   loop do
     prompt "Choose a square to place a piece: #{joinor(empty_squares(brd))}"
-    loop do  
+    loop do
       square = gets.chomp
       break if valid_integer?(square)
       prompt("Please enter a valid integer")
