@@ -89,6 +89,7 @@ we've modified the last array element, we can just use Array#join
 to join the elements.
 =end
 
+# rubocop:disable Metrics/MethodLength, Metrics/PerceivedComplexity
 def who_goes_first?
   prompt("Who would you like to go first: player, computer, or random?")
   current_player = ''
@@ -111,6 +112,7 @@ def who_goes_first?
   end
   current_player
 end
+# rubocop:enable Metrics/MethodLength, Metrics/PerceivedComplexity
 
 def place_piece!(board, current_player)
   if current_player == 'player'
@@ -139,6 +141,7 @@ def player_places_piece!(brd)
   brd[square] = PLAYER_MARKER
 end
 
+# rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
 def computer_places_piece!(brd)
   square = nil
 
@@ -168,7 +171,9 @@ def computer_places_piece!(brd)
 
   brd[square] = COMPUTER_MARKER
 end
+# rubocop:enable Metrics/MethodLength, Metrics/CyclomaticComplexity
 
+# rubocop:disable Style/EmptyElse
 def find_at_risk_square(line, board, marker)
   if board.values_at(*line).count(marker) == 2
     board.select { |k, v| line.include?(k) && v == INITIAL_MARKER }.keys.first
@@ -176,6 +181,7 @@ def find_at_risk_square(line, board, marker)
     nil
   end
 end
+# rubocop:enable Style/EmptyElse
 
 def board_full?(brd)
   empty_squares(brd) == [] # or empty_squares(brd).empty?
