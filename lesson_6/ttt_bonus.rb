@@ -89,30 +89,22 @@ we've modified the last array element, we can just use Array#join
 to join the elements.
 =end
 
-# rubocop:disable Metrics/MethodLength, Metrics/PerceivedComplexity
 def who_goes_first?
   prompt("Who would you like to go first: player, computer, or random?")
   current_player = ''
-  options = ['player', 'p', 'computer', 'comp', 'c', 'random', 'rand', 'r']
+  options = ['player', 'computer', 'random']
 
   loop do
     current_player = gets.chomp.downcase
     break if options.include?(current_player)
-    prompt("Please enter a valid response: player/p, computer/c, or random/r")
+    prompt("Please enter a valid response: player, computer, or random")
   end
 
-  if current_player == 'random' ||
-     current_player == 'rand' ||
-     current_player == 'r'
-    ['player', 'computer'].sample
-  elsif current_player == 'player' || current_player == 'p'
-    'player'
-  else
-    'computer'
+  if current_player == 'random'
+    current_player = ['player', 'computer'].sample
   end
   current_player
 end
-# rubocop:enable Metrics/MethodLength, Metrics/PerceivedComplexity
 
 def place_piece!(board, current_player)
   if current_player == 'player'
