@@ -126,11 +126,20 @@ def player_places_piece!(brd)
   square = ''
   loop do
     prompt "Choose a square to place a piece: #{joinor(empty_squares(brd))}"
-    square = gets.chomp.to_i
+    loop do  
+      square = gets.chomp
+      break if valid_integer?(square)
+      prompt("Please enter a valid integer")
+    end
+    square = square.to_i
     break if empty_squares(brd).include?(square)
     prompt "Sorry, that's not a valid choice"
   end
   brd[square] = PLAYER_MARKER
+end
+
+def valid_integer?(num)
+  num == num.to_i.to_s
 end
 
 # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
