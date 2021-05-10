@@ -1,16 +1,3 @@
-=begin
-1. Display the initial empty 3x3 board.
-2. Ask the user to mark a square.
-3. Computer marks a square.
-4. Display the updated board state.
-5. If winner, display winner.
-6. If board is full, display tie.
-7. If neither winner nor board is full, go to #2
-8. Play again?
-9. If yes, go to #1
-10. Good bye!
-=end
-
 require 'pry'
 
 INITIAL_MARKER = ' '
@@ -66,28 +53,6 @@ def joinor(array, joiner = ', ', word = 'or')
     array.join(joiner).insert(-2, "#{word} ")
   end
 end
-
-=begin
-LS solution for joinor
-def joinor(arr, delimiter=', ', word='or')
-  case arr.size
-  when 0 then ''
-  when 1 then arr.first
-  when 2 then arr.join(" #{word} ")
-  else
-    arr[-1] = "#{word} #{arr.last}"
-    arr.join(delimiter)
-  end
-end
-Using a case statement works well here because we need to
-perform different actions based on the number of elements in arr.
-If arr has 2 elements, then a delimiter isn't required and we can
-just print the 2 elements, separated by the value of word. If
-arr has more than 2 elements, then we permanently mutate the
-last element with arr[-1] = and prepend the value of word. After
-we've modified the last array element, we can just use Array#join
-to join the elements.
-=end
 
 def who_goes_first?
   prompt("Who would you like to go first: player, computer, or random?")
@@ -199,15 +164,6 @@ end
 
 def detect_winner(brd)
   WINNING_LINES.each do |line|
-    # if brd[line[0]] == PLAYER_MARKER &&
-    #    brd[line[1]] == PLAYER_MARKER &&
-    #    brd[line[2]] == PLAYER_MARKER
-    #   return 'Player'
-    # elsif brd[line[0]] == PLAYER_MARKER &&
-    #       brd[line[1]] == PLAYER_MARKER &&
-    #       brd[line[2]] == PLAYER_MARKER
-    #   return 'Computer'
-    # end
     if brd.values_at(*line).count(PLAYER_MARKER) == 3
       return 'Player'
     elsif brd.values_at(*line).count(COMPUTER_MARKER) == 3
@@ -299,30 +255,3 @@ loop do
 end
 
 prompt "Thanks for playing Tic Tac Toe! Goodbye!"
-
-=begin
-
-Alternative loop (before refacotring recommended by LS):
-
-    first_player = who_goes_first?
-    board = initialize_board
-
-    loop do
-      display_board(board, first_player)
-
-      if first_player == 'player' || first_player == 'p'
-        player_places_piece!(board)
-        break if someone_won?(board) || board_full?(board)
-
-        computer_places_piece!(board)
-        break if someone_won?(board) || board_full?(board)
-      else
-        computer_places_piece!(board)
-        display_board(board, first_player)
-        break if someone_won?(board) || board_full?(board)
-
-        player_places_piece!(board)
-        break if someone_won?(board) || board_full?(board)
-      end
-    end
-=end
