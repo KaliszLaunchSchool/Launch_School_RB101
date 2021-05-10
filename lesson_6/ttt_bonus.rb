@@ -56,12 +56,19 @@ end
 def who_goes_first
   prompt("Who would you like to go first: player, computer, or random?")
   current_player = ''
-  options = ['player', 'computer', 'random']
+  options = ['player', 'p', 'computer', 'c', 'random', 'r']
 
   loop do
     current_player = gets.chomp.downcase
+    if current_player == 'p'
+      'player'
+    elsif current_player == 'c'
+      'computer'
+    else current_player == 'r'
+      'random'
+    end
     break if options.include?(current_player)
-    prompt("Please enter a valid response: player, computer, or random")
+    prompt("Please enter a valid response: player/p, computer/c, or random/r")
   end
 
   if current_player == 'random'
