@@ -225,13 +225,13 @@ loop do
 
     display_board(board, current_player)
 
+    winner = detect_winner(board)
+
     if someone_won?(board)
-      prompt "#{detect_winner(board)} won!"
+      prompt "#{winner} won!"
     else
       prompt "It's a tie!"
     end
-
-    winner = detect_winner(board)
 
     calculate_match_score(scoreboard, winner)
     display_match_results(scoreboard)
