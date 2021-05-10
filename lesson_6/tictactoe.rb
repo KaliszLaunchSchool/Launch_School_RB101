@@ -193,3 +193,35 @@ Alternative loop (before refacotring recommended by LS):
       end
     end
 =end
+
+=begin
+def computer_places_piece!(brd)
+  square = nil
+
+  # Offense
+  WINNING_LINES.each do |line|
+    square = find_at_risk_square(line, brd, COMPUTER_MARKER)
+    break if square
+  end
+
+  # Defense
+  if !square
+    WINNING_LINES.each do |line|
+      square = find_at_risk_square(line, brd, PLAYER_MARKER)
+      break if square
+    end
+  end
+
+  # Pick square 5 if available
+  if empty_squares(brd).include?(5)
+    square = 5
+  end
+
+  # Random square
+  if !square
+    square = empty_squares(brd).sample
+  end
+
+  brd[square] = COMPUTER_MARKER
+end
+=end
