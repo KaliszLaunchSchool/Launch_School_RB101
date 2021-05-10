@@ -54,6 +54,7 @@ def joinor(array, joiner = ', ', word = 'or')
   end
 end
 
+# rubocop:disable Metrics/MethodLength
 def who_goes_first
   prompt("Who would you like to go first: player, computer, or random?")
   current_player = ''
@@ -66,15 +67,16 @@ def who_goes_first
   end
 
   current_player = if current_player == 'r' || current_player == 'random'
-                    ['player', 'computer'].sample
-                  elsif current_player == 'c'
-                    'computer'
-                  elsif current_player == 'p'
-                    'player'
-                  else
-                    current_player
-                  end
+                     ['player', 'computer'].sample
+                   elsif current_player == 'c'
+                     'computer'
+                   elsif current_player == 'p'
+                     'player'
+                   else
+                     current_player
+                   end
 end
+# rubocop:enable Metrics/MethodLength
 
 def place_piece!(board, current_player)
   if current_player == 'player'
@@ -123,7 +125,6 @@ def computer_places_piece!(brd)
 end
 
 def choose_strategic_square(square, board, marker)
-  square = nil
   WINNING_LINES.each do |line|
     square = find_at_risk_square(line, board, marker)
     break if square
@@ -132,7 +133,7 @@ def choose_strategic_square(square, board, marker)
 end
 
 def choose_random_square(brd)
-  square = empty_squares(brd).sample
+  empty_squares(brd).sample
 end
 
 def find_at_risk_square(line, board, marker)
@@ -142,7 +143,7 @@ def find_at_risk_square(line, board, marker)
 end
 
 def board_full?(brd)
-  empty_squares(brd) == [] # or empty_squares(brd).empty?
+  empty_squares(brd) == [] 
 end
 
 def someone_won?(brd)
@@ -166,7 +167,6 @@ def detect_round_winner(brd)
 end
 
 def display_round_winner(board, round_winner)
-
   if someone_won?(board)
     prompt "#{round_winner} won!"
   else
