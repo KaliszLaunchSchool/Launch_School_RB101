@@ -2,6 +2,7 @@ INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
 COMPUTER_MARKER = 'O'
 BOARD_SIZE = 3
+CENTER_SQUARE = 5
 
 WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
                 [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
@@ -60,20 +61,20 @@ def who_goes_first
 
   loop do
     current_player = gets.chomp.downcase
-    if current_player == 'p'
-      'player'
-    elsif current_player == 'c'
-      'computer'
-    else current_player == 'r'
-      'random'
-    end
     break if options.include?(current_player)
     prompt("Please enter a valid response: player/p, computer/c, or random/r")
   end
 
-  if current_player == 'random'
-    current_player = ['player', 'computer'].sample
-  end
+  current_player = if current_player == 'r' || current_player == 'random'
+                    ['player', 'computer'].sample
+                  elsif current_player == 'c'
+                    'computer'
+                  elsif current_player == 'p'
+                    'player'
+                  else
+                    current_player
+                  end
+
   current_player
 end
 
@@ -113,7 +114,6 @@ def valid_integer?(num)
   num == num.to_i.to_s
 end
 
-# rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
 def computer_places_piece!(brd)
   square = nil
 
@@ -143,17 +143,14 @@ def computer_places_piece!(brd)
 
   brd[square] = COMPUTER_MARKER
 end
-# rubocop:enable Metrics/MethodLength, Metrics/CyclomaticComplexity
 
-# rubocop:disable Style/EmptyElse
 def find_at_risk_square(line, board, marker)
-  if board.values_at(*line).count(marker) == BOARD_SIZE - 1
+  if board.values_at(*line).count(marker) == (BOARD_SIZE - 1)
     board.select { |k, v| line.include?(k) && v == INITIAL_MARKER }.keys.first
   else
     nil
   end
 end
-# rubocop:enable Style/EmptyElse
 
 def board_full?(brd)
   empty_squares(brd) == [] # or empty_squares(brd).empty?
