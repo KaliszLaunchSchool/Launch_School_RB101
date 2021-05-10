@@ -133,3 +133,63 @@ loop do
 end
 
 prompt "Thanks for playing Tic Tac Toe! Goodbye!"
+
+
+=begin
+LS solution for joinor
+def joinor(arr, delimiter=', ', word='or')
+  case arr.size
+  when 0 then ''
+  when 1 then arr.first
+  when 2 then arr.join(" #{word} ")
+  else
+    arr[-1] = "#{word} #{arr.last}"
+    arr.join(delimiter)
+  end
+end
+Using a case statement works well here because we need to
+perform different actions based on the number of elements in arr.
+If arr has 2 elements, then a delimiter isn't required and we can
+just print the 2 elements, separated by the value of word. If
+arr has more than 2 elements, then we permanently mutate the
+last element with arr[-1] = and prepend the value of word. After
+we've modified the last array element, we can just use Array#join
+to join the elements.
+=end
+
+# if brd[line[0]] == PLAYER_MARKER &&
+    #    brd[line[1]] == PLAYER_MARKER &&
+    #    brd[line[2]] == PLAYER_MARKER
+    #   return 'Player'
+    # elsif brd[line[0]] == PLAYER_MARKER &&
+    #       brd[line[1]] == PLAYER_MARKER &&
+    #       brd[line[2]] == PLAYER_MARKER
+    #   return 'Computer'
+    # end
+
+=begin
+
+Alternative loop (before refacotring recommended by LS):
+
+    first_player = who_goes_first?
+    board = initialize_board
+
+    loop do
+      display_board(board, first_player)
+
+      if first_player == 'player' || first_player == 'p'
+        player_places_piece!(board)
+        break if someone_won?(board) || board_full?(board)
+
+        computer_places_piece!(board)
+        break if someone_won?(board) || board_full?(board)
+      else
+        computer_places_piece!(board)
+        display_board(board, first_player)
+        break if someone_won?(board) || board_full?(board)
+
+        player_places_piece!(board)
+        break if someone_won?(board) || board_full?(board)
+      end
+    end
+=end
