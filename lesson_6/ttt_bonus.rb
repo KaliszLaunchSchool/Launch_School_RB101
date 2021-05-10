@@ -74,8 +74,6 @@ def who_goes_first
                   else
                     current_player
                   end
-
-  current_player
 end
 
 def place_piece!(board, current_player)
@@ -117,24 +115,9 @@ end
 def computer_places_piece!(brd)
   square = nil
 
-  # Offense
-  WINNING_LINES.each do |line|
-    square = find_at_risk_square(line, brd, COMPUTER_MARKER)
-    break if square
-  end
-
-  # Defense
-  if !square
-    WINNING_LINES.each do |line|
-      square = find_at_risk_square(line, brd, PLAYER_MARKER)
-      break if square
-    end
-  end
-
-  # Pick square 5 if available
-  if empty_squares(brd).include?(5)
-    square = 5
-  end
+  square ||= choose_strategic_square(square, brd, COMPUTER_MARKER)
+  square ||= choose_strategic_square(square, brd, PLAYER_MARKER)
+  square ||= CENTER_SQUARE if empty_squares(brd).include?(CENTER_SQUARE)
 
   # Random square
   if !square
@@ -142,6 +125,15 @@ def computer_places_piece!(brd)
   end
 
   brd[square] = COMPUTER_MARKER
+end
+
+def choose_strategic_square(square, board, marker)
+  square = nil
+  WINNING_LINES.each do |line|
+    square = find_at_risk_square(line, board, marker)
+    break if square
+  end
+  square
 end
 
 def find_at_risk_square(line, board, marker)
