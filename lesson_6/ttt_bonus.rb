@@ -1,8 +1,7 @@
-require 'pry'
-
 INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
 COMPUTER_MARKER = 'O'
+BOARD_SIZE = 3
 
 WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
                 [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
@@ -54,7 +53,7 @@ def joinor(array, joiner = ', ', word = 'or')
   end
 end
 
-def who_goes_first?
+def who_goes_first
   prompt("Who would you like to go first: player, computer, or random?")
   current_player = ''
   options = ['player', 'computer', 'random']
@@ -141,7 +140,7 @@ end
 
 # rubocop:disable Style/EmptyElse
 def find_at_risk_square(line, board, marker)
-  if board.values_at(*line).count(marker) == 2
+  if board.values_at(*line).count(marker) == BOARD_SIZE - 1
     board.select { |k, v| line.include?(k) && v == INITIAL_MARKER }.keys.first
   else
     nil
@@ -164,9 +163,9 @@ end
 
 def detect_winner(brd)
   WINNING_LINES.each do |line|
-    if brd.values_at(*line).count(PLAYER_MARKER) == 3
+    if brd.values_at(*line).count(PLAYER_MARKER) == BOARD_SIZE
       return 'Player'
-    elsif brd.values_at(*line).count(COMPUTER_MARKER) == 3
+    elsif brd.values_at(*line).count(COMPUTER_MARKER) == BOARD_SIZE
       return 'Computer'
     end
   end
@@ -221,7 +220,7 @@ enter_to_continue
 system 'clear'
 loop do
   loop do
-    current_player = who_goes_first?
+    current_player = who_goes_first
     board = initialize_board
 
     loop do
