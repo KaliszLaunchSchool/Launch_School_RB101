@@ -146,7 +146,7 @@ def board_full?(brd)
 end
 
 def someone_won?(brd)
-  !!detect_winner(brd)
+  !!detect_round_winner(brd)
 end
 
 def welcome
@@ -154,7 +154,7 @@ def welcome
   prompt("The first player to #{WINNING_SCORE} points, wins!")
 end
 
-def detect_winner(brd)
+def detect_round_winner(brd)
   WINNING_LINES.each do |line|
     if brd.values_at(*line).count(PLAYER_MARKER) == BOARD_SIZE
       return 'Player'
@@ -225,10 +225,10 @@ loop do
 
     display_board(board, current_player)
 
-    winner = detect_winner(board)
+    round_winner = detect_round_winner(board)
 
     if someone_won?(board)
-      prompt "#{winner} won!"
+      prompt "#{round_winner} won!"
     else
       prompt "It's a tie!"
     end
