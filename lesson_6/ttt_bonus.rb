@@ -258,6 +258,7 @@ def enter_to_continue
   STDIN.gets
 end
 
+system 'clear'
 scoreboard = { 'Player': 0, 'Computer': 0 }
 welcome
 enter_to_continue
