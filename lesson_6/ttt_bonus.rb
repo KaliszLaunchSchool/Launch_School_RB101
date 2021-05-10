@@ -118,12 +118,7 @@ def computer_places_piece!(brd)
   square ||= choose_strategic_square(square, brd, COMPUTER_MARKER)
   square ||= choose_strategic_square(square, brd, PLAYER_MARKER)
   square ||= CENTER_SQUARE if empty_squares(brd).include?(CENTER_SQUARE)
-
-  # Random square
-  if !square
-    square = empty_squares(brd).sample
-  end
-
+  square ||= choose_random_square(brd)
   brd[square] = COMPUTER_MARKER
 end
 
@@ -134,6 +129,10 @@ def choose_strategic_square(square, board, marker)
     break if square
   end
   square
+end
+
+def choose_random_square(brd)
+  square = empty_squares(brd).sample
 end
 
 def find_at_risk_square(line, board, marker)
