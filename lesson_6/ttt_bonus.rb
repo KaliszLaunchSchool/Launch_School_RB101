@@ -165,6 +165,15 @@ def detect_round_winner(brd)
   nil
 end
 
+def display_round_winner(board, round_winner)
+
+  if someone_won?(board)
+    prompt "#{round_winner} won!"
+  else
+    prompt "It's a tie!"
+  end
+end
+
 def calculate_match_score(scoreboard, winner)
   scoreboard[winner.to_sym] += 1 unless winner.nil?
 end
@@ -226,14 +235,9 @@ loop do
     display_board(board, current_player)
 
     round_winner = detect_round_winner(board)
+    display_round_winner(board, round_winner)
 
-    if someone_won?(board)
-      prompt "#{round_winner} won!"
-    else
-      prompt "It's a tie!"
-    end
-
-    calculate_match_score(scoreboard, winner)
+    calculate_match_score(scoreboard, round_winner)
     display_match_results(scoreboard)
     enter_to_continue
     system 'clear'
