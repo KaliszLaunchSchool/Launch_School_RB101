@@ -30,8 +30,9 @@ def deal_cards(deck, suits)
     dealer_cards << one_card(deck, suits)
     break if dealer_cards.size == 2
   end
-  p player_cards
-  p dealer_cards
+  player_cards
+  dealer_cards
+
 end
 
 def one_card(deck, suits)
@@ -40,6 +41,8 @@ def one_card(deck, suits)
   chosen_value = deck.fetch(chosen_suit).sample
   card[chosen_suit] = chosen_value
   p card
+  p deck[chosen_suit].delete_if {|value| value == chosen_value}
+  p deck
 end
 
 deck = initiate_deck(values, suits)
