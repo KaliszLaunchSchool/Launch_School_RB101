@@ -72,7 +72,27 @@ def calculate_ace(cards, values, card_value)
   end
 end
 
+def prompt(msg)
+  puts "==> #{msg}"
+end
+
+def player_turn(player_cards, dealer_cards)
+  prompt("Your cards are:") 
+  prompt("  The #{player_cards[0].values[0]} of #{player_cards[0].keys[0]}")
+  prompt("  The #{player_cards[1].values[0]} of #{player_cards[1].keys[0]}")
+  prompt("The dealer shows:")
+  prompt("  The #{dealer_cards[0].values[0]} of #{dealer_cards[0].keys[0]}")
+  prompt("Would you like to hit, or stay?")
+  loop do
+    abbreviations = ['hit', 'h', 'stay', 's']
+    hit_or_stay = gets.chomp
+    break if abbreviations.include?(hit_or_stay)
+    prompt('Please enter a valid response: hit/h or stay/s')
+  end
+end
+
 deck = initiate_deck(values, suits)
 deal_cards(deck, suits, player_cards, dealer_cards)
-p calculate_hand(player_cards)
-p calculate_hand(dealer_cards)
+calculate_hand(player_cards)
+calculate_hand(dealer_cards)
+player_turn(player_cards, dealer_cards)
