@@ -76,18 +76,45 @@ def prompt(msg)
   puts "==> #{msg}"
 end
 
-def player_turn(player_cards, dealer_cards)
-  prompt("Your cards are:") 
-  prompt("  The #{player_cards[0].values[0]} of #{player_cards[0].keys[0]}")
-  prompt("  The #{player_cards[1].values[0]} of #{player_cards[1].keys[0]}")
+def player_turn(player_cards, dealer_cards, deck, suits)
+  display_player_cards(player_cards)
   prompt("The dealer shows:")
   prompt("  The #{dealer_cards[0].values[0]} of #{dealer_cards[0].keys[0]}")
+
+  if hit_or_stay? == 'hit'
+    loop do
+      player_cards << deal_one_card(deck, suits)
+      display_player_cards(player_cards)
+      break if hit_or_stay? == 'stay'
+    end
+  end
+end
+
+def hit_or_stay?
   prompt("Would you like to hit, or stay?")
+  hit_or_stay = ''
   loop do
     abbreviations = ['hit', 'h', 'stay', 's']
-    hit_or_stay = gets.chomp
+    hit_or_stay = gets.chomp.downcase
     break if abbreviations.include?(hit_or_stay)
     prompt('Please enter a valid response: hit/h or stay/s')
+  end
+  if hit_or_stay == 'h'
+    hit_or_stay = 'hit'
+  elsif hit_or_stay ==  's'
+    hit_or_stay = 'stay'
+  else
+    hit_or_stay
+  end
+end
+
+def display_player_cards(player_cards)
+  count = 0
+  prompt("Your cards are:") 
+  loop do
+    prompt("  The #{player_cards[count].values[0]} of #{player_cards[count].keys[0]}")
+    count +=1
+    break if player_cards.size == count
   end
 end
 
@@ -95,4 +122,4 @@ deck = initiate_deck(values, suits)
 deal_cards(deck, suits, player_cards, dealer_cards)
 calculate_hand(player_cards)
 calculate_hand(dealer_cards)
-player_turn(player_cards, dealer_cards)
+player_turn(player_cards, dealer_cards, deck, suits)
