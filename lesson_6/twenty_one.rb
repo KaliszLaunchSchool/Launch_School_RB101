@@ -50,18 +50,26 @@ def calculate_hand(cards)
   values = []
   cards.each do |card|
     card_value = card.values[0]
-    if card_value == 'ace'
-      values << 1
-    elsif card_value.class == String
+    unless card_value == 'ace' 
+      if card_value.class == String
       values << 10
-    else
-      values << card_value
+      else
+        values << card_value
+      end
+    end
+    if card_value == 'ace'
+      values << calculate_ace(cards, values, card_value)
     end
   end
-  p values.sum
+  values.sum
 end
 
-def calculate_ace(cards)
+def calculate_ace(cards, values, card_value)
+  if card_value = 11 && values.sum > 21
+    card_value = 1
+  else
+    card_value = 11
+  end
 end
 
 deck = initiate_deck(values, suits)
