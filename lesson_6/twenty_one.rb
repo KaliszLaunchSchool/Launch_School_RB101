@@ -32,8 +32,8 @@ def deal_cards(deck, suits, player_cards, dealer_cards)
     dealer_cards << deal_one_card(deck, suits)
     break if dealer_cards.size == 2
   end
-  p player_cards
-  p dealer_cards
+  player_cards
+  dealer_cards
 end
 
 def deal_one_card(deck, suits)
@@ -88,6 +88,7 @@ def player_turn(player_cards, dealer_cards, deck, suits)
       break if hit_or_stay? == 'stay'
     end
   end
+  player_cards
 end
 
 def hit_or_stay?
@@ -116,10 +117,10 @@ def display_player_cards(player_cards)
     count +=1
     break if player_cards.size == count
   end
+  prompt("Calculates to #{calculate_hand(player_cards)} points")
 end
 
 deck = initiate_deck(values, suits)
 deal_cards(deck, suits, player_cards, dealer_cards)
-calculate_hand(player_cards)
 calculate_hand(dealer_cards)
 player_turn(player_cards, dealer_cards, deck, suits)
