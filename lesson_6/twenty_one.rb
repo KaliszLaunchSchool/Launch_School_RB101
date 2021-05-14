@@ -85,7 +85,10 @@ def player_turn(player_cards, dealer_cards, deck, suits)
     break if hit_or_stay == 'stay'
     player_cards << deal_one_card(deck, suits)
     display_player_cards(player_cards)
-    break if bust?(player_cards) 
+    if bust?(player_cards) 
+      prompt('Bust!') 
+      break
+    end
   end
   player_cards
 end
@@ -120,16 +123,17 @@ def display_player_cards(player_cards)
 end
 
 def bust?(cards)
-  if calculate_hand(cards) > 30
-    prompt('Bust!') 
+  if calculate_hand(cards) > 21
     true
   end
 end
 
-def determine_winner()
+def determine_winner(player_cards, dealer_cards)
+  prompt("You bust! The dealer wins.") if bust?(player_cards)
 end
 
 deck = initiate_deck(values, suits)
 deal_cards(deck, suits, player_cards, dealer_cards)
 calculate_hand(dealer_cards)
 player_turn(player_cards, dealer_cards, deck, suits)
+determine_winner(player_cards, dealer_cards)
