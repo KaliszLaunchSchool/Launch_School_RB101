@@ -13,7 +13,7 @@
 require 'pry'
 
 deck = {}
-values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king', 'ace']
+values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'ace', 'ace', 'ace']
 suits = ['hearts', 'diamonds', 'clubs', 'spades']
 player_cards = []
 dealer_cards = []
@@ -74,7 +74,7 @@ def calculate_hand(cards)
 end
 
 def calculate_ace(cards, values, card_value)
-  if card_value = 11 && values.sum > 21
+  if (values.sum + 11) > 21
     card_value = 1
   else
     card_value = 11
