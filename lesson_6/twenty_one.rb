@@ -81,31 +81,30 @@ def player_turn(player_cards, dealer_cards, deck, suits)
   prompt("The dealer shows:")
   prompt("  The #{dealer_cards[0].values[0]} of #{dealer_cards[0].keys[0]}")
 
-  if hit_or_stay? == 'hit'
-    loop do
-      player_cards << deal_one_card(deck, suits)
-      display_player_cards(player_cards)
-      break if bust?(player_cards) == nil || hit_or_stay? == 'stay'
-    end
+  loop do
+    break if hit_or_stay == 'stay'
+    player_cards << deal_one_card(deck, suits)
+    display_player_cards(player_cards)
+    break if bust?(player_cards) 
   end
   player_cards
 end
 
-def hit_or_stay?
+def hit_or_stay
   prompt("Would you like to hit, or stay?")
-  hit_or_stay = ''
+  hit_or_stay_response = ''
   loop do
     abbreviations = ['hit', 'h', 'stay', 's']
-    hit_or_stay = gets.chomp.downcase
-    break if abbreviations.include?(hit_or_stay)
+    hit_or_stay_response = gets.chomp.downcase
+    break if abbreviations.include?(hit_or_stay_response)
     prompt('Please enter a valid response: hit/h or stay/s')
   end
-  if hit_or_stay == 'h'
-    hit_or_stay = 'hit'
-  elsif hit_or_stay ==  's'
-    hit_or_stay = 'stay'
+  if hit_or_stay_response == 'h'
+    hit_or_stay_response = 'hit'
+  elsif hit_or_stay_response ==  's'
+    hit_or_stay_response = 'stay'
   else
-    hit_or_stay
+    hit_or_stay_response
   end
 end
 
@@ -121,7 +120,13 @@ def display_player_cards(player_cards)
 end
 
 def bust?(cards)
-  prompt('Bust!') if calculate_hand(cards) > 21
+  if calculate_hand(cards) > 30
+    prompt('Bust!') 
+    true
+  end
+end
+
+def determine_winner()
 end
 
 deck = initiate_deck(values, suits)
