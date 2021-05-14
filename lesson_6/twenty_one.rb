@@ -85,7 +85,7 @@ def player_turn(player_cards, dealer_cards, deck, suits)
     loop do
       player_cards << deal_one_card(deck, suits)
       display_player_cards(player_cards)
-      break if hit_or_stay? == 'stay'
+      break if bust?(player_cards) == nil || hit_or_stay? == 'stay'
     end
   end
   player_cards
@@ -118,6 +118,10 @@ def display_player_cards(player_cards)
     break if player_cards.size == count
   end
   prompt("Calculates to #{calculate_hand(player_cards)} points")
+end
+
+def bust?(cards)
+  prompt('Bust!') if calculate_hand(cards) > 21
 end
 
 deck = initiate_deck(values, suits)
