@@ -1,20 +1,6 @@
-=begin
-1. Initialize deck
-2. Deal cards to player and dealer
-3. Player turn: hit or stay
-  - repeat until bust or "stay"
-4. If player bust, dealer wins.
-5. Dealer turn: hit or stay
-  - repeat until total >= 17
-6. If dealer bust, player wins.
-7. Compare cards and declare winner.
-=end
-
-require 'pry'
-
+VALUES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king', 'ace']
+SUITS = ['hearts', 'diamonds', 'clubs', 'spades']
 deck = {}
-values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king', 'ace']
-suits = ['hearts', 'diamonds', 'clubs', 'spades']
 player_cards = []
 dealer_cards = []
 
@@ -28,25 +14,25 @@ def welcome
   enter_to_continue
 end
 
-def initiate_deck(deck, values, suits)
-  suits.each do |suit|
-    deck[suit] = values.dup
+def initiate_deck(deck)
+  SUITS.each do |suit|
+    deck[suit] = VALUES.dup
   end
   deck
 end
 
-def deal_cards(deck, suits, player_cards, dealer_cards)
+def deal_cards(deck, player_cards, dealer_cards)
   loop do
-    player_cards << deal_one_card(deck, suits)
-    dealer_cards << deal_one_card(deck, suits)
+    player_cards << deal_one_card(deck)
+    dealer_cards << deal_one_card(deck)
     break if dealer_cards.size == 2
   end
   deck
 end
 
-def deal_one_card(deck, suits)
+def deal_one_card(deck)
   card = {}
-  chosen_suit = suits.sample
+  chosen_suit = SUITS.sample
   chosen_value = deck.fetch(chosen_suit).sample
   card[chosen_suit] = chosen_value
   deck[chosen_suit].delete(chosen_value)
@@ -83,7 +69,7 @@ def prompt(msg)
   puts "==> #{msg}"
 end
 
-def player_turn(player_cards, dealer_cards, deck, suits)
+def player_turn(player_cards, dealer_cards, deck)
   prompt("You have:")
   display_cards(player_cards)
   enter_to_continue
@@ -91,7 +77,7 @@ def player_turn(player_cards, dealer_cards, deck, suits)
 
   loop do
     break if hit_or_stay == 'stay'
-    player_cards << deal_one_card(deck, suits)
+    player_cards << deal_one_card(deck)
     prompt("You have:")
     display_cards(player_cards)
     if bust?(player_cards)
@@ -141,7 +127,7 @@ def bust?(cards)
   end
 end
 
-def dealer_turn(dealer_cards, deck, suits)
+def dealer_turn(dealer_cards, deck)
   dealer_score = calculate_hand(dealer_cards)
 
   loop do
@@ -153,19 +139,19 @@ def dealer_turn(dealer_cards, deck, suits)
       break
     else
       prompt("The dealer hits!")
-      dealer_cards << deal_one_card(deck, suits)
+      dealer_cards << deal_one_card(deck)
       dealer_score = calculate_hand(dealer_cards)
     end
     enter_to_continue
   end
 end
 
-def determine_winner(player_cards, dealer_cards, deck, suits)
+def determine_winner(player_cards, dealer_cards, deck)
   if bust?(player_cards)
     enter_to_continue
     prompt("You bust! The dealer wins.")
   else
-    dealer_turn(dealer_cards, deck, suits)
+    dealer_turn(dealer_cards, deck)
     if bust?(dealer_cards)
       prompt("The dealer bust! You win!")
     else
@@ -224,11 +210,11 @@ system 'clear'
 welcome
 loop do
   system 'clear'
-  initiate_deck(deck, values, suits)
-  deal_cards(deck, suits, player_cards, dealer_cards)
+  initiate_deck(deck)
+  deal_cards(deck, player_cards, dealer_cards)
   calculate_hand(dealer_cards)
-  player_turn(player_cards, dealer_cards, deck, suits)
-  determine_winner(player_cards, dealer_cards, deck, suits)
+  player_turn(player_cards, dealer_cards, deck)
+  determine_winner(player_cards, dealer_cards, deck)
   enter_to_continue
   display_final_cards(player_cards, dealer_cards)
   enter_to_continue
