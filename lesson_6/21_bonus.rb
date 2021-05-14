@@ -78,6 +78,13 @@ def play_again?
   answer.downcase.start_with?('y')
 end
 
+def display_match_results(dealer_cards, player_cards, dealer_total, player_total)
+  puts "=============="
+  prompt "Dealer has #{dealer_cards}, for a total of: #{dealer_total}"
+  prompt "Player has #{player_cards}, for a total of: #{player_total}"
+  puts "=============="
+end
+
 loop do
   prompt "Welcome to Twenty-One!"
 
@@ -119,6 +126,7 @@ loop do
   end
 
   if busted?(player_cards)
+    display_match_results(dealer_cards, player_cards, dealer_total, player_total)
     display_result(dealer_cards, player_cards)
     play_again? ? next : break
   else
@@ -133,11 +141,12 @@ loop do
 
     prompt "Dealer hits!"
     dealer_cards << deck.pop
-    prompt "Dealer's cards are now: #{dealer_cards}"
+    prompt "Dealer's cards are now: #{dealer_total = total(dealer_cards)}"
   end
 
   if busted?(dealer_cards)
-    prompt "Dealer total is now: #{dealer_total = total(dealer_cards)}"
+    prompt "Dealer total is now: #{dealer_cards}"
+    display_match_results(dealer_cards, player_cards, dealer_total, player_total)
     display_result(dealer_cards, player_cards)
     play_again? ? next : break
   else
@@ -145,10 +154,7 @@ loop do
   end
 
   # both player and dealer stays - compare cards!
-  puts "=============="
-  prompt "Dealer has #{dealer_cards}, for a total of: #{dealer_total}"
-  prompt "Player has #{player_cards}, for a total of: #{player_total}"
-  puts "=============="
+  display_match_results(dealer_cards, player_cards, dealer_total, player_total)
 
   display_result(dealer_cards, player_cards)
 
