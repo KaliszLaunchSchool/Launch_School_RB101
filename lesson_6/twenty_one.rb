@@ -17,6 +17,16 @@ suits = ['hearts', 'diamonds', 'clubs', 'spades']
 player_cards = []
 dealer_cards = []
 
+def welcome
+  prompt("Welcome to the Twenty-One game!")
+  prompt("Try to get as close to 21 as possible, without going over.") 
+  prompt("If you go over 21, it's a 'bust' and you lose.")
+  enter_to_continue
+  prompt("Face cards are 10 points, and aces are either 1 point or 11.")
+  prompt("You go first! Ready?")
+  enter_to_continue
+end
+
 def initiate_deck(values, suits)
   deck = {}
 
@@ -77,14 +87,17 @@ def prompt(msg)
 end
 
 def player_turn(player_cards, dealer_cards, deck, suits)
-  display_player_cards(player_cards)
+  prompt("You have:")
+  display_cards(player_cards)
+  enter_to_continue
   prompt("The dealer shows:")
-  prompt("  The #{dealer_cards[0].values[0]} of #{dealer_cards[0].keys[0]}")
+  puts "    The #{dealer_cards[0].values[0]} of #{dealer_cards[0].keys[0]}"
 
   loop do
     break if hit_or_stay == 'stay'
     player_cards << deal_one_card(deck, suits)
-    display_player_cards(player_cards)
+    prompt("You have:")
+    display_cards(player_cards)
     if bust?(player_cards) 
       prompt('Bust!') 
       break
@@ -111,15 +124,14 @@ def hit_or_stay
   end
 end
 
-def display_player_cards(player_cards)
+def display_cards(cards)
   count = 0
-  prompt("Your cards are:") 
   loop do
-    prompt("  The #{player_cards[count].values[0]} of #{player_cards[count].keys[0]}")
+    puts "     The #{cards[count].values[0]} of #{cards[count].keys[0]}"
     count +=1
-    break if player_cards.size == count
+    break if cards.size == count
   end
-  prompt("Calculates to #{calculate_hand(player_cards)} points")
+  puts "     (#{calculate_hand(cards)} points)"
 end
 
 def bust?(cards)
@@ -129,17 +141,89 @@ def bust?(cards)
 end
 
 def dealer_turn(dealer_cards, deck, suits)
-  p dealer_cards
-  p calculate_hand(dealer_cards)
+  dealer_cards
+  dealer_score = calculate_hand(dealer_cards)
+
+  loop do
+    if bust?(dealer_cards)
+      break
+    elsif dealer_score >= 17
+      prompt("The dealer stays.")
+      enter_to_continue
+      break
+    else 
+      prompt("The dealer hits!")
+      dealer_cards << deal_one_card(deck, suits)
+      dealer_cards
+      dealer_score = calculate_hand(dealer_cards)
+      dealer_score
+    end
+    enter_to_continue
+  end
 end
 
-def determine_winner(player_cards, dealer_cards)
-  prompt("You bust! The dealer wins.") if bust?(player_cards)
+def determine_winner(player_cards, dealer_cards, deck, suits)
+  if bust?(player_cards)
+    enter_to_continue
+    prompt("You bust! The dealer wins.") 
+  else
+    dealer_turn(dealer_cards, deck, suits)
+    if bust?(dealer_cards)
+      prompt("The dealer bust! You win!")
+    else
+      if calculate_hand(player_cards) > calculate_hand(dealer_cards)
+        prompt("Congrats! You win!")
+      elsif calculate_hand(player_cards) < calculate_hand(dealer_cards)
+        prompt("Sorry, dealer wins!")
+      else calculate_hand(player_cards) == calculate_hand(dealer_cards)
+        prompt("It's a tie!")
+      end
+    end
+  end
 end
 
-deck = initiate_deck(values, suits)
-deal_cards(deck, suits, player_cards, dealer_cards)
-calculate_hand(dealer_cards)
-player_turn(player_cards, dealer_cards, deck, suits)
-determine_winner(player_cards, dealer_cards)
-# dealer_turn(dealer_cards, deck, suits)
+def show_dealer_hand(dealer_cards)
+  prompt("Dealer's hand: ")
+  prompt("The dealer had #{calculate_hand(dealer_cards)} points.")
+end
+
+def display_final_cards (player_cards, dealer_cards)
+  prompt("You had:")
+  display_cards(player_cards)
+  prompt("The dealer had:")
+  display_cards(dealer_cards)
+end
+
+def enter_to_continue
+  prompt('Press enter to continue')
+  STDIN.gets
+end
+
+def play_again?
+  prompt("Would you like to play again?")
+  play_again = ''
+
+  loop do
+    play_again = gets.chomp.downcase
+    break if ['y', 'yes', 'n', 'no'].include?(play_again)
+    prompt('Please enter valid answer (y/yes or n/no)')
+  end
+
+  ['y', 'yes'].include?(play_again)
+end
+
+system 'clear'
+welcome
+loop do
+  deck = initiate_deck(values, suits)
+  deal_cards(deck, suits, player_cards, dealer_cards)
+  calculate_hand(dealer_cards)
+  player_turn(player_cards, dealer_cards, deck, suits)
+  determine_winner(player_cards, dealer_cards, deck, suits)
+  enter_to_continue
+  display_final_cards(player_cards, dealer_cards)
+  enter_to_continue
+  break unless play_again?
+end
+
+prompt("Thanks for playing Twenty-One! Goodbye.")
