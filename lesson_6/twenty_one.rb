@@ -21,7 +21,7 @@ def initiate_deck(values, suits)
   deck = {}
 
   for suit in suits
-    deck[suit] = values
+    deck[suit] = values.dup
   end
   deck
 end
@@ -34,6 +34,7 @@ def deal_cards(deck, suits, player_cards, dealer_cards)
   end
   player_cards
   dealer_cards
+  deck
 end
 
 def deal_one_card(deck, suits)
@@ -41,8 +42,7 @@ def deal_one_card(deck, suits)
   chosen_suit = suits.sample
   chosen_value = deck.fetch(chosen_suit).sample
   card[chosen_suit] = chosen_value
-  
-  deck[chosen_suit].delete_if {|value| value == chosen_value}
+  deck[chosen_suit].delete(chosen_value)
   card
 end
 
@@ -128,6 +128,11 @@ def bust?(cards)
   end
 end
 
+def dealer_turn(dealer_cards, deck, suits)
+  p dealer_cards
+  p calculate_hand(dealer_cards)
+end
+
 def determine_winner(player_cards, dealer_cards)
   prompt("You bust! The dealer wins.") if bust?(player_cards)
 end
@@ -137,3 +142,4 @@ deal_cards(deck, suits, player_cards, dealer_cards)
 calculate_hand(dealer_cards)
 player_turn(player_cards, dealer_cards, deck, suits)
 determine_winner(player_cards, dealer_cards)
+# dealer_turn(dealer_cards, deck, suits)
