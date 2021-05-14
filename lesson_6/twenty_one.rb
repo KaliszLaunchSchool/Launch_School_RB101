@@ -12,6 +12,7 @@
 
 require 'pry'
 
+deck = {}
 values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king', 'ace']
 suits = ['hearts', 'diamonds', 'clubs', 'spades']
 player_cards = []
@@ -27,9 +28,7 @@ def welcome
   enter_to_continue
 end
 
-def initiate_deck(values, suits)
-  deck = {}
-
+def initiate_deck(deck, values, suits)
   for suit in suits
     deck[suit] = values.dup
   end
@@ -212,10 +211,17 @@ def play_again?
   ['y', 'yes'].include?(play_again)
 end
 
+def reset_deck(deck, player_cards, dealer_cards)
+  deck.replace({})
+  player_cards.replace([])
+  dealer_cards.replace([])
+end
+
 system 'clear'
 welcome
-loop do
-  deck = initiate_deck(values, suits)
+  loop do
+  system 'clear'
+  initiate_deck(deck, values, suits)
   deal_cards(deck, suits, player_cards, dealer_cards)
   calculate_hand(dealer_cards)
   player_turn(player_cards, dealer_cards, deck, suits)
@@ -224,6 +230,7 @@ loop do
   display_final_cards(player_cards, dealer_cards)
   enter_to_continue
   break unless play_again?
+  reset_deck(deck, player_cards, dealer_cards)
 end
 
 prompt("Thanks for playing Twenty-One! Goodbye.")
