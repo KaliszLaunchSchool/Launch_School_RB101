@@ -58,11 +58,11 @@ def calculate_hand(cards)
   cards.each do |card|
     card_value = card.values[0]
     unless card_value == 'ace'
-      if card_value.class == String
-        values << 10
-      else
-        values << card_value
-      end
+      values << if card_value.class == String
+                  10
+                else
+                  card_value
+                end
     end
     if card_value == 'ace'
       values << calculate_ace(values)
@@ -87,8 +87,7 @@ def player_turn(player_cards, dealer_cards, deck, suits)
   prompt("You have:")
   display_cards(player_cards)
   enter_to_continue
-  prompt("The dealer shows:")
-  puts "    The #{dealer_cards[0].values[0]} of #{dealer_cards[0].keys[0]}"
+  display_dealer_first_card(dealer_cards)
 
   loop do
     break if hit_or_stay == 'stay'
@@ -101,6 +100,11 @@ def player_turn(player_cards, dealer_cards, deck, suits)
     end
   end
   player_cards
+end
+
+def display_dealer_first_card(dealer_cards)
+  prompt("The dealer shows:")
+  puts "    The #{dealer_cards[0].values[0]} of #{dealer_cards[0].keys[0]}"
 end
 
 def hit_or_stay
@@ -125,7 +129,7 @@ def display_cards(cards)
   count = 0
   loop do
     puts "     The #{cards[count].values[0]} of #{cards[count].keys[0]}"
-    count +=1
+    count += 1
     break if cards.size == count
   end
   puts "     (#{calculate_hand(cards)} points)"
@@ -147,7 +151,7 @@ def dealer_turn(dealer_cards, deck, suits)
       prompt("The dealer stays.")
       enter_to_continue
       break
-    else 
+    else
       prompt("The dealer hits!")
       dealer_cards << deal_one_card(deck, suits)
       dealer_score = calculate_hand(dealer_cards)
@@ -165,14 +169,18 @@ def determine_winner(player_cards, dealer_cards, deck, suits)
     if bust?(dealer_cards)
       prompt("The dealer bust! You win!")
     else
-      if calculate_hand(player_cards) > calculate_hand(dealer_cards)
-        prompt("Congrats! You win!")
-      elsif calculate_hand(player_cards) < calculate_hand(dealer_cards)
-        prompt("Sorry, dealer wins!")
-      else calculate_hand(player_cards) == calculate_hand(dealer_cards)
-        prompt("It's a tie!")
-      end
+      compare_scores(player_cards, dealer_cards)
     end
+  end
+end
+
+def compare_scores(player_cards, dealer_cards)
+  if calculate_hand(player_cards) > calculate_hand(dealer_cards)
+    prompt("Congrats! You win!")
+  elsif calculate_hand(player_cards) < calculate_hand(dealer_cards)
+    prompt("Sorry, dealer wins!")
+  elsif calculate_hand(player_cards) == calculate_hand(dealer_cards)
+    prompt("It's a tie!")
   end
 end
 
