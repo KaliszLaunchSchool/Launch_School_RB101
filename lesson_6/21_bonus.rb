@@ -19,13 +19,13 @@ def total(cards)
 
   sum = 0
   values.each do |value|
-    if value == "A"
-      sum += 11
-    elsif value.to_i == 0 # J, Q, K
-      sum += 10
-    else
-      sum += value.to_i
-    end
+    sum += if value == "A"
+             11
+           elsif value.to_i == 0 # J, Q, K
+             10
+           else
+             value.to_i
+           end
   end
 
   # correct for Aces
@@ -89,7 +89,8 @@ def play_again?
   ['y', 'yes'].include?(play_again)
 end
 
-def display_match_results(dealer_cards, player_cards, dealer_total, player_total)
+def display_match_results(dealer_cards, player_cards, dealer_total,
+                          player_total)
   puts "=============="
   prompt "Dealer has #{dealer_cards}, for a total of: #{dealer_total}"
   prompt "Player has #{player_cards}, for a total of: #{player_total}"
@@ -112,7 +113,7 @@ def update_scoreboard(dealer_cards, player_cards, scoreboard)
               nil
             end
 
-  scoreboard[result] += 1 unless result == nil
+  scoreboard[result] += 1 unless result.nil?
 end
 
 def display_round_score(scoreboard)
@@ -157,7 +158,6 @@ loop do
 
   scoreboard = { Player: 0, Dealer: 0 }
   loop do
-
     # initialize vars
     deck = initialize_deck
     player_cards = []
@@ -173,7 +173,8 @@ loop do
     dealer_total = total(dealer_cards)
 
     prompt "Dealer has #{dealer_cards[0]} and ?"
-    prompt "You have: #{player_cards[0]} and #{player_cards[1]}, for a total of #{player_total}."
+    prompt "You have: #{player_cards[0]} and #{player_cards[1]}, " \
+           "for a total of #{player_total}."
 
     # player turn
     loop do
@@ -196,7 +197,8 @@ loop do
     end
 
     if busted?(player_cards)
-      display_match_results(dealer_cards, player_cards, dealer_total, player_total)
+      display_match_results(dealer_cards, player_cards, dealer_total,
+                            player_total)
       display_result(dealer_cards, player_cards)
       all_results(dealer_cards, player_cards, scoreboard) ? break : next
     else
@@ -216,7 +218,8 @@ loop do
 
     if busted?(dealer_cards)
       prompt "Dealer total is now: #{dealer_cards}"
-      display_match_results(dealer_cards, player_cards, dealer_total, player_total)
+      display_match_results(dealer_cards, player_cards, dealer_total,
+                            player_total)
       display_result(dealer_cards, player_cards)
       all_results(dealer_cards, player_cards, scoreboard) ? break : next
     else
@@ -224,8 +227,9 @@ loop do
     end
 
     # both player and dealer stays - compare cards!
-    display_match_results(dealer_cards, player_cards, dealer_total, player_total)
-    
+    display_match_results(dealer_cards, player_cards, dealer_total,
+                          player_total)
+
     break if all_results(dealer_cards, player_cards, scoreboard)
   end
 
