@@ -153,9 +153,9 @@ def all_results(dealer_cards, player_cards, scoreboard)
 end
 
 def display_match_winner(score)
-  score.select do |player, score|
-    if score == WINNING_ROUNDS
-      prompt "#{player.to_s} wins the game!"
+  score.select do |player, value|
+    if value == WINNING_ROUNDS
+      prompt "#{player} wins the game!"
     end
   end
 end
