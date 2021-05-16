@@ -152,6 +152,14 @@ def all_results(dealer_cards, player_cards, scoreboard)
   end
 end
 
+def display_match_winner(score)
+  score.select do |player, score|
+    if score == WINNING_ROUNDS
+      prompt "#{player.to_s} wins the game!"
+    end
+  end
+end
+
 loop do
   prompt "Welcome to Twenty-One!"
   prompt "The first player to win #{WINNING_ROUNDS} games, wins!"
@@ -232,8 +240,9 @@ loop do
 
     break if all_results(dealer_cards, player_cards, scoreboard)
   end
-
+  display_match_winner(scoreboard)
   break unless play_again?
 end
 
+system 'clear'
 prompt "Thank you for playing Twenty-One! Good bye!"
