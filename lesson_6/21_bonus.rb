@@ -1,6 +1,8 @@
 require 'pry'
 SUITS = ['H', 'D', 'S', 'C']
 VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+CRITICAL_VALUE = 21
+DEALER_HIT_POINT = 17
 WINNING_ROUNDS = 2
 
 def prompt(msg)
@@ -28,14 +30,14 @@ def total(cards)
 
   # correct for Aces
   values.select { |value| value == "A" }.count.times do
-    sum -= 10 if sum > 21
+    sum -= 10 if sum > CRITICAL_VALUE
   end
 
   sum
 end
 
 def busted?(cards)
-  total(cards) > 21
+  total(cards) > CRITICAL_VALUE
 end
 
 # :tie, :dealer, :player, :dealer_busted, :player_busted
@@ -43,9 +45,9 @@ def detect_result(dealer_cards, player_cards)
   player_total = total(player_cards)
   dealer_total = total(dealer_cards)
 
-  if player_total > 21
+  if player_total > CRITICAL_VALUE
     :player_busted
-  elsif dealer_total > 21
+  elsif dealer_total > CRITICAL_VALUE
     :dealer_busted
   elsif dealer_total < player_total
     :player
@@ -205,7 +207,7 @@ loop do
     prompt "Dealer turn..."
 
     loop do
-      break if dealer_total >= 17
+      break if dealer_total >= DEALER_HIT_POINT
 
       prompt "Dealer hits!"
       dealer_cards << deck.pop
