@@ -2,17 +2,19 @@ VALUES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king', 'ace']
 SUITS = ['hearts', 'diamonds', 'clubs', 'spades']
 CRITICAL_VALUE = 21
 DEALER_HIT_POINT = 17
-WINNING_ROUNDS = 2
+WINNING_ROUNDS = 5
 deck = {}
 player_cards = []
 dealer_cards = []
 
 def welcome
   prompt("Welcome to the Twenty-One game!")
-  prompt("Try to get as close to #{CRITICAL_VALUE} as possible, without going over.")
+  prompt("Try to get as close to #{CRITICAL_VALUE} as possible, " \
+        "without going over.")
   prompt("If you go over #{CRITICAL_VALUE}, it's a 'bust' and you lose.")
   enter_to_continue
   prompt("Face cards are 10 points, and aces are either 1 point or 11.")
+  prompt("The first player to win #{WINNING_ROUNDS} rounds, wins!")
   prompt("You go first! Ready?")
   enter_to_continue
 end
@@ -172,16 +174,13 @@ def compare_scores(player_cards, dealer_cards)
   end
 end
 
-def winner(player_cards, dealer_cards, deck)
+def winner(player_cards, dealer_cards)
   if bust?(player_cards)
     "Dealer"
+  elsif bust?(dealer_cards)
+    "Player"
   else
-    #dealer_turn(dealer_cards, deck)
-    if bust?(dealer_cards)
-      "Player"
-    else
-      compare_scores_for_winner(player_cards, dealer_cards)
-    end
+    compare_scores_for_winner(player_cards, dealer_cards)
   end
 end
 
@@ -231,8 +230,8 @@ def reset_deck(deck, player_cards, dealer_cards)
   dealer_cards.replace([])
 end
 
-def update_scoreboard(player_cards, dealer_cards, scoreboard, deck)
-  result = winner(player_cards, dealer_cards, deck)
+def update_scoreboard(player_cards, dealer_cards, scoreboard)
+  result = winner(player_cards, dealer_cards)
 
   scoreboard[result.to_sym] += 1 unless result.nil?
 end
@@ -245,11 +244,6 @@ end
 
 def match_over?(score)
   score.value?(WINNING_ROUNDS)
-end
-
-def enter_to_continue
-  prompt('Press enter to continue')
-  STDIN.gets
 end
 
 def enter_to_continue_next_round
@@ -284,7 +278,7 @@ loop do
     display_final_cards(player_cards, dealer_cards)
     enter_to_continue
     system 'clear'
-    update_scoreboard(player_cards, dealer_cards, scoreboard, deck)
+    update_scoreboard(player_cards, dealer_cards, scoreboard)
     display_round_score(scoreboard)
     break if match_over?(scoreboard)
     enter_to_continue_next_round
