@@ -1,13 +1,16 @@
 VALUES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king', 'ace']
 SUITS = ['hearts', 'diamonds', 'clubs', 'spades']
+CRITICAL_VALUE = 21
+DEALER_HIT_POINT = 17
+WINNING_ROUNDS = 2
 deck = {}
 player_cards = []
 dealer_cards = []
 
 def welcome
   prompt("Welcome to the Twenty-One game!")
-  prompt("Try to get as close to 21 as possible, without going over.")
-  prompt("If you go over 21, it's a 'bust' and you lose.")
+  prompt("Try to get as close to #{CRITICAL_VALUE} as possible, without going over.")
+  prompt("If you go over #{CRITICAL_VALUE}, it's a 'bust' and you lose.")
   enter_to_continue
   prompt("Face cards are 10 points, and aces are either 1 point or 11.")
   prompt("You go first! Ready?")
@@ -58,7 +61,7 @@ def calculate_hand(cards)
 end
 
 def calculate_ace(values)
-  if (values.sum + 11) > 21
+  if (values.sum + 11) > CRITICAL_VALUE
     1
   else
     11
@@ -122,7 +125,7 @@ def display_cards(cards)
 end
 
 def bust?(cards)
-  if calculate_hand(cards) > 21
+  if calculate_hand(cards) > CRITICAL_VALUE
     true
   end
 end
@@ -133,9 +136,8 @@ def dealer_turn(dealer_cards, deck)
   loop do
     if bust?(dealer_cards)
       break
-    elsif dealer_score >= 17
+    elsif dealer_score >= DEALER_HIT_POINT
       prompt("The dealer stays.")
-      enter_to_continue
       break
     else
       prompt("The dealer hits!")
@@ -167,6 +169,29 @@ def compare_scores(player_cards, dealer_cards)
     prompt("Sorry, dealer wins!")
   elsif calculate_hand(player_cards) == calculate_hand(dealer_cards)
     prompt("It's a tie!")
+  end
+end
+
+def winner(player_cards, dealer_cards, deck)
+  if bust?(player_cards)
+    "Dealer"
+  else
+    #dealer_turn(dealer_cards, deck)
+    if bust?(dealer_cards)
+      "Player"
+    else
+      compare_scores_for_winner(player_cards, dealer_cards)
+    end
+  end
+end
+
+def compare_scores_for_winner(player_cards, dealer_cards)
+  if calculate_hand(player_cards) > calculate_hand(dealer_cards)
+    "Player"
+  elsif calculate_hand(player_cards) < calculate_hand(dealer_cards)
+    "Dealer"
+  elsif calculate_hand(player_cards) == calculate_hand(dealer_cards)
+    nil
   end
 end
 
@@ -206,20 +231,69 @@ def reset_deck(deck, player_cards, dealer_cards)
   dealer_cards.replace([])
 end
 
+def update_scoreboard(player_cards, dealer_cards, scoreboard, deck)
+  result = winner(player_cards, dealer_cards, deck)
+
+  scoreboard[result.to_sym] += 1 unless result.nil?
+end
+
+def display_round_score(scoreboard)
+  prompt("Current score")
+  prompt("  Player: #{scoreboard['Player'.to_sym]}")
+  prompt("  Dealer: #{scoreboard['Dealer'.to_sym]}")
+end
+
+def match_over?(score)
+  score.value?(WINNING_ROUNDS)
+end
+
+def enter_to_continue
+  prompt('Press enter to continue')
+  STDIN.gets
+end
+
+def enter_to_continue_next_round
+  prompt('Press enter to continue to the next round')
+  STDIN.gets
+end
+
+def display_match_winner(score)
+  score.select do |player, value|
+    if value == WINNING_ROUNDS
+      prompt "#{player} wins the game!"
+    end
+  end
+end
+
+def reset_score(scoreboard)
+  scoreboard.replace({ "Player": 0, "Computer": 0 })
+end
+
 system 'clear'
 welcome
 loop do
-  system 'clear'
-  initiate_deck(deck)
-  deal_cards(deck, player_cards, dealer_cards)
-  calculate_hand(dealer_cards)
-  player_turn(player_cards, dealer_cards, deck)
-  determine_winner(player_cards, dealer_cards, deck)
-  enter_to_continue
-  display_final_cards(player_cards, dealer_cards)
-  enter_to_continue
-  break unless play_again?
+  scoreboard = { "Player": 0, "Dealer": 0 }
+  loop do
+    system 'clear'
+    initiate_deck(deck)
+    deal_cards(deck, player_cards, dealer_cards)
+    calculate_hand(dealer_cards)
+    player_turn(player_cards, dealer_cards, deck)
+    determine_winner(player_cards, dealer_cards, deck)
+    enter_to_continue
+    display_final_cards(player_cards, dealer_cards)
+    enter_to_continue
+    system 'clear'
+    update_scoreboard(player_cards, dealer_cards, scoreboard, deck)
+    display_round_score(scoreboard)
+    break if match_over?(scoreboard)
+    enter_to_continue_next_round
+    reset_deck(deck, player_cards, dealer_cards)
+  end
+  display_match_winner(scoreboard)
   reset_deck(deck, player_cards, dealer_cards)
+  reset_score(scoreboard)
+  break unless play_again?
 end
 
 prompt("Thanks for playing Twenty-One! Goodbye.")
