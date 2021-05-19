@@ -156,17 +156,17 @@ def determine_winner(player_cards, dealer_cards, deck)
     if bust?(dealer_cards)
       prompt("The dealer bust! You win!")
     else
-      compare_scores(player_cards, dealer_cards)
+      display_round_result(player_cards, dealer_cards)
     end
   end
 end
 
-def compare_scores(player_cards, dealer_cards)
-  if calculate_hand(player_cards) > calculate_hand(dealer_cards)
+def display_round_result(player_cards, dealer_cards)
+  if compare_scores_for_winner(player_cards, dealer_cards) == "Player"
     prompt("Congrats! You win!")
-  elsif calculate_hand(player_cards) < calculate_hand(dealer_cards)
+  elsif compare_scores_for_winner(player_cards, dealer_cards) == "Dealer"
     prompt("Sorry, dealer wins!")
-  elsif calculate_hand(player_cards) == calculate_hand(dealer_cards)
+  else
     prompt("It's a tie!")
   end
 end
@@ -191,7 +191,7 @@ def compare_scores_for_winner(player_cards, dealer_cards)
   end
 end
 
-def show_dealer_hand(dealer_cards)
+def display_dealer_hand(dealer_cards)
   prompt("Dealer's hand: ")
   prompt("The dealer had #{calculate_hand(dealer_cards)} points.")
 end
