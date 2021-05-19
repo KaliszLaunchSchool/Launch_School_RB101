@@ -126,9 +126,7 @@ def display_cards(cards)
 end
 
 def bust?(cards)
-  if calculate_hand(cards) > CRITICAL_VALUE
-    true
-  end
+  calculate_hand(cards) > CRITICAL_VALUE
 end
 
 def dealer_turn(dealer_cards, deck)
