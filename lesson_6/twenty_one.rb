@@ -1,3 +1,5 @@
+require 'pry'
+
 VALUES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king', 'ace']
 SUITS = ['hearts', 'diamonds', 'clubs', 'spades']
 CRITICAL_VALUE = 21
@@ -36,7 +38,7 @@ def deal_cards(deck, player_cards, dealer_cards)
 end
 
 def deal_one_card(deck)
-  card = {}
+  card = { }
   chosen_suit = SUITS.sample
   chosen_value = deck.fetch(chosen_suit).sample
   card[chosen_suit] = chosen_value
@@ -102,18 +104,15 @@ def hit_or_stay
   prompt("Would you like to hit, or stay?")
   hit_or_stay_response = ''
   loop do
-    abbreviations = ['hit', 'h', 'stay', 's']
+    abbreviations = { "h" => "hit", "s" => "stay" }
     hit_or_stay_response = gets.chomp.downcase
-    break if abbreviations.include?(hit_or_stay_response)
+    if abbreviations.has_key?(hit_or_stay_response)
+      hit_or_stay_response = abbreviations[hit_or_stay_response]
+    end
+    break if abbreviations.has_value?(hit_or_stay_response) 
     prompt('Please enter a valid response: hit/h or stay/s')
   end
-  if hit_or_stay_response == 'h'
-    hit_or_stay_response = 'hit'
-  elsif hit_or_stay_response == 's'
-    hit_or_stay_response = 'stay'
-  else
-    hit_or_stay_response
-  end
+  hit_or_stay_response
 end
 
 def display_cards(cards)
