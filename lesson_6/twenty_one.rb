@@ -191,11 +191,6 @@ def compare_scores_for_winner(player_cards, dealer_cards)
   end
 end
 
-def display_dealer_hand(dealer_cards)
-  prompt("Dealer's hand: ")
-  prompt("The dealer had #{calculate_hand(dealer_cards)} points.")
-end
-
 def display_final_cards(player_cards, dealer_cards)
   prompt("You had:")
   display_cards(player_cards)
