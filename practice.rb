@@ -18,7 +18,7 @@ p s.object_id
 
 p t.object_id
 =end
-
+=begin
 arr = [1, 2, 3, 4]
 
 counter = 0
@@ -31,3 +31,10 @@ loop do
 end
 
 p sum
+=end
+
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+arr << 12
+arr.unshift(0)
+p arr
