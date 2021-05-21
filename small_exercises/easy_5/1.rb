@@ -45,15 +45,6 @@ def ascii_value(string)
   characters_as_ascii.sum
 end
 
-def ascii_value(string)
-  sum = 0
-  string.each_char do |char| 
-    sum += char.ord 
-    p char.ord.to_s
-  end
-  sum
-end
-
 p ascii_value('Four score') == 984
 p ascii_value('Launch School') == 1251
 p ascii_value('a') == 97
