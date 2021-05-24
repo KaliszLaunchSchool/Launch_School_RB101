@@ -99,7 +99,7 @@ def time_of_day(total_minutes)
   p "#{hours_minutes[0]}:#{hours_minutes[1]}"
 end
 =end
-
+=begin
 MINUTES_PER_HOUR = 60
 HOURS_PER_DAY = 24
 MINUTES_PER_DAY = MINUTES_PER_HOUR * HOURS_PER_DAY
@@ -117,7 +117,53 @@ def time_of_day(total_minutes)
       minutes -= 60
     end
   else
+    loop do
+      hours = hours * -1
+      break if hours < 24
+      hours -= 24
+    end
+    loop do
+      break if minutes < 60
+      minutes -= 60
+    end
+  end
+  if hours < 10 
+    hours = "0" + hours.to_s
+  end
+  if minutes < 10 
+    minutes = "0" + minutes.to_s
+  end
+  p "#{hours.to_s}:#{minutes.to_s}"
+end
+=end
 
+MINUTES_PER_HOUR = 60
+HOURS_PER_DAY = 24
+MINUTES_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR
+
+def normalize_minutes(minutes)
+  while minutes < 0
+    minutes += MINUTES_PER_DAY
+  end
+  p minutes
+end
+
+def time_of_day(total_minutes)
+  hours = total_minutes / MINUTES_PER_HOUR
+  total_minutes = normalize_minutes(total_minutes)
+  minutes = total_minutes
+  if total_minutes.positive?
+    loop do
+      break if hours < 24
+      hours -= 24
+    end
+    loop do
+      break if minutes < 60
+      minutes -= 60
+    end
+  end
+  while hours < 0
+    hours += 24
   end
   if hours < 10 
     hours = "0" + hours.to_s
