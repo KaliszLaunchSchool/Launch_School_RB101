@@ -10,6 +10,8 @@ On `line x` we are calling the method `puts` and passing in local variable `var_
 
 On `line x` we are breaking out of the loop by using thekeyword `break` if the value of the object that local variable `var_name` is referencing is equal to `something`.
 
+On `lines x-x` we invoke the `each/select/map` method on the local variable `var_name` and pass in the do..end block as an argument. As the `each/select/map` method iterates over each element in the array, it DOES ONEO OF THE THINGS BELOW. s
+
 `each` method takes a block. Returns the original array/hash
 `select` block passed into select. Select returns a new array/hash based on the block's *return value*. If the *return value* of block evaluates to true, then the element is selected. If the return value of the block evaluates to false, then the element is not selected. New array/hash can be different size as the original
 `map` returns a new array based on the block's *return value*. Each element is transformed based on the *return value*. New array is same size as original
