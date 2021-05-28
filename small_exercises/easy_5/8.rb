@@ -46,3 +46,25 @@ p alphabetic_number_sort((0..19).to_a) == [
   6, 16, 10, 13, 3, 12, 2, 0
 ]
 
+=begin
+LS Solution
+
+NUMBER_WORDS = %w(zero one two three four
+                  five six seven eight nine
+                  ten eleven twelve thirteen fourteen
+                  fifteen sixteen seventeen eighteen nineteen)
+
+def alphabetic_number_sort(numbers)
+  numbers.sort_by { |number| NUMBER_WORDS[number] }
+end
+
+The secret to solving this problem is to use a data structure of some kind to map numbers to their English 
+names. Once you've done this, read the documentation for Enumerable#sort_by, and construct a call that sorts 
+the numbers by each number's corresponding English name.
+
+Further Exploration
+Why do you think we didn't use Array#sort_by! instead of Enumerable#sort_by? #sort_by! returns self, whereas
+  sory_by returns array
+
+For an extra challenge, rewrite your method to use Enumerable#sort (unless you already did so).
+=end
