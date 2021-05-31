@@ -95,3 +95,25 @@ p list == ["abc"] # true
 p list = []
 p reverse!(list) == [] # true
 p list == [] # true
+
+=begin
+LS Solution
+
+This solution is straightforward; it sets one index to point to the beginning of the array, another index to 
+point to the end of the array, and then walks through the Array exchanging elements at each step. Since we 
+update the Array in place, we name the method reverse! instead of reverse.
+
+Note that the loop terminates at the middle of the list. If we continued, we would end up rebuilding the 
+original array.
+
+The most interesting part of this code is the parallel assignment on line 6; this is a Ruby idiom for 
+exchanging two values without requiring an intermediate variable. It's a handy idiom to remember.
+
+In practice, of course, you would probably use Array#reverse! instead of writing this method. It helps, 
+though, to write your own versions of standard methods so you can understand how they work, and how to use 
+those principles in your own code.
+
+Note that our solution here has both a side-effect (in mutating the array passed in to the method) and a 
+meaningful return value (it returns the mutated array). Generally, this would be seen as bad practice (you 
+want your methods to have either a side-effect, or a meaningful return value).
+=end
