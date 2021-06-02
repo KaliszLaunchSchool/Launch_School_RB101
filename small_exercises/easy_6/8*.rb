@@ -58,3 +58,23 @@ p find_dup([18,  9, 36, 96, 31, 19, 54, 75, 42, 15,
           85, 87, 51, 17, 66, 20, 28, 26,  2, 22,
           40, 23, 71, 62, 73, 32, 43, 24,  4, 56,
           7,  34, 57, 74, 45, 11, 88, 67,  5, 58]) == 73
+
+=begin
+LS Solution
+
+def find_dup(array)
+  array.find { |element| array.count(element) == 2 }
+end
+
+Discussion
+Here we're using the method Enumerable#find to look through each item in our array. If that item meets some 
+condition we return it. In this case, the condition we check is that that item occurs twice. This bit of code 
+will allow us to find the duplicate element regardless of the size of the array.
+
+Further Exploration
+There are several ways to go about solving this problem. One other way would be to have a separate array that 
+keeps track of which items have been looked at as we iterate through the original array. If we ever add the 
+same item twice to this second array, then we know that we have found a duplicate.
+
+How did you end up solving this one?
+=end
