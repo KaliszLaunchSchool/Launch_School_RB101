@@ -1,31 +1,89 @@
 =begin
-Reversed Arrays (Part 1)
-Write a method that takes an Array as an argument, and reverses its elements in place; that is, mutate the 
-Array passed into this method. The return value should be the same Array object.
-
-You may not use Array#reverse or Array#reverse!.
+Right Triangles
+Write a method that takes a positive integer, n, as an argument, and displays a right triangle whose sides 
+each have n stars. The hypotenuse of the triangle (the diagonal side in the images below) should have one end 
+at the lower-left of the triangle, and the other end at the upper-right.
 
 Examples:
 
-list = [1,2,3,4]
-result = reverse!(list)
-result == [4, 3, 2, 1] # true
-list == [4, 3, 2, 1] # true
-list.object_id == result.object_id # true
+triangle(5)
 
-list = %w(a b e d c)
-reverse!(list) == ["c", "d", "e", "b", "a"] # true
-list == ["c", "d", "e", "b", "a"] # true
+    *
+   **
+  ***
+ ****
+*****
 
-list = ['abc']
-reverse!(list) == ["abc"] # true
-list == ["abc"] # true
+triangle(9)
 
-list = []
-reverse!(list) == [] # true
-list == [] # true
+        *
+       **
+      ***
+     ****
+    *****
+   ******
+  *******
+ ********
+*********
 
-Note: for the test case list = ['abc'], we want to reverse the elements in the array. The array only has one 
-element, a String, but we're not reversing the String itself, so the reverse! method call should return 
-['abc'].
+# Problem
+- Write a method which accepts 1 parameter (an integer n)
+- Displays a R triangle whose sides all have n stars
+
+Input: Integer
+Output: String
+
+# Examples
+triangle(5)
+
+    *
+   **
+  ***
+ ****
+*****
+
+triangle(9)
+
+        *
+       **
+      ***
+     ****
+    *****
+   ******
+  *******
+ ********
+*********
+
+# Data
+Integer 
+String
+Array?
+
+# Algo
+- Create a method which accepts 1 parameter (n)
+- Initiate a loop
+- Print * n times
+- Decrement n
+- For n - new n, print that number of spaces before the *'s'
+- Break if n == 0
+# Code
 =end
+
+def triangle(n)
+  start = 0 
+  loop do
+    lines = ''
+    start += 1 
+    start.times do |_| 
+      lines << '*'
+    end
+    while lines.size < n
+      lines = " " + lines
+    end
+    break if start > n
+    p lines
+  end
+end
+
+triangle(5)
+triangle(9)
