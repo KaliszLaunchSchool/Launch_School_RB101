@@ -50,3 +50,23 @@ def calculate_product(numbers)
 end
 
 p multiply_list([3, 5, 7], [9, 10, 11]) == [27, 50, 77]
+
+=begin
+LS Solution
+
+def multiply_list(list_1, list_2)
+  products = []
+  list_1.each_with_index do |item, index|
+    products << item * list_2[index]
+  end
+  products
+end
+
+Discussion
+We take a direct approach, and simply iterate an index into both Arrays, appending each product to the products 
+Array.
+
+Further Exploration
+The Array#zip method can be used to produce an extremely compact solution to this method. Read the 
+documentation for zip, and see if you can come up with a one line solution (not counting the def and end lines).
+=end
