@@ -50,3 +50,24 @@ end
 show_multiplicative_average([3, 5])                # => The result is 7.500
 show_multiplicative_average([6])                   # => The result is 6.000
 show_multiplicative_average([2, 5, 7, 11, 13, 17]) # => The result is 28361.667
+
+=begin
+Approach/Algorithm
+Hint: You may need to use Kernel#format.
+
+LS Solution
+
+def show_multiplicative_average(numbers)
+  product = 1.to_f
+  numbers.each { |number| product *= number }
+  average = product / numbers.size
+  puts "The result is #{format('%.3f', average)}"
+end
+
+Discussion
+We could use Enumerable#inject to compute the product, but for simplicity, we use #each instead. Once we have 
+the desired product, we calculate the multiplicative average and format it with three decimal places.
+
+Further Exploration
+What happens if you omit the call to #to_f on the first line of our method?
+=end
