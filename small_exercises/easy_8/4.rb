@@ -67,7 +67,6 @@ def substrings(string)
   results
 end
 
-
 p substrings('abcde') == [
   'a', 'ab', 'abc', 'abcd', 'abcde',
   'b', 'bc', 'bcd', 'bcde',
@@ -75,3 +74,27 @@ p substrings('abcde') == [
   'd', 'de',
   'e'
 ]
+
+=begin
+LS Solution
+
+def substrings(string)
+  results = []
+  (0...string.size).each do |start_index|
+    this_substring = string[start_index..-1]
+    results.concat(leading_substrings(this_substring))
+  end
+  results
+end
+
+Discussion
+This problem is a lot easier if you use the leading_substrings method from the previous exercise. Without that 
+method, it can be really hard to wrap your head around the requirements and come up with a working solution.
+
+The solution boils down to just repeatedly running leading_substrings on increasingly smaller substrings of 
+string, starting with the 1st character, then the 2nd character, and so on. The results are all concatenated to 
+our results Array which is subsequently returned to the caller.
+
+Our leading_substrings method returns substrings in order from shortest to longest, and substrings itself works 
+from left to right in the string. Our results are thus arranged in the desired sequence.
+=end
