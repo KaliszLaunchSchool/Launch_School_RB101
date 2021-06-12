@@ -66,3 +66,30 @@ end
 
 p get_grade(95, 90, 93) == "A"
 p get_grade(50, 50, 95) == "D"
+
+=begin
+
+def get_grade(s1, s2, s3)
+  result = (s1 + s2 + s3)/3
+
+  case result
+  when 90..100 then 'A'
+  when 80..89  then 'B'
+  when 70..79  then 'C'
+  when 60..69  then 'D'
+  else              'F'
+  end
+end
+
+Discussion
+The result is just the average of the three scores. The case statement does a comparison on it. This takes 
+advantage of the fact that the comparison used by the case statement returns true if the range includes the 
+other object (essentially calling (range).include?(other_object).
+
+You can therefore read it as
+
+when (90..100).include?(result)
+  
+Further exploration
+How would you handle this if there was a possibility of extra credit grades causing it to exceed 100 points?
+=end
