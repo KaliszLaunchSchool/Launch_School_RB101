@@ -79,3 +79,41 @@ p word_lengths("Supercalifragilisticexpialidocious") ==
   ["Supercalifragilisticexpialidocious 34"]
 
 p word_lengths("") == []
+
+=begin
+LS Solution
+
+def word_lengths(string)
+  words = string.split
+
+  words.map do |word|
+    word + ' ' + word.length.to_s
+  end
+end
+
+Discussion
+Let's take it step by step. First we want to split the separate words into an array:
+
+Copy Code
+irb(main):001:0> string = "cow sheep chicken"
+=> "cow sheep chicken"
+irb(main):002:0> string.split
+=> ["cow", "sheep", "chicken"]
+We store this word array in a words variable. Then we realize we need to modify each word separately, that is 
+to transform our words array. This is a good use case for Array#map. Remember that map will return a new array, 
+of the same size as the caller array, with each element replaced according to the return value of the block. 
+Let's test this out with a simple example:
+
+irb(main):003:0> ["cow", "sheep", "chicken"].map { |word| word + '!' }
+=> ["cow!", "sheep!", "chicken!"]
+This is close, but not exactly what we want. We can use string concatenation to combine the word with its 
+length. Remember that the length will be an integer and needs to be converted to a string before you can 
+concatenate them.
+
+We could also use string interpolation and method chaining to solve this problem in one line:
+
+def word_lengths(string)
+  string.split.map { |word| "#{word} #{word.length}" }
+end
+
+=end
