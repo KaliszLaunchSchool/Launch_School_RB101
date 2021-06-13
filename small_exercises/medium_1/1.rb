@@ -69,3 +69,21 @@ p rotate_array(['a']) == ['a']
 x = [1, 2, 3, 4]
 p rotate_array(x) == [2, 3, 4, 1]   # => true
 p x == [1, 2, 3, 4]                 # => true
+
+=begin
+LS Solution
+
+def rotate_array(array)
+  array[1..-1] + [array[0]]
+end
+
+Discussion
+There are multiple ways to solve this, but we show just one.
+
+Our solution simply slices everything out of the array except the first element, then appends the original 
+first element to the end. Note that we must be careful to not mutate array.
+
+Further Exploration
+Write a method that rotates a string instead of an array. Do the same thing for integers. You may use 
+rotate_array from inside your new method.
+=end
