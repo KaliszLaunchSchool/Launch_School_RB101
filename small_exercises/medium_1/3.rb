@@ -63,10 +63,34 @@ def max_rotation(num)
   num
 end
 
-
-
 p max_rotation(735291) == 321579
 p max_rotation(3) == 3
 p max_rotation(35) == 53
 p max_rotation(105) == 15 # the leading zero gets dropped
 p max_rotation(8_703_529_146) == 7_321_609_845
+
+=begin
+LS Solution
+
+def max_rotation(number)
+  number_digits = number.to_s.size
+  number_digits.downto(2) do |n|
+    number = rotate_rightmost_digits(number, n)
+  end
+  number
+end
+
+Discussion
+Our max_rotation method begins by first determining how many digits we have, then starts up a loop. The loop 
+repeatedly rotates the number, starting with the rightmost n digits, then the rightmost n - 1 digits, and so on, 
+until we get down to the last 2 digits. (We could also include 1, but it is not needed since it does not modify 
+the number when we rotate just the last digit.)
+
+Further Exploration
+Assume you do not have the rotate_rightmost_digits or rotate_array methods. How would you approach this 
+problem? Would your solution look different? Does this 3 part approach make the problem easier to understand or 
+harder?
+
+There is an edge case in our problem when the number passed in as the argument has multiple consecutive zeros. 
+Can you create a solution that preserves zeros?
+=end
