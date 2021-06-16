@@ -92,3 +92,84 @@ end
 
 p light_switches(5) == [1, 4]
 p light_switches(10) == [1, 4, 9]
+
+=begin
+LS Solution
+
+# initialize the lights hash
+def initialize_lights(number_of_lights)
+  lights = Hash.new
+  1.upto(number_of_lights) { |number| lights[number] = "off" }
+  lights
+end
+
+# return list of light numbers that are on
+def on_lights(lights)
+  lights.select { |_position, state| state == "on" }.keys
+end
+
+# toggle every nth light in lights hash
+def toggle_every_nth_light(lights, nth)
+  lights.each do |position, state|
+    if position % nth == 0
+      lights[position] = (state == "off") ? "on" : "off"
+    end
+  end
+end
+
+# Run entire program for number of lights
+def toggle_lights(number_of_lights)
+  lights = initialize_lights(number_of_lights)
+  1.upto(lights.size) do |iteration_number|
+    toggle_every_nth_light(lights, iteration_number)
+  end
+
+  on_lights(lights)
+end
+
+p toggle_lights(1000)
+
+Discussion
+In this exercise, we use a Hash to represent our lights. A single light is represented as a key-value pair 
+within the hash. The key will be the position that light has out of the 1000 lights; the first light is 
+position 1, the last is 1000. The value of each light is either "on" or "off" to represent the state of that 
+light.
+
+We start by calling toggle_lights with an argument (the number of lights) of 1000.
+
+toggle_lights immediately calls initialize_lights, which creates and returns a Hash that represents all lights 
+with a current state of off. toggle_lights subsequently uses the 1.upto(lights.size) method call to iterate 
+over the lights as many times as needed (1000 based on our initial value). It uses toggl_every_nth_light to 
+toggle first every light, then every other light, then every 3rd light, and so on, until we have iterated over 
+all of the lights 1000 times.
+
+Finally, we call on_lights to select the lights that are still on. We use Hash#select, which returns a new Hash 
+that contains only the on lights, and then, we chain Hash#keys method which returns an array with only the keys 
+of the Hash.
+
+The definition of on_lights uses _position as a parameter name since we don't use the parameter, but want to 
+show what it represents. Using an underscore at the beginning of a parameter name is a common convention to 
+show that a parameter isn't used.
+
+Note that we don't use the value 1000 internally in most of our methods. Instead, we use lights.size. This lets 
+us easily reuse the code for any number of lights.
+
+Our final answer ends up being:
+
+p on_lights(lights)
+Output:
+
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400, 441, 484, 529, 576, 
+625, 676, 729, 784, 841, 900, 961]
+
+Further Exploration
+There are a few interesting points about this exercise that we can explore:
+
+Do you notice the pattern in our answer? Every light that is on is a perfect square. Why is that?
+
+What are some alternatives for solving this exercise? What if we used an Array to represent our 1000 lights 
+instead of a Hash, how would that change our code?
+
+We could have a method that replicates the output from the description of this problem (i.e. "lights 2, 3, 
+and 5 are now off; 1 and 4 are on.") How would we go about writing that code?
+=end
