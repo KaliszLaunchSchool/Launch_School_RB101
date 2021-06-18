@@ -64,7 +64,7 @@ Integers
 def fibonacci(num)
   if num == 1 || num == 2
     return 1 
-  else num > 2
+  else
     fibonacci(num - 1) + fibonacci(num - 2)
   end
 end
