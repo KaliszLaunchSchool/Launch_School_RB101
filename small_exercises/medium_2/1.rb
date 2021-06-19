@@ -66,7 +66,7 @@ The longest sentence in this book is 157 words long.
 
 =end
 
-text = File.read('sample_file.txt')
+text = File.read('book.txt')
 
 def longest_sentence(text)
   sentences = text.split(/(\.)|(\?)|(!)/)
