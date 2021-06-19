@@ -81,3 +81,35 @@ def longest_sentence(text)
 end
 
 longest_sentence(text)
+
+=begin
+LS Solution
+
+text = File.read('sample_text.txt')
+sentences = text.split(/\.|\?|!/)
+largest_sentence = sentences.max_by { |sentence| sentence.split.size }
+largest_sentence = largest_sentence.strip
+number_of_words = largest_sentence.split.size
+
+puts "#{largest_sentence}"
+puts "Containing #{number_of_words} words"
+
+Discussion
+This problem can be a bit tricky. Let's break this down step by step. First, we read in the entire file. When 
+the file gets read in, it is in the form of one big string containing all the file's text.
+
+Next, we use the method String#split. The punctuation marks .,!, and ? mark the end of one sentence and the 
+beginning of another. Because of that fact, we can use these punctuation marks as places to split our string of 
+text into sentences.
+
+On this third line, we take our array of sentences and use the Enumerable#max_by method to find the longest one.
+
+We now have the largest sentence. To get the number of words in that sentence, we use the same operations as we 
+did in max_by. In this case we call those methods on largest_sentence instead.
+
+Further Exploration
+You may have noticed that our solution fails to print the period at the end of the sentence. Can you write a 
+solution that keeps the period printed at the end of each sentence?
+
+What about finding the longest paragraph or longest word? How would we go about solving that problem?
+=end
