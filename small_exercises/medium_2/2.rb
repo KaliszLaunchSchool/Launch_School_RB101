@@ -52,20 +52,27 @@ def block_word?(string)
 
   BLOCKED_ALPHABET.each do |letter_blocks|
     if letters.include?(letter_blocks[0]) && letters.include?(letter_blocks[1])
-      offending_letters << letter_blocks
+      offending_letters << letter_blocks[0]
+      offending_letters << letter_blocks[1]
+    elsif letters.tally.each do |_, value| 
+      if value >= 2
+        offending_letters << value
+      end
+    end
     end
   end
 
-  if offending_letters.empty?
-    return true
-  else
+  if offending_letters.size >= 2
     return false
+  else
+    return true
   end
 end
 
 p block_word?('BATCH') == true
 p block_word?('BUTCH') == false
 p block_word?('jest') == true
+p block_word?('BABCH') == false
 
 =begin
 Solution
