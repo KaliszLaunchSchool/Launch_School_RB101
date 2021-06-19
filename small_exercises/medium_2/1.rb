@@ -69,14 +69,15 @@ The longest sentence in this book is 157 words long.
 text = File.read('book.txt')
 
 def longest_sentence(text)
-  sentences = text.split(/(\.)|(\?)|(!)/)
+  sentences = text.split(/(\.)|(\?)|(\!)/)
   #sentences.each do |sentence|
   #  words = sentence.split(' ')
   #  words.count
   #end
   longest_and_shortest_sentence = sentences.minmax {|a, b| a.size <=> b.size}
-  p longest_and_shortest_sentence[1].split(' ').join(' ')
-  p longest_and_shortest_sentence[1].split(' ').count
+  longest_sentence = longest_and_shortest_sentence[1].split(' ')
+  p longest_sentence.join(' ')
+  p longest_sentence.count
 end
 
 longest_sentence(text)
