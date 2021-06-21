@@ -79,8 +79,8 @@ p letter_percentages('AbCd +Ef') == { lowercase: 37.5, uppercase: 37.5, neither:
 p letter_percentages('123') == { lowercase: 0.0, uppercase: 0.0, neither: 100.0 }
 
 =begin
-Solution
-Copy Code
+LS Solution
+
 def letter_percentages(string)
   counts = {}
   percentages = {}
