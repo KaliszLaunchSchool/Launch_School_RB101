@@ -54,7 +54,6 @@ triangle(50, 50, 50) == :invalid
 =end
 
 def validate_triangle(sides)
-  p sides
   if sides.any?(0)
     true
   else sides.sum != 180
@@ -63,17 +62,15 @@ end
 
 def triangle(side_1, side_2, side_3)
   sides = [side_1, side_2, side_3]
-  if validate_triangle(sides)
-    return :invalid
-  else
-    case
-    when sides.any?(90)
-      :right
-    when sides.any? {|side| side > 90}
-      :obtuse
-    when sides.all? {|side| side < 90}
-      :acute
-    end
+  case 
+  when validate_triangle(sides)
+    :invalid
+  when sides.any?(90)
+    :right
+  when sides.any? {|side| side > 90}
+    :obtuse
+  when sides.all? {|side| side < 90}
+    :acute
   end
 end
 
@@ -82,3 +79,23 @@ p triangle(30, 90, 60) == :right
 p triangle(120, 50, 10) == :obtuse
 p triangle(0, 90, 90) == :invalid
 p triangle(50, 50, 50) == :invalid
+
+=begin
+LS Solution
+
+def triangle(angle1, angle2, angle3)
+  angles = [angle1, angle2, angle3]
+
+  case
+  when angles.reduce(:+) != 180, angles.include?(0)
+    :invalid
+  when angles.include?(90)
+    :right
+  when angles.all? { |angle| angle < 90 }
+    :acute
+  else
+    :obtuse
+  end
+end
+
+=end
