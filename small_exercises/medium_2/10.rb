@@ -60,6 +60,8 @@ p sum_square_difference(1) == 0
 p sum_square_difference(100) == 25164150
 
 =begin
+LS Solution
+
 def sum_square_difference(n)
   sum = 0
   sum_of_squares = 0
