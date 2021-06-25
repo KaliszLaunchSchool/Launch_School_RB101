@@ -110,3 +110,36 @@ p array == [1, 2, 4, 6, 7]
 array = %w(Sue Pete Alice Tyler Rachel Kim Bonnie)
 p bubble_sort!(array)
 p array == %w(Alice Bonnie Kim Pete Rachel Sue Tyler)
+
+=begin
+LS Solution
+
+def bubble_sort!(array)
+  loop do
+    swapped = false
+    1.upto(array.size - 1) do |index|
+      next if array[index - 1] <= array[index]
+      array[index - 1], array[index] = array[index], array[index - 1]
+      swapped = true
+    end
+
+    break unless swapped
+  end
+  nil
+end
+
+Discussion
+Our outer loop handles the task of repeating iterations until the Array is completely sorted. It terminates the 
+first time we iterate through all comparisons without making any swaps, which we keep track of through the 
+swapped variable.
+
+The inner loop takes care of looking at every pair of consecutive elements and swapping them if the first 
+element of a pair is greater than the second. We use the usual ruby idiom for swapping two values, e.g.,
+
+Copy Code
+a, b = b, a
+Further Exploration
+Note that we did not use the optimization suggested on the Wiki page that skips looking at tail elements that 
+we know are already sorted. If your solution also skipped this optimization, try modifying your solution so it 
+uses that optimization.
+=end
