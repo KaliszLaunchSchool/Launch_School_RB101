@@ -18,12 +18,17 @@ On `lines x-x` we invoke the `each/select/map` method on the local variable `var
 `select` block passed into select. Select returns a new array/hash based on the block's *return value*. If the *return value* of block evaluates to true, then the element is selected. If the return value of the block evaluates to false, then the element is not selected. New array/hash can be different size as the original
 `map` returns a new array based on the block's *return value*. Each element is transformed based on the *return value*. New array is same size as original
 
+Method definitions cannot directly access local variables initialized outside of the method definition, nor can local variables initialized outside of the method definition be reassigned from within it. A block can access local variables initialized outside of the block and can reassign those variables. Methods can access local variables passed in as arguments, and methods can also access local variables through interaction with blocks.
+So, method definition sets a scope for any local variables in terms of the parameters that the method definition has, what it does with those parameters, and also how it interacts (if at all) with a block. We can then think of method invocation as using the scope set by the method definition. If the method is defined to use a block, then the scope of the block can provide additional flexibility in terms of how the method invocation interacts with its surroundings.
+
 Things to be careful about:
   For += (reassignment) var = var +/- argument
   On `line x` we are reassigning the local variable `var_name` to the return value of a method call `Integer/String#+/-` on a local variable `var_name` with integer/string/etc `argument`  passed to it as an argument.
 
   String concatination(+): nondistructive, returns a new object (technically a method)
   Shovel operator(<<): method call, mutates the calling object
+
+  `arr[counter]` uses Array/String/Hash#[] indexed assignment, which mutates the original array, returning the element corresponding to the index.
 
 Topics of interest:
 - local variable scope, especially how local variables interact with method invocations with blocks and method definitions
