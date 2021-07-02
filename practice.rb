@@ -40,17 +40,14 @@ arr.unshift(0)
 p arr
 =end
 
-arr = [1, 2, 3, 4]
-counter = 0
-sum = 0
+a = "hi there"
+b = a
+a << ", Bob"
 
-loop do
-  sum += arr[counter]
-  counter += 1
-  break if counter == arr.size
-end 
 
-puts "Your total is #{sum}"
+
+
+
 
 
 

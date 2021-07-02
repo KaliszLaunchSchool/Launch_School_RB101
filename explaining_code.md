@@ -31,13 +31,14 @@ Things to be careful about:
 
   String concatination(+): nondistructive, returns a new object (technically a method)
   Shovel operator(<<): method call, mutates the calling object
+    - On `line x` we call the Array/String#<<  method on variable/String/Integer/Arrray `object`, which implements mutating concatenation on the calling object
 
   `arr[counter]` uses Array/String/Hash#[] indexed assignment, which mutates the original array, returning the element corresponding to the index.
 
 Topics of interest:
 - local variable scope, especially how local variables interact with method invocations with blocks and method definitions
   - This creates a local scope for this method. Variables initialized in an outer scope are available in an inner scope, so we can/not access `var name`
-  - This creates a new scope for just this method, defines a new local variable `n` and assigns the Integer/String/Array object `object` to it. On `line x` when we call the method `method` and pass in local variable `local_var` to it as an argument, it outputs the local variable in the relatively outer scope
+  - This creates a new local scope for this method, defines a new local variable `n` and assigns the Integer/String/Array object `object` to it. On `line x` when we call the method `method` and pass in local variable `local_var` to it as an argument, it outputs the local variable in the relatively outer scope. This demonstrates variable shadowing and local variable scope
   - variable shadowing, prevents access to the outer scope local variable or changing the outer scope local variable
   - method definition as setting a certain scope for any local variables in terms of the parameters that the method definition has, what it does with those parameters, and also how it interacts (if at all) with a block. We can then think of method invocation as using the scope set by the method definition.
 
