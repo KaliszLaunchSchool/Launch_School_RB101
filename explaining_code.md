@@ -8,6 +8,8 @@ On `lines x–x` we are defining the method `method_name` which takes __ paramet
 
 On `lines x–x` we are defining the method `loop` and on `line x` we are calling the method `loop` and passing in the `do..end` block as an argument.
 
+On `line x` we are calling the method `times` on the Integer object `num` and passing in the `do..end` block as an argument.
+
 On `line x` we are calling the method `puts` and passing in local variable `var_name` to it as an argument. 
 `puts` outputs the object passed to it, and returns `nil`
 `p` outputs and returns the object passed to it
@@ -35,6 +37,7 @@ Things to be careful about:
 Topics of interest:
 - local variable scope, especially how local variables interact with method invocations with blocks and method definitions
   - This creates a local scope for this method. Variables initialized in an outer scope are available in an inner scope, so we can/not access `var name`
+  - This creates a new scope for just this method, defines a new local variable `n` and assigns the Integer/String/Array object `object` to it. On `line x` when we call the method `method` and pass in local variable `local_var` to it as an argument, it outputs the local variable in the relatively outer scope
   - variable shadowing, prevents access to the outer scope local variable or changing the outer scope local variable
   - method definition as setting a certain scope for any local variables in terms of the parameters that the method definition has, what it does with those parameters, and also how it interacts (if at all) with a block. We can then think of method invocation as using the scope set by the method definition.
 
