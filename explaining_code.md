@@ -8,7 +8,9 @@ On `lines x–x` we are defining the method `method_name` which takes __ paramet
 
 On `lines x–x` we are defining the method `loop` and on `line x` we are calling the method `loop` and passing in the `do..end` block as an argument.
 
-On `line x` we are calling the method `puts` and passing in local variable `var_name` to it as an argument.
+On `line x` we are calling the method `puts` and passing in local variable `var_name` to it as an argument. 
+`puts` outputs the object passed to it, and returns `nil`
+`p` outputs and returns the object passed to it
 
 On `line x` we are breaking out of the loop by using the keyword `break` if the value of the object that local variable `var_name` is referencing is equal to `something`.
 
