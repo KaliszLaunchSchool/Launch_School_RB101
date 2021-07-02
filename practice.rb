@@ -40,9 +40,12 @@ arr.unshift(0)
 p arr
 =end
 
-a = "hi there"
-b = a
-a << ", Bob"
+def test(b)
+  b.map {|letter| "I like the letter: #{letter}"}
+end
+
+a = ['a', 'b', 'c']
+test(a)
 
 
 

@@ -4,7 +4,7 @@ On `line x`,  the local variable `var_name` is initialized to the integer/string
 
 On `line x` the local variable `var_name` is reassigned.
 
-On `lines x–x` we are defining the method `method_name` which takes __ parameter(s). On `line x` we are calling the method and passing in the Integer/String/etc object `value` as an argument to it
+On `lines x–x` we are defining the method `method_name` which takes __ parameter(s). On `line x` we are calling the method and passing in the Integer/String/etc object `value` as an argument to it. This is now a new object
 
 On `lines x–x` we are defining the method `loop` and on `line x` we are calling the method `loop` and passing in the `do..end` block as an argument.
 
