@@ -40,13 +40,19 @@ arr.unshift(0)
 p arr
 =end
 
-a = 4
-loop do
-  a = 5
-  b = 3
-  break
-end
+arr = [1, 2, 3, 4]
+counter = 0
+sum = 0
 
-puts a
-puts b
+loop do
+  sum += arr[counter]
+  counter += 1
+  break if counter == arr.size
+end 
+
+puts "Your total is #{sum}"
+
+
+
+
 

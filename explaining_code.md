@@ -6,7 +6,7 @@ On `line x` the local variable `var_name` is reassigned.
 
 On `lines x–x` we are defining the method `method_name` which takes __ parameter(s). On `line x` we are calling the method and passing in the Integer/String/etc object `value` as an argument to it
 
-On `line x` we are calling the method `loop` and passing in the `do..end` block as an argument.
+On `lines x–x` we are defining the method `loop` and on `line x` we are calling the method `loop` and passing in the `do..end` block as an argument.
 
 On `line x` we are calling the method `puts` and passing in local variable `var_name` to it as an argument.
 
@@ -27,7 +27,7 @@ Things to be careful about:
 
 Topics of interest:
 - local variable scope, especially how local variables interact with method invocations with blocks and method definitions
-  - This creates a local scope for this method. Variables initialized in an outer scope are available in an inner scope, so we can access `var name`
+  - This creates a local scope for this method. Variables initialized in an outer scope are available in an inner scope, so we can/not access `var name`
   - variable shadowing, prevents access to the outer scope local variable or changing the outer scope local variable
   - method definition as setting a certain scope for any local variables in terms of the parameters that the method definition has, what it does with those parameters, and also how it interacts (if at all) with a block. We can then think of method invocation as using the scope set by the method definition.
 
