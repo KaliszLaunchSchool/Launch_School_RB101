@@ -51,6 +51,7 @@ Topics of interest:
   - Arguments that are passed by copy cannot be mutated, so Ruby must use pass by reference when a method can mutate its arguments.
   -  Immutable objects seem to be passed by value, while mutable objects seemed to be passed by reference. Assignment can break the binding between an argument name and the object it references. 
   - A pass by value method only has a copy of the original object. Operations performed on the object within the method have no effect on the original object outside of the method.
+  - Integers are immutable, and, because ruby treats immutable objects as pass by value operations performed on the object within the method have no effect on the original object outside of the method.
   - A pass by reference method allows operations within the method to affect the original object
   - In Ruby: when an operation within the method mutates the caller, it will affect the original object
   - Ruby is pass by value for immutable objects, pass by reference otherwise
