@@ -40,12 +40,17 @@ arr.unshift(0)
 p arr
 =end
 
-def test(b)
-  b.map {|letter| "I like the letter: #{letter}"}
+def cap(str)
+  str.capitalize!  
 end
 
-a = ['a', 'b', 'c']
-test(a)
+name = "jim"
+cap(name)
+puts name 
+
+
+
+
 
 
 

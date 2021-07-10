@@ -4,7 +4,7 @@ On `line x`,  the local variable `var_name` is initialized to the integer/string
 
 On `line x` the local variable `var_name` is reassigned.
 
-On `lines x–x` we are defining the method `method_name` which takes __ parameter(s). On `line x` we are calling the method and passing in the Integer/String/etc object `value` as an argument to it. This is now a new object
+On `lines x–x` we are defining the method `method_name` which takes __ parameter(s). On `line x` we are calling the method and passing in the Integer/String/etc object `value` (referred to by `var`) as an argument to it. ( Local variable `local_var` is scoped within the method definition. Since `local_var` and `var`are both referring to the same object, both `local_var` and `var` now point to Integer/String/etc object `value` )
 
 On `lines x–x` we are defining the method `loop` and on `line x` we are calling the method `loop` and passing in the `do..end` block as an argument.
 
@@ -31,7 +31,7 @@ Things to be careful about:
 
   String concatination(+): nondistructive, returns a new object (technically a method)
   Shovel operator(<<): method call, mutates the calling object
-    - On `line x` we call the Array/String#<<  method on variable/String/Integer/Arrray `object`, which implements mutating concatenation on the calling object
+    - On `line x` we call the Array/String#<<  method on variable/String/Integer/Arrray `object`, referred to by local variable `var`, which implements mutating concatenation on the calling object. Local variable `var` is scoped within the method definition
 
   `arr[counter]` uses Array/String/Hash#[] indexed assignment, which mutates the original array, returning the element corresponding to the index.
 
