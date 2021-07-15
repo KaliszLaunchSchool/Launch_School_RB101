@@ -40,13 +40,19 @@ arr.unshift(0)
 p arr
 =end
 
-def cap(str)
-  str.capitalize!  
+a = 4
+
+loop do
+  a = 5
+  b = 3
+
+
+  break
 end
 
-name = "jim"
-cap(name)
-puts name 
+puts a
+puts b
+
 
 
 
