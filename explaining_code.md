@@ -8,7 +8,7 @@ On `lines x–x` we are defining the method `method_name` which takes __ paramet
 
 ( Local variable `local_var` is scoped within the method definition. Since `local_var` and `var`are both referring to the same object, both `local_var` and `var` now point to Integer/String/etc object `value` )
 
-On `lines x–x` we are defining the method `loop` and on `line x` we are calling the method `loop` and passing in the `do..end` block as an argument.
+On `lines x–x` we are defining the method `loop` and on `line x` we are calling the method `loop` and passing in the `do..end` block as an argument. 
 
 On `line x` we are calling the method `times` on the Integer object `num` and passing in the `do..end` block as an argument.
 
@@ -24,7 +24,10 @@ On `lines x-x` we invoke the `each/select/map` method on the local variable `var
 `select` block passed into select. Select returns a new array/hash based on the block's *return value*. If the *return value* of block evaluates to true, then the element is selected. If the return value of the block evaluates to false, then the element is not selected. New array/hash can be different size as the original
 `map` returns a new array based on the block's *return value*. Each element is transformed based on the *return value*. New array is same size as original
 
-Method definitions cannot directly access local variables initialized outside of the method definition, nor can local variables initialized outside of the method definition be reassigned from within it. A block can access local variables initialized outside of the block and can reassign those variables. Methods can access local variables passed in as arguments, and methods can also access local variables through interaction with blocks.
+Method definitions cannot directly access local variables initialized outside of the method definition, nor can local variables initialized outside of the method definition be reassigned from within it. 
+
+A block can access local variables initialized outside of the block and can reassign those variables. Methods can access local variables passed in as arguments.
+Methods can access local variables through interaction with blocks.
 So, method definition sets a scope for any local variables in terms of the parameters that the method definition has, what it does with those parameters, and also how it interacts (if at all) with a block. We can then think of method invocation as using the scope set by the method definition. If the method is defined to use a block, then the scope of the block can provide additional flexibility in terms of how the method invocation interacts with its surroundings.
 
 Things to be careful about:
@@ -40,6 +43,7 @@ Things to be careful about:
 Topics of interest:
 - local variable scope, especially how local variables interact with method invocations with blocks and method definitions
   - This creates a local scope for this method. Variables initialized in an inner scope are not available in an outer scope, so we can/not access `var name`
+  - This demonstrates local variable scoping rules in Ruby; specifically the fact that a local variable initialized outside of a block is accessible inside the block.
   - This creates a new local scope for this method, defines a new local variable `n` and assigns the Integer/String/Array object `object` to it. On `line x` when we call the method `method` and pass in local variable `local_var` to it as an argument, it outputs the local variable in the relatively outer scope. This demonstrates variable shadowing and local variable scope
   - variable shadowing, prevents access to the outer scope local variable or changing the outer scope local variable
   - method definition as setting a certain scope for any local variables in terms of the parameters that the method definition has, what it does with those parameters, and also how it interacts (if at all) with a block. We can then think of method invocation as using the scope set by the method definition.
