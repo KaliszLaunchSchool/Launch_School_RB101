@@ -30,3 +30,10 @@ nouns: fox dog head leg
 verbs: jumps lifts bites licks
 adverb: easily lazily noisily excitedly
 =end
+
+words = {
+  adjectives: [quick, lazy, sleepy, ugly]; 
+  nouns: [fox, dog, head, leg]};
+  verbs: [jumps, lifts, bites, licks];
+  adverb: [easily, lazily, noisily, excitedly]
+}
