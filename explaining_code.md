@@ -20,6 +20,8 @@ On `line x` we are breaking out of the loop by using the keyword `break` if the 
 
 On `lines x-x` we invoke the `each/select/map` method on the local variable `var_name` and pass in the do..end block as an argument. As the `each/select/map` method iterates over each element in the array, it DOES ONE OF THE THINGS BELOW. 
 
+Conditional statements: `var` evaluates as `true` in the conditional statement and so `'Hello is truthy'` is output
+
 `each` method takes a block. Returns the original array/hash
 `select` block passed into select. Select returns a new array/hash based on the block's *return value*. If the *return value* of block evaluates to true, then the element is selected. If the return value of the block evaluates to false, then the element is not selected. New array/hash can be different size as the original
 `map` returns a new array based on the block's *return value*. Each element is transformed based on the *return value*. New array is same size as original
