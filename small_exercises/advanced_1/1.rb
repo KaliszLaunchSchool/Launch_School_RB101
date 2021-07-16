@@ -38,4 +38,20 @@ words = {
   adverb: ['easily', 'lazily', 'noisily', 'excitedly']
 }
 
-p words[:adjectives].sample
+madlib = File.read('madlib.txt')
+
+def fill_madlib(madlib, words)
+  paragraph = madlib.split(' ')
+  paragraph.each do |word|
+    if word.include? ("%")
+      word = word.gsub(/a-z/)
+      puts word
+    else
+      puts word
+    end
+  end
+  #p paragraph
+  p words[:adjectives].sample
+end
+
+fill_madlib(madlib, words)
