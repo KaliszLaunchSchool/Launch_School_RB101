@@ -38,30 +38,17 @@ arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 arr << 12
 arr.unshift(0)
 p arr
-=end
 
-a = 4
-
-loop do
-  a = 5
-  b = 3
-
-
-  break
+def greetings(str)
+  puts str
+  puts "Goodbye"
 end
 
-puts a
-puts b
+word = "Hello"
 
+greetings(word)
 
-
-
-
-
-
-
-
-
+=end
 
 
 
