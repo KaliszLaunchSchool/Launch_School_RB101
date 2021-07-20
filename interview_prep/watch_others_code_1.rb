@@ -32,18 +32,37 @@ Example 2:
 =end
 
 def repeated_substring(string)
-  num_of_letters = string.length - 1
-  array = string.split(//)
+  number_of_letters = string.length
+  tracker = 0
   check_array = []
-  until array.empty?
-    check_array << array.pop(2)
-    p check_array
+  loop do
+    array = string.split(//)
+    tracker += 1
+    until array.empty?
+      check_array << array.pop(tracker)
+    end
+    if each_element_same?(check_array)
+      return true
+      break
+    else
+      check_array = []
+    end
+    break if tracker == string.length
+  end
+  false
+end
+
+def each_element_same?(array)
+  if array.size > 1 && array.all? {|element| element == array[0]}
+    true
+  else 
+    false
   end
 end
 
-p repeated_substring('abab') == true
-p repeated_substring('aba') == false
-p repeated_substring('aabaaba') == false
-p repeated_substring('abaababaab') == true
-p repeated_substring('abcabcabcabc') == true
-p repeated_substring('aaaaa') == true
+ p repeated_substring('abab') == true
+ p repeated_substring('aba') == false
+ p repeated_substring('aabaaba') == false
+ p repeated_substring('abaababaab') == true
+ p repeated_substring('abcabcabcabc') == true
+ p repeated_substring('aaaaa') == true
