@@ -66,3 +66,40 @@ end
  p repeated_substring('abaababaab') == true
  p repeated_substring('abcabcabcabc') == true
  p repeated_substring('aaaaa') == true
+
+=begin
+LS Solution
+
+Input: string
+Output: boolean
+Rules: the entire string is a repeating substring
+
+Option 1:
+  - Create an array of substrings
+    - in length, the factors of the sting (up to half the length of the string)
+  - for each substring, multiply it by the length of the string divided by the
+   length of the substring
+  - Check if that substring multiplication is equal to the string
+    - Return true, else, return false at the end
+=end
+
+def repeated_substring(string)
+  substrings = []
+  1.upto(string.size / 2) do |substring_length|
+    if (string.size % substring_length == 0)
+      substrings << string[0, substring_length]
+    end
+  end
+  substrings.each do |substring|
+    multiplier = string.size / substring.size
+    return true if substring * multiplier == string
+  end
+  false 
+end
+
+p repeated_substring('abab') == true
+p repeated_substring('aba') == false
+p repeated_substring('aabaaba') == false
+p repeated_substring('abaababaab') == true
+p repeated_substring('abcabcabcabc') == true
+p repeated_substring('aaaaa') == true
