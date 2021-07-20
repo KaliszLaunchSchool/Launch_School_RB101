@@ -24,10 +24,11 @@ Algo
   - Iterate through the first string's characters
   - Check if all of the strings in the original array include that character
     - If yes, add it to the results array
+      - Delete one instance of the common character from each string
     - If not, continue the iteration
 - Return the results array
 
-=end
+
 
 def common_chars(array_of_strings)
   results = []
@@ -36,9 +37,28 @@ def common_chars(array_of_strings)
     if array_of_strings.all?{|string| string.include?(character)}
       results << character
     end
+    array_of_strings.each {|string| string.delete!(character)}
   end
   puts results
   results
+end
+=end
+
+def common_chars(array_of_strings)
+  results = []
+  comparison_array = array_of_strings[0].chars
+  array_of_strings.delete(array_of_strings[0])
+  loop do
+    p comparison_letter = comparison_array.shift
+      if array_of_strings.all?{|string| string.include?(comparison_letter)}
+        results << comparison_letter
+        array_of_strings.each {|string| string.delete!(comparison_letter)}
+      end
+      p array_of_strings
+    break if comparison_array.empty?
+  end
+    puts results
+    results
 end
 
 p common_chars(['bella', 'label', 'roller']) == ['e', 'l', 'l']
