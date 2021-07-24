@@ -46,18 +46,19 @@ end
 
 def common_chars(array_of_strings)
   results = []
-  comparison_array = array_of_strings[0].chars
-  array_of_strings.delete(array_of_strings[0])
+  characters_to_compare = array_of_strings[0].chars
+  words_left_in_string = array_of_strings
+  words_left_in_string.delete(array_of_strings[0])
   loop do
-    p comparison_letter = comparison_array.shift
+    comparison_letter = characters_to_compare.shift
       if array_of_strings.all?{|string| string.include?(comparison_letter)}
         results << comparison_letter
-        array_of_strings.each {|string| string.delete!(comparison_letter)}
+        words_left_in_string.each {|string| string.slice!(comparison_letter)}
       end
-      p array_of_strings
-    break if comparison_array.empty?
+      array_of_strings
+      words_left_in_string
+    break if characters_to_compare.empty?
   end
-    puts results
     results
 end
 
