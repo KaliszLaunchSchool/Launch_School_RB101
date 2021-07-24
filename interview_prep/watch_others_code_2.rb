@@ -65,3 +65,29 @@ end
 p common_chars(['bella', 'label', 'roller']) == ['e', 'l', 'l']
 p common_chars(['cool', 'lock', 'cook']) == ['c', 'o']
 p common_chars(['aabbaa', 'cccdddd', 'eeffee', 'ggrrrr']) == []
+
+=begin
+Input: an array of lowercaase strings
+Output: an array of every character that appears in all of the strings
+  - If a character appears mult times in each strings, then the 
+  return array should contain that number of elements
+
+Algo
+  - Set chars equal to the characters of the first element 
+  (remove the first element from the array)
+  - Iterate through the characters (with select)
+    - Iterate through the words in the array
+    - Check if all the words contain the character
+      - If they do, block should return true
+      - Remove one of that character from the string
+=end
+
+def common_chars(array)
+  array = array.map { |word| word} #So we don't mutate the original array
+
+  chars = array.shift.chars
+
+  chars.select do |char|
+    array.all? { |word| word.sub!(char, "") }
+  end
+end
