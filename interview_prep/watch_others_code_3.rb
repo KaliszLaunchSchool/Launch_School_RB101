@@ -54,3 +54,57 @@ p next_bigger_num(2017) == 2071
 p next_bigger_num(111) == -1
 p next_bigger_num(531) == -1
 p next_bigger_num(123456789) == 123456798
+
+=begin
+LS Notes
+
+input: integer
+output: integer, or -1 if no valid number is found
+
+Algo
+max number = sort the digits, find the max number
+current number ... max number, break if the number contains all the digits
+If no number is found, then return -1
+=end
+
+def next_bigger_num(input)
+  max = max_num(input)
+
+  (input + 1..max).to_a.each do |num|
+    return num if matches?(num, input)
+  end
+  return -1
+end
+
+def matches?(num, input)
+  num.to_s.chars.sort == input.to_s.chars.sort
+end
+
+def max_num(input)
+  input.to_s.chars.sort.reverse.join.to_i
+end
+
+p next_bigger_num(9) == -1
+p next_bigger_num(12) == 21
+p next_bigger_num(513) == 531
+p next_bigger_num(2017) == 2071
+p next_bigger_num(111) == -1
+p next_bigger_num(531) == -1
+p next_bigger_num(123456789) == 123456798
+
+
+# OR
+
+
+def next_bigger_num(input)
+  max = max_num(input)
+
+  (input + 1..max).to_a.each do |num|
+    return num if max == max_num(num)
+  end
+  return -1
+end
+
+def max_num(input)
+  input.to_s.chars.sort.reverse.join.to_i
+end
