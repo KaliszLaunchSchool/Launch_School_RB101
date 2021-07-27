@@ -31,19 +31,26 @@ If no bigger number can be composed using those digits, return -1:
 
 def next_bigger_num(integer)
   working_integer = integer.dup
+  largest_possible = working_integer.to_s.split(//).sort.reverse.join.to_i
   if integer.to_s.size < 2
     -1
+  elsif integer == largest_possible
+  return -1
   else
-    largest_possible = working_integer.to_s.split(//).sort.reverse.join.to_i
-    integer.up_to(largest_possible)
-    
+    start = integer + 1
+    (start).upto(largest_possible) do |num|
+      if integer.to_s.split(//).sort == num.to_s.split(//).sort
+        num
+        return num
+      end
+    end
   end
 end
 
 p next_bigger_num(9) == -1
 p next_bigger_num(12) == 21
-#p next_bigger_num(513) == 531
-#p next_bigger_num(2017) == 2071
-#p next_bigger_num(111) == -1
-#p next_bigger_num(531) == -1
-#p next_bigger_num(123456789) == 123456798
+p next_bigger_num(513) == 531
+p next_bigger_num(2017) == 2071
+p next_bigger_num(111) == -1
+p next_bigger_num(531) == -1
+p next_bigger_num(123456789) == 123456798
