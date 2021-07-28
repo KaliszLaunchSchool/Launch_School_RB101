@@ -21,7 +21,7 @@ Output: String
 - Cont iterate through arraay
 - Break if string[0].all? == false
 =end
-
+=begin
 def common_prefix(array)
   result = ""
   counter = 0
@@ -42,6 +42,43 @@ def common_prefix(array)
 
   end
   result
+end
+
+puts common_prefix(["flower", "flow", "fliwht"]) == "fl"
+puts common_prefix(["dog", "racecar", "car"]) == ""
+puts common_prefix(["interspecies", "interstellar", "interstate"]) == "inters"
+puts common_prefix(["throne", "dungeon"]) == ""
+puts common_prefix(["throne", "throne"]) == "throne"
+=end
+=begin
+# Problem
+- Find the longest common prefix in an array of strings
+- Return the prefix string
+
+Input: Array of strings
+Output: string
+
+# Data: array, string
+
+# Algo
+- Iterate from 0 to the length of the smallest string in the array
+- Using the index, check if the characters of each string in the array is the same
+- If its the same, add that charaacter to a results array
+- If its not, retrun the results array
+=end
+
+def common_prefix(array)
+  result = []
+  max_index = array.min_by {|string| string.size}.size
+  (0...(max_index - 1)).each do |index|
+    current_char = array[0][index]
+    if array.all? { |str| str[index] == current_char }
+      result << current_char 
+    else
+      return result.join('')
+    end
+  end
+  result.join('')
 end
 
 puts common_prefix(["flower", "flow", "fliwht"]) == "fl"
