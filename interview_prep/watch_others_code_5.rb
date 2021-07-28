@@ -21,7 +21,7 @@ Output: String
 - Cont iterate through arraay
 - Break if string[0].all? == false
 =end
-=begin
+
 def common_prefix(array)
   result = ""
   counter = 0
@@ -49,7 +49,7 @@ puts common_prefix(["dog", "racecar", "car"]) == ""
 puts common_prefix(["interspecies", "interstellar", "interstate"]) == "inters"
 puts common_prefix(["throne", "dungeon"]) == ""
 puts common_prefix(["throne", "throne"]) == "throne"
-=end
+
 =begin
 # Problem
 - Find the longest common prefix in an array of strings
