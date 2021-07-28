@@ -94,3 +94,35 @@ p max_sequence([-2, 1, -3, 4, -1, 2, 1, -5, 4]) == 6
 p max_sequence([11]) == 11
 p max_sequence([-32]) == 0
 p max_sequence([-2, 1, -7, 4, -10, 2, 1, 5, 4]) == 12
+
+=begin
+LS Solution
+# Problem
+- Find the subarray from an array that contains the largest sum
+- The subarray can be any length
+- If all numbers are positive, return the simple sum
+- If all numbers aare negative, or empty array return 0
+
+input: array
+output: integer
+
+Algo
+- Initialize result array 
+- Iterate from 0 to the length of the array
+- Iterate from 0 to length of the array
+- Add an array that ranges from the first index to the second index to the result array
+
+- Iterate through the result array and collect the sum of all the subarrays
+- Find the max sum of the subarrays
+=end
+
+def max_sequence(array)
+  return 0 if array.all? {|number| number < 0 }
+  result = []
+  (0..(array.size-1)).each do |index|
+    (index1..(array.size-1)).each do |index2|
+      result << array[index1..index2]
+    end
+  end
+  result.max_by {|subarray| subarray.sum}.sum
+end
