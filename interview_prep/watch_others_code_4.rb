@@ -43,23 +43,54 @@ Question: if a single element is greater than the sum of any sequence,
 should that be the max value?
 =end
 
+# def max_sequence(array)
+#   max_value = array.sum
+#   puts "The max value is #{max_value}"
+#   working_array = array.dup
+#   until working_array.empty?
+#     working_array.shift
+#     working_value = working_array.sum
+#     if working_value > max_value
+#       max_value = working_value
+#     end
+#   end
+#   puts "The max value is #{max_value}"
+#   max_value
+# end
+
 def max_sequence(array)
   max_value = array.sum
-  puts "The max value is #{max_value}"
-  working_array = array.dup
-  until working_array.empty?
-    working_array.shift
-    working_value = working_array.sum
-    if working_value > max_value
-      max_value = working_value
+  index = 0
+  negative_index = -1
+  if array.empty?
+    return 0
+  elsif array.size == 1
+    element = array[0]
+    if element.positive?
+      return element
+    else
+      return 0
+    end
+  else
+    loop do
+      loop do 
+        subarray = array[index..negative_index]
+        if max_value < subarray.sum
+          max_value = subarray.sum
+        end
+        index += 1
+        break if subarray.size == 2 
+      end
+      negative_index -= 1
+      index = 0 
+      break if negative_index * -1 == array.size - 1
     end
   end
-  puts "The max value is #{max_value}"
   max_value
 end
 
-#p max_sequence([]) #== 0
-max_sequence([-2, 1, -3, 4, -1, 2, 1, -5, 4]) #== 6
-#p max_sequence([11]) #== 11
-#p max_sequence([-32]) #== 0
-#p max_sequence([-2, 1, -7, 4, -10, 2, 1, 5, 4]) #== 12
+p max_sequence([]) == 0
+p max_sequence([-2, 1, -3, 4, -1, 2, 1, -5, 4]) == 6
+p max_sequence([11]) == 11
+p max_sequence([-32]) == 0
+p max_sequence([-2, 1, -7, 4, -10, 2, 1, 5, 4]) == 12
