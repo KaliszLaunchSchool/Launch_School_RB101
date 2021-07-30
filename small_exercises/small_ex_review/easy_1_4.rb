@@ -46,7 +46,7 @@ def count_occurrences(elements)
       results[element] = 1
     end
   end
-  p results
+  results.each { |key, value| puts "#{key} => #{value}" }
 end
 
 vehicles = [
