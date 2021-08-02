@@ -7,4 +7,4 @@ Print all odd numbers from 1 to 99, inclusive, to the console, with each number 
 
 =end
 
-puts (1..99).to_a
+(1..99).to_a.each {|num| puts num if num.odd?}
