@@ -12,3 +12,23 @@ input:
 Please write word or multiple words: walk, don't run
 output:
 There are 13 characters in "walk, don't run".
+
+# Problem
+- Create a method which asks for a word, gives back the number of characers
+- Spaces do not count
+- punctuation does count
+
+# Algo
+- Ask user for a word or words
+- split the word into chars 
+- count the chars
+- Return the number of characters
+=end
+
+puts "Please write word or multiple words:"
+words = gets.chomp
+
+array = words.split.map {|word| word.chars}.flatten 
+count = array.size
+
+puts "There are #{count} characters in '#{words}'."
