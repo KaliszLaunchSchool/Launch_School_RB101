@@ -28,7 +28,8 @@ There are 13 characters in "walk, don't run".
 puts "Please write word or multiple words:"
 words = gets.chomp
 
-array = words.split.map {|word| word.chars}.flatten 
-count = array.size
+#array = words.split.map {|word| word.chars}.flatten 
+#count = array.size
+count = words.delete(' ').size
 
 puts "There are #{count} characters in '#{words}'."
