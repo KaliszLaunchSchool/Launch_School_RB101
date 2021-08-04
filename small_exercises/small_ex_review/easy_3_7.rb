@@ -11,4 +11,34 @@ oddities([1, 2, 3, 4, 5, 6]) == [1, 3, 5]
 oddities(['abc', 'def']) == ['abc']
 oddities([123]) == [123]
 oddities([]) == []
+
+# Problem
+- Create a method which accepts 1 argument
+- Return a list with every other element in the initial array
+
+Input: array
+Output: array
+
+# Algo
+- Create a method which accepts 1 argument
+- Create an empty array
+- Iterate through the array with each with index
+- If index is odd, push the element to the new array
+- Return the new array
 =end
+
+def oddities(original_array)
+  odd_array = []
+  original_array.each_with_index do |num, index|
+    if index.even?
+      odd_array << num
+    end
+  end
+  odd_array
+end
+
+p oddities([2, 3, 4, 5, 6]) == [2, 4, 6]
+p oddities([1, 2, 3, 4, 5, 6]) == [1, 3, 5]
+p oddities(['abc', 'def']) == ['abc']
+p oddities([123]) == [123]
+p oddities([]) == []
