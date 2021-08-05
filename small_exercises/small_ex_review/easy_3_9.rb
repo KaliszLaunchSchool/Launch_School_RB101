@@ -32,7 +32,7 @@ real_palindrome?('123ab321') == false
   - keep if the array of nums and letters includes that character
   - join the string back into a string
 =end
-
+=begin
 NUMS_AND_LETTERS = ('a'..'z').to_a + ('0'..'9').to_a
 
 def real_palindrome?(string)
@@ -43,6 +43,18 @@ end
 def clean_string(string)
   string.downcase!
   string.chars.keep_if {|char| NUMS_AND_LETTERS.include?(char)}.join
+end
+=end
+
+def real_palindrome?(string)
+  string = clean_string(string)
+  string == string.reverse
+end
+
+def clean_string(string)
+  string.downcase!
+  string.gsub!(/[^a-z0-9]/, '')
+  string
 end
 
 p real_palindrome?('madam') == true
