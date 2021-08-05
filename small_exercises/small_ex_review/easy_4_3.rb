@@ -20,4 +20,30 @@ leap_year?(1700) == false
 leap_year?(1) == false
 leap_year?(100) == false
 leap_year?(400) == true
+
+# Problem
+- Leap year = every year evenly divisible by 4, unless the year is also divisible by 100
+- If evenly divisible by 100, not a leap year unless evenly divisible by 400
+- Return true if leap year 
+- Assume year > 0
+
+Input: integer
+Output: boolean
+
+# Algo
+- Create a method which accepts 1 argument
 =end
+
+leap_year?(2016) == true
+leap_year?(2015) == false
+leap_year?(2100) == false
+leap_year?(2400) == true
+leap_year?(240000) == true
+leap_year?(240001) == false
+leap_year?(2000) == true
+leap_year?(1900) == false
+leap_year?(1752) == true
+leap_year?(1700) == false
+leap_year?(1) == false
+leap_year?(100) == false
+leap_year?(400) == true
