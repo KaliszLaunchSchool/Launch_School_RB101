@@ -12,4 +12,38 @@ multisum(3) == 3
 multisum(5) == 8
 multisum(10) == 33
 multisum(1000) == 234168
+
+# Problem
+- Create a method which accepts 1 parameter (an integer)
+- Search between 1 and that integer
+  - Final all multiples of 3 or 5
+- Sum the multiples
+
+Input: integer
+Output: Integer
+
+Data: integer, array
+
+# Algo
+- Create a method which accepts 1 parameter (integer)
+- Create an empty results array
+- Iterate from 1 up to the integer using upto
+  - if num % 3 == 0 or num % 5 == 0, add that number to the results array
+- Sum the results array
 =end
+
+def multisum(integer)
+  results = []
+  1.upto(integer) do |num|
+    if num % 3 == 0 || num % 5 == 0
+      results << num
+    end
+  end
+  results.sum
+end
+
+
+p multisum(3) == 3
+p multisum(5) == 8
+p multisum(10) == 33
+p multisum(1000) == 234168
