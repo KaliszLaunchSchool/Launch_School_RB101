@@ -30,7 +30,7 @@ Data: integer, array
 - Iterate from 1 up to the integer using upto
   - if num % 3 == 0 or num % 5 == 0, add that number to the results array
 - Sum the results array
-=end
+
 
 def multisum(integer)
   results = []
@@ -41,7 +41,17 @@ def multisum(integer)
   end
   results.sum
 end
+=end
 
+def multisum(integer)
+  results = []
+  1.upto(integer) do |num|
+    if num % 3 == 0 || num % 5 == 0
+      results << num
+    end
+  end
+  results.inject(:+)
+end
 
 p multisum(3) == 3
 p multisum(5) == 8
