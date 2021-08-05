@@ -31,19 +31,38 @@ Input: integer
 Output: boolean
 
 # Algo
-- Create a method which accepts 1 argument
+- Create a method which accepts 1 argument (year)
+- create a var, leap year, begins as false 
+- if year % 4 == 0, leap_year is true
+  - if leap year % 100 == 0, leap year is false
+    - if leap year % 400 == 0, leap year is true
+return leap year
 =end
 
-leap_year?(2016) == true
-leap_year?(2015) == false
-leap_year?(2100) == false
-leap_year?(2400) == true
-leap_year?(240000) == true
-leap_year?(240001) == false
-leap_year?(2000) == true
-leap_year?(1900) == false
-leap_year?(1752) == true
-leap_year?(1700) == false
-leap_year?(1) == false
-leap_year?(100) == false
-leap_year?(400) == true
+def leap_year?(year)
+  leap_year = false
+  if year % 4 == 0
+    leap_year = true
+    if year % 100 == 0
+      leap_year = false
+      if year % 400 == 0
+        leap_year = true
+      end
+    end
+  end
+  leap_year
+end
+
+p leap_year?(2016) == true
+p leap_year?(2015) == false
+p leap_year?(2100) == false
+p leap_year?(2400) == true
+p leap_year?(240000) == true
+p leap_year?(240001) == false
+p leap_year?(2000) == true
+p leap_year?(1900) == false
+p leap_year?(1752) == true
+p leap_year?(1700) == false
+p leap_year?(1) == false
+p leap_year?(100) == false
+p leap_year?(400) == true
