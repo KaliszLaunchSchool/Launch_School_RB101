@@ -19,24 +19,27 @@ integer_to_string(5000) == '5000'
 - Take an integer and convert it into a string
 
 # Algo
-- Create a hash for integer to string nums
-- Initiaate a method
-- Initiate an empty array
-- Loop
-  - Divide the integer by 10
-  - Push the remainder to the array
-  - Continue for the entire integer
+- Initiate a method
+- Initiate an array
+loop
+  - Find the remainder of the number, push to array
+  - Divide the number by 10
+  - Break when num is 0
+- Reverse the array
 - Join the array
-- Reverse the string
-- Return the string
+
 =end
 
-INT_TO_STR = {0 => '0', 1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5', 6 => '6', 7 => '7', 8 => '8', 9 => '9',}
+INT_TO_STR = {0 => '0', 1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5', 6 => '6', 7 => '7', 8 => '8', 9 => '9'}
 
 def integer_to_string(integer)
   array = []
-  array << integer
-  array.join
+  loop do
+    array << integer.remainder(10)
+    integer /= 10
+    break if integer == 0 
+  end
+  array.reverse.join
 end
 
 p integer_to_string(4321) == '4321'
