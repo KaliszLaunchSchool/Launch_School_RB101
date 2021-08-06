@@ -18,4 +18,40 @@ Examples
 
 string_to_integer('4321') == 4321
 string_to_integer('570') == 570
+
+# Problem
+- Create a method which takes a string of digits and returns the number as an integer
+  - May not use to_i  or integer constructor
+  - Dont worry about +/- signs
+  - Assume all chars will be numeric
+
+Input: String
+Output: Integer
+
+# Algo
+- Create a hash from 0 to 9, key is string, value is integer
+- Create a method which takes a string
+- b
+- Iterate through the string using a loop
+- For each char, change the key into the value
+- Return the integer
+
 =end
+
+CONVERSION = {'0' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9}
+
+
+def string_to_integer(string)
+  counter = 0
+  integer = 0
+  loop do
+    integer += CONVERSION[string[counter]]
+    counter += 1
+    break if counter == (string.size)
+    integer *= 10
+  end
+  integer
+end
+
+p string_to_integer('4321') #== 4321
+p string_to_integer('570') #== 570
