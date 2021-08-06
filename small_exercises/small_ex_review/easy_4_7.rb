@@ -31,7 +31,7 @@ Output: Integer
 # Algo
 - Create a hash from 0 to 9, key is string, value is integer
 - Create a method which takes a string
-- b
+- Initiate an integer of 0
 - Iterate through the string using a loop
 - For each char, change the key into the value
 - Return the integer
