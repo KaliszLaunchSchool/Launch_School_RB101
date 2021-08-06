@@ -17,4 +17,54 @@ Examples
 string_to_signed_integer('4321') == 4321
 string_to_signed_integer('-570') == -570
 string_to_signed_integer('+100') == 100
+
+# Problem
+- Create a method which takes an integer (may or may not have a sign)
+- Return an integer, if sign was -, make sure the integer is -
+
+Input: string
+Output: signed integer
+
+# Algo
+- Check for sign
+  - See if the string includes a + or - 
+  - If so, remove the sign for conversion, but save in variable for later
+- Convert string for integer
+  - Initiate hash for conversion
+  - Initiate integer
+  - Convert string to integer  
+    - iterate through the string
+    - Convert each string num into the interger form using hash
+    - integer * 10 + num from hash
+  - If sign had been -, integer * -1
+  - return integer
 =end
+
+STRING_TO_INT = { '0' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6,
+                  '7' => 7, '8' => 8, '9' => 9 }
+
+def string_to_signed_integer(string)
+  if string.include?('-')
+    sign = string.delete!('-')
+    string_to_integer(string) * -1
+  elsif string.include?('+')
+    sign = string.delete!('+')
+    string_to_integer(string)
+  else
+    string_to_integer(string)
+  end
+
+end
+
+def string_to_integer(string)
+  integer = 0
+  string.chars.each do |num|
+    num = STRING_TO_INT[num]
+    integer = integer * 10 + num
+  end
+  integer
+end
+
+p string_to_signed_integer('4321') == 4321
+p string_to_signed_integer('-570') == -570
+p string_to_signed_integer('+100') == 100
