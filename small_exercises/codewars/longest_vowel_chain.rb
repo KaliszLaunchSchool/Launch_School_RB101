@@ -11,4 +11,38 @@ solve("strengthlessnesses") == 1
 solve("cuboideonavicuare") == 2
 solve("chrononhotonthuooaos") == 5
 solve("iiihoovaeaaaoougjyaw") == 8
+
+# Problem
+- Given a lowercase string of all alphabetic characters without spaces, find the length of the longest vowel substring
+
+Input: string
+Output: integer
+
+# Algo
+- Create a method which accepts 1 parameter (string)
+- Divide the string into an array of vowel substrings (substrings with only a, e, i, o, u)
+  - Initiate an empty array
+  - Split the string into subarrays which are not AEIOU
+- Find the longest substring
+  - Iterate through the substrings, select the substring with the largest size
+- Return the length of the longest substring
 =end
+
+def solve(string)
+  vowel_substrings = string.split(/[^aeiou]/)
+  vowel_substrings
+  substring_sizes = []
+  vowel_substrings.each do |substring|
+    substring_sizes << substring.size
+  end
+  substring_sizes.sort[-1]
+end
+
+p solve("codewarriors") == 2
+p solve("suoidea") == 3
+p solve("iuuvgheaae") == 4
+p solve("ultrarevolutionariees") == 3
+p solve("strengthlessnesses") == 1
+p solve("cuboideonavicuare") == 2
+p solve("chrononhotonthuooaos") == 5
+p solve("iiihoovaeaaaoougjyaw") == 8
