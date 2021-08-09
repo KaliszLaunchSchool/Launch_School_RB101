@@ -30,7 +30,6 @@ Output: integer
 
 def solve(string)
   vowel_substrings = string.split(/[^aeiou]/)
-  vowel_substrings
   substring_sizes = []
   vowel_substrings.each do |substring|
     substring_sizes << substring.size
