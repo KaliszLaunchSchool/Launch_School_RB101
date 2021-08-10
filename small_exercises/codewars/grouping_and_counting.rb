@@ -35,19 +35,16 @@ group_and_count([0,1,1,0]) == {0=>2, 1=>2}
 =end
 
 def group_and_count(array)
-  if array == nil || array.empty?
-    return nil
-  else
-    results = {}
-    array.each do |num|
-      if results.include?(num)
-        results[num] += 1
-      else
-        results[num] = 1
-      end
+  return nil if array == nil || array.empty?
+  results = {}
+  array.each do |num|
+    if results.include?(num)
+      results[num] += 1
+    else
+      results[num] = 1
     end
-    results
   end
+  results
 end
 
 p group_and_count([0,1,1,0]) == {0=>2, 1=>2}
