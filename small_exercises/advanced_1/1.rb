@@ -44,7 +44,7 @@ def fill_madlib(madlib, words)
   paragraph = madlib.split(' ')
   paragraph.each do |word|
     if word.include? ("%")
-      word = word.gsub(/a-z/)
+      word = word.gsub(/^a-z/, '')
       puts word
     else
       puts word

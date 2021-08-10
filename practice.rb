@@ -50,7 +50,7 @@ greetings(word)
 
 =end
 
-
+["ab", "c", "aaa", "aaab", "b", "aa"].sort
 
 
 
