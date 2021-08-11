@@ -28,45 +28,31 @@ Output: array with a string and an integer
 
 # Algo
 - Create a method which accepts a string
-- 
-
-=end
-=begin
-def f(string)
-  results = ['', 0]
-  subarrays = string.chars
-  #loop do
-    if subarrays.all?(subarrays[0])
-      results = [subarrays[0], subarrays.size]
-    else
-      size_of_subs
-      subarrays.map.with_index do |substring, index|
-        substring[index] = substring[index] + substring[index + 1]
-      end
-      p substring
-    end
-  #end
-end
+- Find the size of the original string
+- Create a return array [string, multiplier]
+- Initiate a count variable
+- take the first letter of the string * size of the string divided by 1
+  - if that = original string, return the substring and the size
+  - else, take the first 2 letters of the string * size of original string divided by 2
+  - continue on until count == string size
+- return the 
 =end
 
-def f(string)
-  size_of_substring = 1 
-  index = 0
-  size_of_string = string.size
-  if size_of_string.even?
-    loop do
-      substring = string[index, size_of_substring]
-      if substring * size_of_string == string
-        return [substring, size_of_string]
-        break
-      else
-        size_of_substring += 1
-        size_of_string /= 2
-      end
+def f(string) 
+  size = string.size
+  result = [string, 1]
+  count = 1
+  until count == size do
+    substring = string[0..(count - 1)]
+    created_string =  substring * (size / count)
+    if created_string == string
+      result = [substring, size / count]
+      break
+    else 
+      count += 1
     end
-  else
-    p 'odd'
   end
+  result 
 end
 
 p f("ababab") == ["ab", 3] 
