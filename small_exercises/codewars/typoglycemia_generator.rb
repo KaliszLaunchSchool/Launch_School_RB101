@@ -43,36 +43,51 @@ Output: string
 
 # Algo
 - Create a method which accepts 1 parameter (string)
-- Split the string so that each word is its own element in aan array
+- Split the string so that each word is its own element in an array
 - Iterate through the array
   - For each word: create a method which keeps the first and last letter in place, alphabatizes middle letters (helper method?)
     - Split the word into an array of characters
       - remove any non-alphabetical characters, and store with their indexes
       - pop the first and last characters off of the array and store in variables with their indexes
       - sort the rest of the letters alphabetically
-      - put firstt and last chars back
+      - put first and last chars back
       - put non-alphabetical chars back
     - Return the rearranged word
   - Join the array back into a string of word(s)
 =end
 
+p ALPHANUMERIC = ('a'..'z').to_a + (0..9).to_a 
+
 def scramble_words(words)
-  scrambling(words)
-end
-
-def scrambling(words)
-  words.chars.each_with_index do |char|
-    
+  return words if words.size < 2
+  special_chars_with_index = []
+  clean_characters = []
+  characters = words.chars.each_with_index do |char, index|
+    if ALPHANUMERIC.include?(char)
+      clean_characters << char
+    else
+      special_chars_with_index << [char,index]
+    end
   end
+  first_char = clean_characters.shift
+  last_char = clean_characters.pop
+  middle = alphabatize(clean_characters)
+  p special_chars_with_index
+  p result = first_char + middle + last_char
+  
 end
 
-scramble_words('professionals') == 'paefilnoorsss' 
-# scramble_words('i') == 'i'
-# scramble_words('') == ''
-# scramble_words('me') == 'me'
-# scramble_words('you') == 'you'
-# scramble_words('card-carrying') == 'caac-dinrrryg'
-# scramble_words("shan't") == "sahn't"
-# scramble_words('-dcba') == '-dbca'
-# scramble_words('dcba.') == 'dbca.'
-# scramble_words("you've gotta dance like there's nobody watching, love like you'll never be hurt, sing like there's nobody listening, and live like it's heaven on earth.") == "you've gotta dacne like teehr's nbdooy wachintg, love like ylo'ul neevr be hrut, sing like teehr's nbdooy leiinnstg, and live like it's haeevn on earth."
+def alphabatize(words)
+  words.sort.join
+end
+
+p scramble_words('professionals') == 'paefilnoorsss' 
+p scramble_words('i') == 'i'
+p scramble_words('') == ''
+p scramble_words('me') == 'me'
+p scramble_words('you') == 'you'
+p scramble_words('card-carrying') == 'caac-dinrrryg'
+p scramble_words("shan't") == "sahn't"
+p scramble_words('-dcba') == '-dbca'
+p scramble_words('dcba.') == 'dbca.'
+p scramble_words("you've gotta dance like there's nobody watching, love like you'll never be hurt, sing like there's nobody listening, and live like it's heaven on earth.") == "you've gotta dacne like teehr's nbdooy wachintg, love like ylo'ul neevr be hrut, sing like teehr's nbdooy leiinnstg, and live like it's haeevn on earth."
