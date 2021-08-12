@@ -65,3 +65,55 @@ p get_char_count("Hello. Hello? HELLO!!") == {6=>["l"], 3=>["e", "h", "o"]}
 p get_char_count("aaa...bb...c!") == {3=>["a"], 2=>["b"], 1=>["c"]}
 p get_char_count("aaabbbccc") == {3=>["a", "b", "c"]}
 p get_char_count("abc123") == {1=>["1", "2", "3", "a", "b", "c"]}
+
+def get_char_count(string)
+  results = {}
+  clean_array = string.downcase.gsub(/[^a-z0-9]/, '').chars
+  uniq_array = clean_array.uniq
+  uniq_array.each do |char|
+    char_count = clean_array.count(char)
+    if results.include?(char_count)
+      results[char_count] << char
+    else
+      results[char_count] = [char]
+    end
+  end
+  results = results.sort {|a, b| b <=> a}
+  results.map do |_key, value|
+    value.sort!
+  end
+  results.to_h 
+end
+
+p get_char_count("Mississippi") == {4=>["i", "s"], 2=>["p"], 1=>["m"]}
+p get_char_count("Hello. Hello? HELLO!!") == {6=>["l"], 3=>["e", "h", "o"]}
+p get_char_count("aaa...bb...c!") == {3=>["a"], 2=>["b"], 1=>["c"]}
+p get_char_count("aaabbbccc") == {3=>["a", "b", "c"]}
+p get_char_count("abc123") == {1=>["1", "2", "3", "a", "b", "c"]}
+
+def get_char_count(str)
+  results = {}
+  characters = str.downcase.chars.select { |char| char.match?(/[a-z|A-Z|0-9]/) }
+  characters.each do |char|
+    counter = characters.count(char)
+    if results.key?(counter)
+      results[counter] << char
+    else
+      results[counter] = [char]
+    end
+  end
+  results.each do |_key, value|
+    if value.size >= 2
+      value.uniq!
+      value.sort!
+    end
+  end
+  results.sort_by {|key, value| -key}.to_h
+end
+
+
+p get_char_count("Mississippi") == {4=>["i", "s"], 2=>["p"], 1=>["m"]}
+p get_char_count("Hello. Hello? HELLO!!") == {6=>["l"], 3=>["e", "h", "o"]}
+p get_char_count("aaa...bb...c!") == {3=>["a"], 2=>["b"], 1=>["c"]}
+p get_char_count("aaabbbccc") == {3=>["a", "b", "c"]}
+p get_char_count("abc123") == {1=>["1", "2", "3", "a", "b", "c"]}

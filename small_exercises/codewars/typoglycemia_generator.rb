@@ -56,7 +56,7 @@ Output: string
   - Join the array back into a string of word(s)
 =end
 
-p ALPHANUMERIC = ('a'..'z').to_a + (0..9).to_a 
+ALPHANUMERIC = ('a'..'z').to_a + (0..9).to_a 
 
 def scramble_words(words)
   return words if words.size < 2
@@ -72,22 +72,30 @@ def scramble_words(words)
   first_char = clean_characters.shift
   last_char = clean_characters.pop
   middle = alphabatize(clean_characters)
-  p special_chars_with_index
-  p result = first_char + middle + last_char
-  
+  if special_chars_with_index.empty?
+    result = first_char + middle + last_char
+  else
+    result = first_char + middle + last_char
+    special_char_index = special_chars_with_index[1]
+    special_char = special_chars_with_index[0]
+    p result
+    p result.chars[special_char_index] += special_char
+    p result.join(' ')
+  end
+  p result
 end
 
 def alphabatize(words)
   words.sort.join
 end
 
-p scramble_words('professionals') == 'paefilnoorsss' 
-p scramble_words('i') == 'i'
-p scramble_words('') == ''
-p scramble_words('me') == 'me'
-p scramble_words('you') == 'you'
+#p scramble_words('professionals') == 'paefilnoorsss' 
+#p scramble_words('i') == 'i'
+#p scramble_words('') == ''
+#p scramble_words('me') == 'me'
+#p scramble_words('you') == 'you'
 p scramble_words('card-carrying') == 'caac-dinrrryg'
-p scramble_words("shan't") == "sahn't"
-p scramble_words('-dcba') == '-dbca'
-p scramble_words('dcba.') == 'dbca.'
-p scramble_words("you've gotta dance like there's nobody watching, love like you'll never be hurt, sing like there's nobody listening, and live like it's heaven on earth.") == "you've gotta dacne like teehr's nbdooy wachintg, love like ylo'ul neevr be hrut, sing like teehr's nbdooy leiinnstg, and live like it's haeevn on earth."
+#p scramble_words("shan't") == "sahn't"
+#p scramble_words('-dcba') == '-dbca'
+#p scramble_words('dcba.') == 'dbca.'
+#p scramble_words("you've gotta dance like there's nobody watching, love like you'll never be hurt, sing like there's nobody listening, and live like it's heaven on earth.") == "you've gotta dacne like teehr's nbdooy wachintg, love like ylo'ul neevr be hrut, sing like teehr's nbdooy leiinnstg, and live like it's haeevn on earth."
