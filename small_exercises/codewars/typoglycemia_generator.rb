@@ -59,43 +59,56 @@ Output: string
 ALPHANUMERIC = ('a'..'z').to_a + (0..9).to_a 
 
 def scramble_words(words)
-  return words if words.size < 2
-  special_chars_with_index = []
-  clean_characters = []
-  characters = words.chars.each_with_index do |char, index|
-    if ALPHANUMERIC.include?(char)
-      clean_characters << char
-    else
-      special_chars_with_index << [char,index]
+  scrambled_words = words.split.map do |word|
+    return word if word.size < 2
+    cleaned_characters = []
+    special_chars_with_index = []
+    word.chars.each_with_index do |char, index|
+      if ALPHANUMERIC.include?(char)
+        cleaned_characters << char
+      else
+        special_chars_with_index << [char,index]
+      end
     end
+    cleaned_characters
+    special_chars_with_index
+    first_char = cleaned_characters.shift
+    last_char = cleaned_characters.pop
+    middle = alphabatize(cleaned_characters)
+    if special_chars_with_index.empty?
+      result = first_char + middle + last_char
+    else
+      result = first_char + middle + last_char
+      if special_chars_with_index[0][1] == 0
+        special_char_index = 0
+        special_char = special_chars_with_index[0][0]
+        new_char = result.chars[special_char_index] += special_char
+        new_char = new_char.reverse
+        result[special_char_index] = new_char
+      else
+        special_char_index = special_chars_with_index[0][1] - 1
+        special_char = special_chars_with_index[0][0]
+        new_char = result.chars[special_char_index] += special_char
+        result[special_char_index] = new_char
+      end
+    end
+    result
   end
-  first_char = clean_characters.shift
-  last_char = clean_characters.pop
-  middle = alphabatize(clean_characters)
-  if special_chars_with_index.empty?
-    result = first_char + middle + last_char
-  else
-    result = first_char + middle + last_char
-    special_char_index = special_chars_with_index[1]
-    special_char = special_chars_with_index[0]
-    p result
-    p result.chars[special_char_index] += special_char
-    p result.join(' ')
-  end
-  p result
+  scrambled_words.join(' ')
 end
+
 
 def alphabatize(words)
   words.sort.join
 end
 
-#p scramble_words('professionals') == 'paefilnoorsss' 
-#p scramble_words('i') == 'i'
-#p scramble_words('') == ''
-#p scramble_words('me') == 'me'
-#p scramble_words('you') == 'you'
+p scramble_words('professionals') == 'paefilnoorsss' 
+p scramble_words('i') == 'i'
+p scramble_words('') == ''
+p scramble_words('me') == 'me'
+p scramble_words('you') == 'you'
 p scramble_words('card-carrying') == 'caac-dinrrryg'
-#p scramble_words("shan't") == "sahn't"
-#p scramble_words('-dcba') == '-dbca'
-#p scramble_words('dcba.') == 'dbca.'
-#p scramble_words("you've gotta dance like there's nobody watching, love like you'll never be hurt, sing like there's nobody listening, and live like it's heaven on earth.") == "you've gotta dacne like teehr's nbdooy wachintg, love like ylo'ul neevr be hrut, sing like teehr's nbdooy leiinnstg, and live like it's haeevn on earth."
+p scramble_words("shan't") == "sahn't"
+p scramble_words('-dcba') == '-dbca'
+p scramble_words('dcba.') == 'dbca.'
+p scramble_words("you've gotta dance like there's nobody watching, love like you'll never be hurt, sing like there's nobody listening, and live like it's heaven on earth.") == "you've gotta dacne like teehr's nbdooy wachintg, love like ylo'ul neevr be hrut, sing like teehr's nbdooy leiinnstg, and live like it's haeevn on earth."
