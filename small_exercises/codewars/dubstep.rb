@@ -23,8 +23,34 @@ Return the words of the initial song that Polycarpus used to make a dubsteb remi
 
 Examples
 song_decoder("WUBWEWUBAREWUBWUBTHEWUBCHAMPIONSWUBMYWUBFRIENDWUB")  =>  WE ARE THE CHAMPIONS MY FRIEND
+
+# Problem
+- Remove all 'WUB's from an uppercase string, instead adding spaces
+
+Input: string
+Output: String
+
+# Algo
+- Create a methos which takes a string
+- Remove "WUB"s from that string
+- Replace with spaces
+- Squeeze the spaces
 =end
 
+def song_decoder(dubbed_title)
+  title = dubbed_title.gsub('WUB', ' ').squeeze
+  loop do
+    break if title[0] != ' '
+    title = title[1..-1]
+  end
+  loop do
+    break if title[-1] != ' '
+    title = title[0..-2]
+  end
+  title
+end
+
+p song_decoder("WUBWEWUBAREWUBWUBTHEWUBCHAMPIONSWUBMYWUBFRIENDWUB")  ==  'WE ARE THE CHAMPIONS MY FRIEND'
 p song_decoder("AWUBBWUBC") == "A B C"
 p song_decoder("AWUBWUBWUBBWUBWUBWUBC") == "A B C"
 p song_decoder("WUBAWUBBWUBCWUB") == "A B C"
