@@ -26,7 +26,18 @@ Output: kebab case string
 - Join the array with a '-' between each word
 =end 
 
+UPPERCASE_ALPHABET = ('A'..'Z').to_a
+LOWERCASE_ALPHABET = ('a'..'z').to_a
+
 def kebabize(camel_case_string)
+  string = camel_case_string.chars.map do |letter|
+    if UPPERCASE_ALPHABET.include?(letter)
+      letter = "-" + letter.downcase
+    elsif LOWERCASE_ALPHABET.include?(letter)
+      letter
+    end
+  end
+  p string.join
 end
 
 p kebabize('myCamelCasedString') == 'my-camel-cased-string'
