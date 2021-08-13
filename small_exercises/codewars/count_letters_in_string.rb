@@ -46,3 +46,14 @@ letter_count('arithmetics') #=> {:a=>1, :c=>1, :e=>1, :h=>1, :i=>2, :m=>1, :r=>1
 letter_count('codewars') #=>{:a=>1, :c=>1, :d=>1, :e=>1, :o=>1, :r=>1, :s=>1, :w=>1})
 letter_count('activity') #=> {:a=>1, :c=>1, :i=>2, :t=>2, :v=>1, :y=>1})
 letter_count('arithmetics') #=> {:a=>1, :c=>1, :e=>1, :h=>1, :i=>2, :m=>1, :r=>1, :s=>1, :t=>2})
+
+# Other solution
+def letterCount(str)
+  result = {}
+  characters = str.chars
+  characters.each do |letter|
+    count = str.count(letter)
+    result[letter.to_sym] = count
+  end
+  p result.sort_by {|k, v| k.to_s }.to_h
+ends
