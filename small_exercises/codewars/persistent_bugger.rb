@@ -11,7 +11,29 @@ For example:
                   # 1*2*6=12, and finally 1*2=2
 
  persistence(4) # returns 0, because 4 is already a one-digit number
+
+ # Problem
+ - Write a function which takes a positive integer, and returns the number of times you must multiply its 
+ individual digits until a single digit is reached
+
+ # Algo 
+ - Create a method which accepts 1 parameter (an integer)
+ - Turn the integer into a string
+  - split it into characters
+  - turn back into integers
+  - inject the aarray to multiply
+  - if the result turned into a string's size is 1, break, 
+    - else, integer = result
 =end
+
+def persistence(integer)
+  count = 0
+  until integer.to_s.size == 1 do
+     integer = integer.to_s.chars.map { |char| char.to_i }.inject(:*)
+     count += 1
+  end
+  count 
+end
 
 p persistence(39) == 3
 p persistence(4) == 0
