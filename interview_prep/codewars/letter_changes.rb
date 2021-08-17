@@ -40,6 +40,40 @@ p letter_changes("EMAILZ@gmail.com") == "HPDLOC@jpdlo.frp"
 p letter_changes('xyz') == ('abc')
 =end
 
+# LOWERCASE_ALPHA = ('a'..'z').to_a
+# UPPERCASE_ALPHA = ('A'..'Z').to_a
+
+# def letter_changes(string)
+#   results = []
+#   string.chars.each do |letter|
+#     alphabet = alpha_check(letter)
+#     if alphabet == false 
+#       results << letter
+#     elsif alphabet.index(letter) == 23
+#       results << alphabet[0]
+#     elsif alphabet.index(letter) == 24
+#       results << alphabet[1]
+#     elsif alphabet.index(letter) == 25
+#       results << alphabet[2]
+#     else
+#       index = alphabet.index(letter)
+#       results << alphabet[index + 3] 
+#     end
+#   end
+#   p results.join
+# end
+
+# def alpha_check(letter)
+#   if LOWERCASE_ALPHA.include?(letter)
+#     alphabet = LOWERCASE_ALPHA
+#   elsif UPPERCASE_ALPHA.include?(letter)
+#     alphabet = UPPERCASE_ALPHA
+#   else
+#     alphabet = false
+#   end
+# end
+
+
 LOWERCASE_ALPHA = ('a'..'z').to_a
 UPPERCASE_ALPHA = ('A'..'Z').to_a
 
@@ -49,12 +83,9 @@ def letter_changes(string)
     alphabet = alpha_check(letter)
     if alphabet == false 
       results << letter
-    elsif alphabet.index(letter) == 23
-      results << alphabet[0]
-    elsif alphabet.index(letter) == 24
-      results << alphabet[1]
-    elsif alphabet.index(letter) == 25
-      results << alphabet[2]
+    elsif alphabet.index(letter) > 22 
+      index = alphabet.index(letter) % 23
+      results << alphabet[index]
     else
       index = alphabet.index(letter)
       results << alphabet[index + 3] 
@@ -80,40 +111,40 @@ p letter_changes('xyz') == ('abc')
 
 # Monte's solution
 
-def target(idx, size)
-  target_num = 3
-  if idx > (size - target_num)
-    (target_num - (size % idx)) - 1
-  else
-    target_num + idx
-  end
-end
+# def target(idx, size)
+#   target_num = 3
+#   if idx > (size - target_num)
+#     (target_num - (size % idx)) - 1
+#   else
+#     target_num + idx
+#   end
+# end
 
 
-def letter_changes(str)
-  result = ''
-  characters = str.chars
-  uppercase = ('A'..'Z').to_a
-  lowercase = ('a'..'z').to_a
-  hsh = ('a'..'z').zip(0..25).to_h
-  characters.each do |char|
-    if lowercase.include?(char)
-      size = (lowercase.size - 1)
-      counter = target(hsh[char], size)
-      result << lowercase[counter]
-    elsif uppercase.include?(char)
-      size = (uppercase.size - 1)
-      counter = target(hsh[char.downcase], size)
-      result << uppercase[counter]
-    else
-      result << char
-    end
+# def letter_changes(str)
+#   result = ''
+#   characters = str.chars
+#   uppercase = ('A'..'Z').to_a
+#   lowercase = ('a'..'z').to_a
+#   hsh = ('a'..'z').zip(0..25).to_h
+#   characters.each do |char|
+#     if lowercase.include?(char)
+#       size = (lowercase.size - 1)
+#       counter = target(hsh[char], size)
+#       result << lowercase[counter]
+#     elsif uppercase.include?(char)
+#       size = (uppercase.size - 1)
+#       counter = target(hsh[char.downcase], size)
+#       result << uppercase[counter]
+#     else
+#       result << char
+#     end
     
-  end
-  result
-end
+#   end
+#   result
+# end
 
-p letter_changes("this long cake@&") == "wklv orqj fdnh@&"
-p letter_changes("Road trip9") == "Urdg wuls9"
-p letter_changes("EMAILZ@gmail.com") == "HPDLOC@jpdlo.frp"
-p letter_changes('wxyz') == ('zabc')
+# p letter_changes("this long cake@&") == "wklv orqj fdnh@&"
+# p letter_changes("Road trip9") == "Urdg wuls9"
+# p letter_changes("EMAILZ@gmail.com") == "HPDLOC@jpdlo.frp"
+# p letter_changes('wxyz') == ('zabc')

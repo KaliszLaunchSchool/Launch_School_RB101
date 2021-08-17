@@ -1,8 +1,5 @@
 =begin
-The marketing team is spending way too much time typing in hashtags.
-Let's help them with our own Hashtag Generator!
-
-Here's the deal:
+Generate a 'hastag'
 
 It must start with a hashtag (#).
 All words must have their first letter capitalized.
@@ -12,7 +9,34 @@ Examples
 " Hello there thanks for trying my Kata"  =>  "#HelloThereThanksForTryingMyKata"
 "    Hello     World   "                  =>  "#HelloWorld"
 ""                                        =>  false
+
+# Problem
+- Create a method which takes 1 parameter (string)
+- If the string is longer than or equal to 140 chars, or if the string is empty, return false
+  - Spaces don't count as 'chars' for the chars count
+  - # doesnt count as a char for the char count
+- Otherwise, return a string with the original words capitalized and combined without spaces, with a # at the start
+  - word: letters a-z with spaces in between individual words
+
+Input: string
+Output: either boolean, or a string
+
+# Algo
+- Create a method which accepts 1 parameter(string)
+- if the string is empty, return false, 
+- Clean up the string
+  - Split into an array of words (split at every space)
+  -Iterate through the array
+    - Capitalize each word
+    - Join the words back into a string without spaces, with a # at the beginning
+    - return the string
+      - if the char count >= 140,
+      - otherwise, return the string
 =end
+
+def generateHashtag(string)
+
+end
 
 p generateHashtag("") == false
 p generateHashtag(" " * 200) == false

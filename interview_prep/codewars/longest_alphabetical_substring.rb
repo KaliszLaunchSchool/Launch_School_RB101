@@ -59,3 +59,15 @@ p longest('asdfaaaabbbbcttavvfffffdf') == 'aaaabbbbctt'
 p longest('asdfbyfgiklag') =='fgikl'
 p longest('z') == 'z'
 p longest('zyba') == 'z'
+
+# Riaz's solution
+def longest(str)
+  str.chars.slice_when { |a, b| a > b }.max_by(&:size).join
+end
+
+# or
+
+def longest(str)
+  reg = ("a".."z").to_a.join('*') + '*'
+  str.scan(/#{reg}/).max_by(&:size)
+end
