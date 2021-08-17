@@ -35,7 +35,7 @@ Output: either boolean, or a string
 =end
 
 def generateHashtag(string)
-
+ 
 end
 
 p generateHashtag("") == false
