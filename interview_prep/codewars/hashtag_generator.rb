@@ -23,19 +23,36 @@ Output: either boolean, or a string
 
 # Algo
 - Create a method which accepts 1 parameter(string)
-- if the string is empty, return false, 
+- if the string is empty or includes only spaces), return false
 - Clean up the string
   - Split into an array of words (split at every space)
+  - Count the size of each word, and sum them all
+    - if the char count >= 140, return false, otherwise continue
   -Iterate through the array
     - Capitalize each word
     - Join the words back into a string without spaces, with a # at the beginning
     - return the string
-      - if the char count >= 140,
-      - otherwise, return the string
 =end
 
 def generateHashtag(string)
- 
+  string = check_for_falses(string)
+  return false if string == false
+
+  array = string.split.map do |word|
+    word.capitalize
+  end
+  new_string = array.join
+  '#' + new_string
+end
+
+def check_for_falses(string)
+  if string.empty? || string.chars.all?(' ')
+    string = false
+  elsif string.delete(' ').size >= 140
+    string = false
+  else 
+    string
+  end
 end
 
 p generateHashtag("") == false
