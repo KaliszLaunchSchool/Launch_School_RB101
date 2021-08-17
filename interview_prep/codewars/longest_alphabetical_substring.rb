@@ -64,7 +64,7 @@ p longest('zyba') == 'z'
 def longest(str)
   str.chars.slice_when { |a, b| a > b }.max_by(&:size).join
 end
-
+ 
 # or
 
 def longest(str)
