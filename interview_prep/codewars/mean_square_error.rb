@@ -37,6 +37,7 @@ Output: Aa resulting integer
 - Return that
 =end
 
+=begin
 def solution(array_1, array_2)
   nums_to_average = []
   index = 0
@@ -45,6 +46,18 @@ def solution(array_1, array_2)
     nums_to_average << difference ** 2
     break if index == (array_1.size - 1)
     index += 1
+  end
+  p nums_to_average.sum.to_f / array_1.size.to_f
+end
+=end
+
+# Additional solution: 
+
+def solution(array_1, array_2)
+  nums_to_average = []
+  array_1.each_with_index do |num, idx|
+    difference = num - array_2[idx]
+    nums_to_average << difference ** 2
   end
   p nums_to_average.sum.to_f / array_1.size.to_f
 end
