@@ -3,6 +3,87 @@ Given 2 strings, your job is to find out if there is a substring that appears in
 strings. You will return true if you find a substring that appears in both strings, and 
 false if not. A substring is longer than 1 character.
 
+# Problem 
+- Create a method which accepts 2 strings
+- Check to see if the strings contain a common substring
+  - Return true if there is one, otherwise false
+- substring = longer than 1 character
+- If either given string is ' ', return false
+- case insensitive
+
+Input: 2 strings
+Output: Boolean
+
+# Algo
+- Create a method which accepts 2 strings
+- Downcase both strings for comparison
+- Create arrays to hold the substrings
+- Create all potential consecutive substrings of each (must be longer than 1 char)
+  - From 0 to the size of the string, create arrays starting at 2 chars and increasing until the substring's size
+  - Send to the appropriate array
+- Compare to see if any substrings are the same 
+  - if so, return true
+  - if not, return false
+=end
+
+def substring_test(string_1, string_2)
+  return false if string_1 == ' ' || string_2 == ' '
+  string_1.downcase!
+  string_2.downcase!
+  substrings_1 = create_substrings(string_1)
+  substrings_2 = create_substrings(string_2)
+  substrings_2.each do |word|
+    if substrings_1.include?(word)
+      return true
+    end
+  end
+  false
+end
+
+def create_substrings(string)
+  substrings = []
+  size = string.size - 1
+  counter = 0
+  loop do
+    counter.upto(size) do |index|
+      substrings << (string[counter..index])
+   end
+   counter += 1
+   break if counter == size
+  end
+  substrings.delete_if {|string| string.empty? || string.size == 1}
+  substrings
+end
+
+puts substring_test('Something', 'Fun') == false
+puts substring_test('Something', 'Home') == true
+puts substring_test('Something', ' ') == false
+puts substring_test('BANANA', 'banana') == true
+puts substring_test('test', 'llt') == false
+puts substring_test(' ', ' ') == false
+puts substring_test('1234567', '541265') == true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=begin
+
 Problem
 - Given 2 strings
 - Check if there is a substring (a string longer than 2 chars) that appears in both strings
@@ -25,7 +106,7 @@ Algo
 - Compare the 2 result arrays
   - If there is 1 string that matches, return true
   - Else, return false
-=end
+
 
 def substring_test(string_1, string_2)
   string_1.downcase!
@@ -46,12 +127,12 @@ def split_into_substrings(string)
 end
 
 substring_test('Something', 'Fun') == false
-#puts substring_test('Something', 'Home') == true
-#puts substring_test('Something', ' ') == false
-#puts substring_test('BANANA', 'banana') == true
-#puts substring_test('test', 'llt') == false
-#puts substring_test(' ', ' ') == false
-#puts substring_test('1234567', '541265') == true
+puts substring_test('Something', 'Home') == true
+puts substring_test('Something', ' ') == false
+puts substring_test('BANANA', 'banana') == true
+puts substring_test('test', 'llt') == false
+puts substring_test(' ', ' ') == false
+puts substring_test('1234567', '541265') == true
 
 
 =begin
