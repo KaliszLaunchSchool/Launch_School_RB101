@@ -66,9 +66,8 @@ p scramble('scriptingjava', 'javascript') == true
 # LS Solution
 
 def scramble(str1, str2)
-  str1_chars = str1.chars
   str2_chars = str2.chars
   str2_chars.each do |char2|
-    str1_chaars.include?(char2?) ||
+    return false if str2.count(char2) > str1.count(char2)
   end
 end
