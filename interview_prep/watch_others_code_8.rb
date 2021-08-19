@@ -69,5 +69,44 @@ puts longest_palindrome('baabcd') == 4
 puts longest_palindrome('baab1kj12345432133d') == 9
 puts longest_palindrome("I like racecars that go fast") == 7
 
+# LS solution
 
+def longest_palindrome(string)
+  substrings  = find_all_substrings(string)
+  palindromes = palindromes(substrings)
+  max_length = 0
+  palindromes.each do |palindrome|
+    if palindrome.length > max_length
+      max_length = palindrome.length
+    end
+  end
+  max_length
+end
 
+def find_all_substrings(string)
+  results = []
+
+  0.upto(string.length - 1 ) do |current_index|
+    current_index.upto(string.length - 1) do |second_index|
+      results << string[current_index..second_index]
+    end
+  end
+  results
+end
+
+def palindromes(substrings)
+  results = []
+  substrings.each do |substr|
+    results << substr if substr == substr.reverse
+  end
+  results
+end
+
+puts longest_palindrome('') == 0
+puts longest_palindrome('a') == 1
+puts longest_palindrome('aa') == 2
+puts longest_palindrome('baa') == 2
+puts longest_palindrome('aab') == 2
+puts longest_palindrome('baabcd') == 4
+puts longest_palindrome('baab1kj12345432133d') == 9
+puts longest_palindrome("I like racecars that go fast") == 7
