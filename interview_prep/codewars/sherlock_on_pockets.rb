@@ -76,4 +76,3 @@ p find_suspects(pockets, [1, 2]) == [:tom, :jane]
 p find_suspects(pockets, [1, 7, 5, 2]) == nil
 p find_suspects(pockets, []) == [:bob, :tom, :jane]
 p find_suspects(pockets, [7]) == [:bob, :tom]
-
