@@ -49,8 +49,7 @@ end
 
 def scramble(str1, str2)
   str2.chars.each do |letter|
-    return false if str1.include?(letter) == false
-    return false if str1.count(letter) < str2.count(letter)
+    return false if str1.include?(letter) == false || str1.count(letter) < str2.count(letter)
   end
   true
 end
@@ -63,17 +62,13 @@ p scramble('katas', 'steak') == false
 p scramble('scriptjava', 'javascript') == true
 p scramble('scriptingjava', 'javascript') == true
 
-=begin
+
 # LS Solution
+
 def scramble(str1, str2)
   str1_chars = str1.chars
   str2_chars = str2.chars
   str2_chars.each do |char2|
-    str1_chars.each do |char1|
-      if char2 == char1
-        str_chars.delete(char1)
-
-    end
+    str1_chaars.include?(char2?) ||
   end
 end
-=end
