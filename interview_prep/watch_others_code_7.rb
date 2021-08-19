@@ -32,6 +32,8 @@ Output: boolean
       - compare the count in the letters in string 1 with the count in string2
     if it does, return true
   - if it does not, return false
+
+  str1_letter_count[letter]
 =end
 
 def scramble(str1, str2)
@@ -43,9 +45,35 @@ def scramble(str1, str2)
   true
 end
 
+# OR
+
+def scramble(str1, str2)
+  str2.chars.each do |letter|
+    return false if str1.include?(letter) == false
+    return false if str1.count(letter) < str2.count(letter)
+  end
+  true
+end
+
+
 p scramble('javaass', 'jjss') == false
 p scramble('rkqodlw', 'world') == true
 p scramble('cedewaraaossoqqyt', 'codewars') == true
 p scramble('katas', 'steak') == false
 p scramble('scriptjava', 'javascript') == true
 p scramble('scriptingjava', 'javascript') == true
+
+=begin
+# LS Solution
+def scramble(str1, str2)
+  str1_chars = str1.chars
+  str2_chars = str2.chars
+  str2_chars.each do |char2|
+    str1_chars.each do |char1|
+      if char2 == char1
+        str_chars.delete(char1)
+
+    end
+  end
+end
+=end
