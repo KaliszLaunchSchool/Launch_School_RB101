@@ -102,6 +102,14 @@ def palindromes(substrings)
   results
 end
 
+# OR
+
+def palindromes(substrings)
+  substrings.select do |substr|
+    results << substr if substr == substr.reverse
+  end
+end
+
 puts longest_palindrome('') == 0
 puts longest_palindrome('a') == 1
 puts longest_palindrome('aa') == 2
