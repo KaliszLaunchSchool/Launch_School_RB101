@@ -24,7 +24,7 @@ Output: Boolean
 - Compare to see if any substrings are the same 
   - if so, return true
   - if not, return false
-=end
+
 
 def substring_test(string_1, string_2)
   return false if string_1 == ' ' || string_2 == ' '
@@ -62,10 +62,28 @@ puts substring_test('BANANA', 'banana') == true
 puts substring_test('test', 'llt') == false
 puts substring_test(' ', ' ') == false
 puts substring_test('1234567', '541265') == true
+=end 
+
+# LS Solution
+def substring_test(str1, str2)
+  str1_chars = str1.downcase.chars
+  str2_chars = str2.downcase.chars
+  str1_chars.each_with_index do |char1, idx1|
+    str2_chars.each_with_index do |char2, idx2|
+      return true if char1 == char2 && str1_chars[idx1 + 1] == str2_chars[idx2 + 1] && idx1 != str1_chars.size - 1
+    end
+  end
+  false
+end
 
 
-
-
+puts substring_test('Something', 'Fun') == false
+puts substring_test('Something', 'Home') == true
+puts substring_test('Something', ' ') == false
+puts substring_test('BANANA', 'banana') == true
+puts substring_test('test', 'llt') == false
+puts substring_test(' ', ' ') == false
+puts substring_test('1234567', '541265') == true
 
 
 
