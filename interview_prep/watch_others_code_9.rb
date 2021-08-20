@@ -43,7 +43,7 @@ p find_even_index([-1, -2, -3, -4, -3, -2, -1]) == 3
 
 def find_even_index(array)
   return 0 if array.empty?
-  array.each_with_index do |num, index|
+  array.each_with_index do |_num, index|
     sum_after = array[(index + 1)..-1].sum
     sum_before = array[0..(index-1)].sum
     if index == 0
