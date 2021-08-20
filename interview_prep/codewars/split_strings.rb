@@ -22,7 +22,7 @@ Output: Array of substrings
   - Iterate through the array, push every 2 chars into the result array as strings
 
 =end
-
+=begin
 def solution(string)
   string << '_' if string.size.odd?
   results = []
@@ -31,6 +31,14 @@ def solution(string)
      index += 2
      break if index >= (string.size)
   end
+  p results.select {|substring| results.index(substring).even?}
+end
+=end
+
+def solution(string)
+  string << '_' if string.size.odd?
+  results = []
+  string.chars.each_cons(2) {|sub| results << sub.join}
   p results.select {|substring| results.index(substring).even?}
 end
 
