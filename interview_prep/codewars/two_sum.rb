@@ -12,6 +12,45 @@ Based on: http://oj.leetcode.com/problems/two-sum/
 
 twoSum [1, 2, 3] 4 === (0, 2)
 
-two_sum([1, 2, 3], 4).sort, [0, 2])
-two_sum([1234, 5678, 9012], 14690).sort, [1, 2])
-two_sum([2, 2, 3], 4).sort, [0, 1])
+# Problem
+- Create a method which accepts an array of integers, and a "target"
+- Find 2 numbers that, when added together, give the targer
+- Return the indeces of theose 2 numbers
+
+Rules: Inputs will be valid, any valid solutions are accpetable
+  - All array items will be number
+  - Target will always be viable
+
+  Input: array, integer
+  Output: Array
+
+# Examples
+twoSum [1, 2, 3] 4 === (0, 2)
+  - target: 4, 1+3 = 4 --> 0,2
+
+# Algo
+- Create a method which accepts 2 parameters (array, "target" integer)
+- Iterate through the array, summing each number with one of the other numbers in the array in turn
+- If the result of the sum == the target number, retturn those 2 numbers which summed hit the targer
+- Find the index of those arrays in the OG array
+- Return the indexes
+=end
+
+def two_sum(array, target)
+  subs = find_subarrays(array)
+  twos = subs.select {|sub| sub.size == 2 && sub.sum == target}
+  find_index = twos.first
+  p find_index.map {|num| array.index(num) }
+end
+
+def find_subarrays(array)
+  results = []
+  1.upto(array.size) do |length|
+    array.permutation(length) {|subarray| results << subarray}
+  end
+  results 
+end
+
+p two_sum([1, 2, 3], 4).sort == [0, 2]
+p two_sum([1234, 5678, 9012], 14690).sort == [1, 2]
+p two_sum([2, 2, 3], 4).sort == [0, 1]
