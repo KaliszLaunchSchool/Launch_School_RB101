@@ -35,7 +35,7 @@ twoSum [1, 2, 3] 4 === (0, 2)
 - Find the index of those arrays in the OG array
 - Return the indexes
 =end
-
+=begin
 def two_sum(array, target)
   subs = find_subarrays(array)
   twos = subs.select {|sub| sub.size == 2 && sub.sum == target}
@@ -49,6 +49,15 @@ def find_subarrays(array)
     array.permutation(length) {|subarray| results << subarray}
   end
   results 
+end
+=end
+
+def two_sum(array, target)
+  array.each_with_index do |num1, idx1|
+    array.each_with_index do |num2, idx2|
+      return [idx1, idx2] if (num1 + num2) == target && idx1 != idx2
+    end
+  end
 end
 
 p two_sum([1, 2, 3], 4).sort == [0, 2]
