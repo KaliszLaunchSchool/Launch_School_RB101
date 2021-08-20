@@ -13,10 +13,23 @@ You may assume that both input Arrays are non-empty and that they have the same 
 Assume: each array has the same number of elements
   - arrays are non-empty
 
+# Algo
+- initiate a results array
+- iterate through the first array with index
+- after adding the arr1[index] to results, add arr2[index] to results
 =end
 
+# def interleave(arr1, arr2)
+#   p arr1.zip(arr2).flatten
+# end
+
 def interleave(arr1, arr2)
-  p arr1.zip(arr2).flatten
+  result = []
+  arr1.each_with_index do |element, index|
+    result << element
+    result << arr2[index]
+  end
+  p result
 end
 
 p interleave([1, 2, 3], ['a', 'b', 'c']) == [1, "a", 2, "b", 3, "c"]
