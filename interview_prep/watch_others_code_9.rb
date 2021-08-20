@@ -64,3 +64,32 @@ p find_even_index([20, 10, 30, 10, 10, 15, 35]) == 3
 p find_even_index([20, 10, -80, 10, 10, 15, 35]) == 0
 p find_even_index([10, -80, 10, 10, 15, 35, 20]) == 6
 p find_even_index([-1, -2, -3, -4, -3, -2, -1]) == 3
+
+# LS solution
+
+def find_even_index(arr)
+  n = 0 
+
+  loop do
+    if n == 0 
+      left_array = []
+    else
+      left_array = arr[0..(n-1)]
+    end
+
+    right_array = arr[(n+1)..(arr.length - 1)]
+
+    left_sum = 0
+    right_sum = 0
+    left_sum = left_array.reduce(:+) unless left_array.empty?
+    rught_sum = right_array.reduce(:+) unless right_array.empty?
+
+    if left_sum == right_sum
+      return n
+    else
+      n += 1 
+    end
+    break if n == arr.size
+  end
+  -1 
+end
