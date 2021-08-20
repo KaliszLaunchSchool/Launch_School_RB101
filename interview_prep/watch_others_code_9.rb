@@ -8,6 +8,7 @@ would make this happen, return -1. Empty arrays are equal to 0 in this problem.
 # Problem
 - Given an array of intergers, find the index where the 
 sum of the integers to the left of N = the sum to the right of N
+  - can be + and - integers
   - does not include the number that is at the index
 - If there is no index to do that, return -1
 - If empty array, return 0
@@ -30,7 +31,30 @@ p find_even_index([20, 10, -80, 10, 10, 15, 35]) == 0
 p find_even_index([10, -80, 10, 10, 15, 35, 20]) == 6
 p find_even_index([-1, -2, -3, -4, -3, -2, -1]) == 3
 
+# Algorithm
+- Create a method which accepts 1 parameter (array)
+- If the array is empty, return 0
+- Iterate through the array
+  - At each index, check to see if the sum of everything before that index = the sum of everything after that index
+    - if that is true, return the index (can be 0)
+    - If the iteration finishes with nothing being true return -1
+
 =end
+
+def find_even_index(array)
+  return 0 if array.empty?
+  array.each_with_index do |num, index|
+    sum_after = array[(index + 1)..-1].sum
+    sum_before = array[0..(index-1)].sum
+    if index == 0
+      sum_before = 0
+      return index if sum_before == sum_after
+    elsif sum_before == sum_after
+      return index 
+    end
+  end
+  -1
+end
 
 p find_even_index([]) == 0
 p find_even_index([1, 2, 3, 4, 3, 2, 1]) == 3
