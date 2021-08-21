@@ -15,7 +15,36 @@ Input/Output
 Constraints: 10 ≤ n ≤ 1000000.
 
 [output] an integer
+
+# Problem
+- Create a method which accepts an integer
+- Returns the max number that can be obtained if exactly one digit is deleted from the number
+- Digit will be at least 2 chars long (greater than or equal to 10), and less than or equal to 1000000
+
+Input: integer
+Output: integer
+Intermediate: string, array
+
+# Algo
+- Create a method which takes one parameter (integer)
+- Turn the integer into an array if single digits
+  - Create an array of all permutations of the digit which are the size of the digit's size - 1
+  - Iterate through the permutations and turn back into digits
+    - Return the max
+
 =end
+
+def delete_digit(num)
+  single_digits = num.to_s.chars
+  all_char_options = []
+  single_digits.each_with_index do |num, index|
+    digits = single_digits.dup
+    digits.delete_at(index)
+    all_char_options << digits
+  end
+  p all_char_options.map {|ary| ary.join.to_i}.max
+end
+
 p delete_digit(152) == 52
 p delete_digit(1001) == 101
 p delete_digit(10) == 1
