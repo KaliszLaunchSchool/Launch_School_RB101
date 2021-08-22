@@ -46,3 +46,16 @@ puts common_prefix(["dog", "racecar", "car"]) == ""
 puts common_prefix(["interspecies", "interstellar", "interstate"]) == "inters"
 puts common_prefix(["throne", "dungeon"]) == ""
 puts common_prefix(["throne", "throne"]) == "throne"
+
+# Chris' solution
+def common_prefix(arr)
+  base_chars = arr.first.chars
+  
+  base_chars.size.times do |index|
+    unless arr.all? { |word| word[index] == base_chars[index] }
+      return arr.first[0, index]
+    end
+  end
+  
+  arr.first
+end
