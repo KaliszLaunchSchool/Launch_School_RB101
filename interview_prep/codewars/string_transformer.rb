@@ -37,7 +37,7 @@ Intermed: array
 
 def string_transformer(string)
   array = [] 
-  string.split.reverse.each {|word| array << switch_case(word)}
+  string.split(/ /).reverse.each {|word| array << switch_case(word)}
   array.join(' ')
 end
 
@@ -55,3 +55,6 @@ end
 p string_transformer('Example string') == 'STRING eXAMPLE'
 p string_transformer("Example Input") == "iNPUT eXAMPLE"
 p string_transformer("Ugjuz Kfde Zvhulw Zaia") == 'zAIA zVHULW kFDE uGJUZ'
+p string_transformer("You Know When  THAT  Hotline Bling") == "bLING hOTLINE  that  wHEN kNOW yOU"
+
+#Expected: "bLING hOTLINE  that  wHEN kNOW yOU", instead got: "bLING hOTLINE that wHEN kNOW yOU
