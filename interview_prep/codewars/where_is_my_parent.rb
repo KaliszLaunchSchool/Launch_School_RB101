@@ -28,7 +28,7 @@ Algo
 =end
 
 def find_children(str)
-  p str.chars.sort_by {|letter| [letter.downcase, letter]}.join
+  str.chars.sort_by {|letter| [letter.downcase, letter]}.join
 end
 
 p find_children("abBA") == "AaBb"
