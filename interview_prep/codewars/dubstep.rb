@@ -38,15 +38,16 @@ Output: String
 =end
 
 def song_decoder(dubbed_title)
-  title = dubbed_title.gsub('WUB', ' ').squeeze
-  loop do
-    break if title[0] != ' '
-    title = title[1..-1]
-  end
-  loop do
-    break if title[-1] != ' '
-    title = title[0..-2]
-  end
+  title = dubbed_title.gsub('WUB', ' ').squeeze.lstrip.rstrip
+  p title
+  # loop do
+  #   break if title[0] != ' '
+  #   title = title[1..-1]
+  # end
+  # loop do
+  #   break if title[-1] != ' '
+  #   title = title[0..-2]
+  # end
   title
 end
 
