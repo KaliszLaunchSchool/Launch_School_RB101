@@ -49,3 +49,18 @@ p delete_digit(152) == 52
 p delete_digit(1001) == 101
 p delete_digit(10) == 1
 
+def delete_digit(digit)
+  digits = digit.to_s.chars
+  results = []
+  digits.each_with_index do |num, index|
+    array = digits.dup
+    array.delete_at(index)
+    results << array.join
+  end
+  p results.map {|num| num.to_i}.max
+end
+
+ p delete_digit(152) == 52
+ p delete_digit(1001) == 101
+ p delete_digit(9) == 0
+
