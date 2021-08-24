@@ -25,7 +25,30 @@ dig_pow(89, 1) should return 1 since 8¹ + 9² = 89 = 89 * 1
 dig_pow(92, 1) should return -1 since there is no k such as 9¹ + 2² equals 92 * k
 dig_pow(695, 2) should return 2 since 6² + 9³ + 5⁴= 1390 = 695 * 2
 dig_pow(46288, 3) should return 51 since 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 * 51
+
+# Problem
+- Create a method which takes 2 integers (num1, num2)
+- Split num1 into its respective digits
+- Raise the first digit to num2, the next to num2+1, etc
+- Find aa number that num1 * that num = the sum of the integers raised to the powers
+
+# Algo
+- Create a method which accepts 2 parameters(num1, num2)
+- Split num1 into an array of digits
+  - Iterate through the array, raising each number to their respective powers (helper method?)
+  - Sum each digit raised by the exponents
+
+- Take the sum, and the original num1
+  - See what multiplier, if any, can have num1 * n == sum
+  - return n
+  - if n * num1 is greater than the sum, return -1
+
+
 =end
+
+def dig_pow(num1, num2)
+  p array_of_digits = num1.to_s.chars
+end
 
 p dig_pow(89, 1) == 1
 p dig_pow(92, 1) == -1
