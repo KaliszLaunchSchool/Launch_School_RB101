@@ -93,3 +93,23 @@ def find_even_index(arr)
   end
   -1 
 end
+
+#Another solution
+def find_even_index(integers)
+  return 0 if integers.empty?
+  left_side = []
+  right_side = []
+  counter = 0
+  integers.each_with_index do |integer, index|
+    left_side << integers[0, counter]
+    right_side << integers[(index + 1)..-1]
+    counter += 1
+  end
+  
+  left_side.each_with_index do |array, index|
+    if array.sum == right_side[index].sum
+      return index
+    end
+  end
+  -1
+end
