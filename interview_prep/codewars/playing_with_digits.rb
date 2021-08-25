@@ -30,7 +30,7 @@ dig_pow(46288, 3) should return 51 since 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 236068
 - Create a method which takes 2 integers (num1, num2)
 - Split num1 into its respective digits
 - Raise the first digit to num2, the next to num2+1, etc
-- Find aa number that num1 * that num = the sum of the integers raised to the powers
+- Find a number that num1 * that num = the sum of the integers raised to the powers
 
 # Algo
 - Create a method which accepts 2 parameters(num1, num2)
@@ -47,7 +47,22 @@ dig_pow(46288, 3) should return 51 since 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 236068
 =end
 
 def dig_pow(num1, num2)
-  p array_of_digits = num1.to_s.chars
+  array_of_digits = num1.to_s.chars
+  target_num = find_target_num(array_of_digits, num2)
+  1.upto((target_num / 2)) do |n|
+    return n if n * num1 == target_num
+  end
+  -1
+end
+
+def find_target_num(array, num2)
+  digits_raised = []
+  counter = 0 
+  array.each_with_index do |digit, index|
+    digits_raised << digit.to_i ** (num2 + counter)
+    counter += 1
+  end
+  target_num = digits_raised.sum
 end
 
 p dig_pow(89, 1) == 1
