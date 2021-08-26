@@ -91,3 +91,54 @@ def common_chars(array)
     array.all? { |word| word.sub!(char, "") }
   end
 end
+
+=begin
+Given an array of strings made only from lowercase letters, return an array 
+of all characters that show up in all strings within the given array 
+(including duplicates). For example, if a character occurs 3 times in all 
+strings but not 4 times, you need to include that character three times in 
+the final answer.
+
+# Problem
+- Given an array of strings, return an array of all chars that show up in each of the strings
+- If a char shows up x2 in each string, it needs to be returned x2 times
+
+['bella', 'label', 'roller']
+b e l l a, l a b e l, r o l l e r ==> e, l, l 
+
+['cool', 'lock', 'cook']
+c o o l, l o c k, c o o k ==> c, o 
+
+Input: array of words
+Output: array of common letters
+
+# Ago
+- Given a string of words
+- Use the first word's chars as comparison
+- Iterate through each string
+  - if every string contains that letter
+    ** remove one instance of the letter from each string
+    - add the letter to a results array
+- return the results array
+
+=end
+
+def common_chars(array)
+  results = []
+  compare_letters = array[0].chars.each do |letter|
+    if array.all? {|word| word.match?(letter)}
+      results << letter
+      array = array.map { |word| remove_letter(word, letter) }
+   end
+  end
+  p results
+end
+
+def remove_letter(string, letter)
+  string.sub(letter, '')
+end
+
+
+p common_chars(['bella', 'label', 'roller']) == ['e', 'l', 'l']
+p common_chars(['cool', 'lock', 'cook']) == ['c', 'o']
+p common_chars(['aabbaa', 'cccdddd', 'eeffee', 'ggrrrr']) == []
