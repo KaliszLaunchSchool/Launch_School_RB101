@@ -2,6 +2,39 @@
 Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous subarray of which the sum ≥ s. 
 If there isn't one, return 0 instead.
 
+# Problem
+- Create a method which accepts an array of integers and a target num
+- Find the minimal length of a contiguous subarray
+  - the sum of the subarray should be greater than or equal to target num
+- Return the length of the subarray
+
+Input: array of integers, integer
+Output: integer
+
+# Algo
+- Create a method which accepts 2 parameters (array, target)
+- Find all subarrays
+- Select all subarrays where the sum is >= target num
+- Find the subarray with the min length
+- Return the length of that subarray
+
+=end
+
+def min_sub_length(array, target)
+  all_subs = find_subs(array)
+  subs = all_subs.select {|sub| sub.sum >= target}
+  return 0 if subs.empty?
+  smallest_sub = subs.min_by {|sub| sub.size}
+  smallest_sub.size
+end
+
+def find_subs(array)
+  subs = []
+  1.upto(array.size) do |length|
+    array.each_cons(length) {|sub| subs << sub}
+  end
+  subs
+end
 
 p min_sub_length([2,3,1,2,4,3], 7) == 2
 p min_sub_length([1, 10, 5, 2, 7], 9) == 1
@@ -76,7 +109,7 @@ High-Level-Algo:
     -iterate through given array and push all sub-arrays to subs
   -return subs
 
-=end
+
 
 def find_subs(arr)
   subs = []
