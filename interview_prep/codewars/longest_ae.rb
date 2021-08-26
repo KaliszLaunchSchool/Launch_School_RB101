@@ -52,3 +52,29 @@ p longest_ae("xenoglossophobia") == -1
 p longest_ae("pteromerhanophobia") == 18
 p longest_ae("johannisberger") == -1
 p longest_ae("secaundogenituareabb") == 16
+
+=begin
+Chris' solution
+def find_subs(str)
+  subs = []
+  1.upto(str.size) do |length|
+    str.chars.each_cons(length) { |sub_arr| subs << sub_arr.join }
+  end
+  subs
+end
+
+def longest_ae(str)
+  subs = find_subs(str)
+  two_ae = subs.select { |sub_str| sub_str.count('a') == 2 && sub_str.count('e') == 2 }
+  two_ae.empty? ? -1 : two_ae.max_by { |str| str.length }.size
+end
+
+# p find_subs("babanctekeaa")
+
+p longest_ae("aaee") == 4
+p longest_ae("babanctekeaa") == 10
+p longest_ae("xenoglossophobia") == -1
+p longest_ae("pteromerhanophobia") == 18
+p longest_ae("johannisberger") == -1
+p longest_ae("secaundogenituareabb") == 16
+=end
