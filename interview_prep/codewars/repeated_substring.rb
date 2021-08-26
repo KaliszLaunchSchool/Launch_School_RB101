@@ -59,3 +59,28 @@ p f("ababab") == ["ab", 3]
 p f("abcde") == ["abcde", 1]
 p f("abcdeabcde") == ["abcde", 2]
 p f("aaaaa") == ['a', 5]
+
+def repeated_substring_pattern(string)
+  substrings = find_substrings(string)
+  repeated = substrings.select do |sub|
+    substrings.count(sub) >= 2
+  end
+  num = 1
+  loop do 
+    repeated.each do |sub|
+      multiplied_sub = sub * num
+      return true if multiplied_sub == string
+    end
+    num += 1
+    break if num > string.size
+  end
+  false
+end
+
+def find_substrings(string)
+  substrings = []
+  1.upto(string.size - 1) do |length|
+    string.chars.each_cons(length) {|sub| substrings << sub.join } 
+  end
+  substrings
+end
