@@ -67,29 +67,23 @@ end
 
 def reverse_and_combine_text(string)
   array = string.split
-  if array.size == 1
-    return string
-  else
+  return string if array.size == 1
+  reversed = reverse_words(array)
+  combined = combine_words(reversed)
+  loop do
+    return combined.join if combined.size == 1
+    array = combined
     reversed = reverse_words(array)
     combined = combine_words(reversed)
-    loop do
-      if combined.size == 1
-        return combined.join
-        break
-      else 
-        array = combined
-        reversed = reverse_words(array)
-        combined = combine_words(reversed)
-      end
     end
   end
 end
 
-# p reverse_and_combine_text("abc def") == "cbafed"
-# p reverse_and_combine_text("abc def ghi jkl") == "defabcjklghi"
-# p reverse_and_combine_text("dfghrtcbafed") == "dfghrtcbafed"
-# p reverse_and_combine_text("234hh54 53455 sdfqwzrt rtteetrt hjhjh lllll12  44") == "trzwqfdstrteettr45hh4325543544hjhjh21lllll"
-# p reverse_and_combine_text("sdfsdf wee sdffg 342234 ftt") == "gffds432243fdsfdseewttf"
+p reverse_and_combine_text("abc def") == "cbafed"
+p reverse_and_combine_text("abc def ghi jkl") == "defabcjklghi"
+p reverse_and_combine_text("dfghrtcbafed") == "dfghrtcbafed"
+p reverse_and_combine_text("234hh54 53455 sdfqwzrt rtteetrt hjhjh lllll12  44") == "trzwqfdstrteettr45hh4325543544hjhjh21lllll"
+p reverse_and_combine_text("sdfsdf wee sdffg 342234 ftt") == "gffds432243fdsfdseewttf"
 
 
 
@@ -130,16 +124,16 @@ end
 #   else
 #     reversed = reverse_words(array)
 #     combined = combine_words(reversed)
-#     # loop do
-#     #   if combined.size == 1
-#     #     return combined.join
-#     #     break
-#     #   else 
-#     #     array = combined
-#     #     reversed = reverse_words(array)
-#     #     combined = combine_words(reversed)
-#     #   end
-#     # end
+#     loop do
+#       if combined.size == 1
+#         return combined.join
+#         break
+#       else 
+#         array = combined
+#         reversed = reverse_words(array)
+#         combined = combine_words(reversed)
+#       end
+#     end
 #   end
 # end
 
@@ -148,3 +142,36 @@ end
 # p reverse_and_combine_text("dfghrtcbafed") == "dfghrtcbafed"
 # p reverse_and_combine_text("234hh54 53455 sdfqwzrt rtteetrt hjhjh lllll12  44") == "trzwqfdstrteettr45hh4325543544hjhjh21lllll"
 # p reverse_and_combine_text("sdfsdf wee sdffg 342234 ftt") == "gffds432243fdsfdseewttf"
+
+# Monte's solutsion
+
+def reverse_strings(arr)
+  0.upto(arr.size - 1) do |idx|
+    arr[idx] = arr[idx].reverse
+  end
+  arr
+end
+
+def combine_elements(arr)
+  result = []
+  iteration_count = arr.size / 2
+  iteration_count.times do
+    result << arr.slice!(0, 2).join
+  end
+  result + arr
+end
+
+def reverse_and_combine_text(str)
+  string_array = str.split
+  loop do
+    return string_array.join if string_array.size == 1
+    reversed = reverse_strings(string_array)
+    string_array = combine_elements(reversed)
+  end
+end
+
+p reverse_and_combine_text("abc def") == "cbafed"
+p reverse_and_combine_text("abc def ghi jkl") == "defabcjklghi"
+p reverse_and_combine_text("dfghrtcbafed") == "dfghrtcbafed"
+p reverse_and_combine_text("234hh54 53455 sdfqwzrt rtteetrt hjhjh lllll12  44") == "trzwqfdstrteettr45hh4325543544hjhjh21lllll"
+p reverse_and_combine_text("sdfsdf wee sdffg 342234 ftt") == "gffds432243fdsfdseewttf"
