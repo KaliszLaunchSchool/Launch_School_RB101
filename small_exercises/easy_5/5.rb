@@ -92,6 +92,11 @@ Solution 2
 def cleanup(text)
   text.gsub(/[^a-z]/i, ' ').squeeze(' ')
 end
+
+def cleanup(text)
+  text.gsub(/[^a-z]/i, ' ').gsub(/[' ']+/, ' ')
+end
+
 Discussion
 Our first solution is straightforward. We begin by initializing a constant to contain an array of all the 
 letters in the alphabet. The letters of the English alphabet are not meant to change, so this is a good use 
