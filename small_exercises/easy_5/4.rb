@@ -121,3 +121,15 @@ and called the method like this:
 swap_first_last_characters(word[0], word[-1])
 Would this method work? Why or why not?
 =end
+
+def swap(string)
+  string.split.map do |word|
+    letters = word.chars
+    letters[0], letters[-1] = letters[-1], letters[0]
+    letters.join
+  end.join(' ')
+end
+
+p swap('Oh what a wonderful day it is') == 'hO thaw a londerfuw yad ti si'
+p swap('Abcde') == 'ebcdA'
+p swap('a') == 'a'
