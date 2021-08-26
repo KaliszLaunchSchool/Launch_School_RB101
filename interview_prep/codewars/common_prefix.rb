@@ -23,7 +23,7 @@ puts common_prefix(["flower", "flow", "flight"]) == "fl"
 - iterate through the results, and keep only the subarraays where each char is the same
 - take one of each of those characters, and add it to a results string
 
-=end
+
 
 def common_prefix(array)
   n = array[0].size
@@ -59,3 +59,56 @@ def common_prefix(arr)
   
   arr.first
 end
+=end
+=begin
+Write a method to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty 
+string
+
+All given inputs are in lowercase letters a-z.
+
+# Problem
+- Create a method which accepts an array of strings
+- Check to see if the words have a common prefix
+  - If so, return the prefix
+  - if not, return an empty string
+
+["flower", "flow", "flight"]) == "fl"
+f f f
+fl fl fl
+flo flo fli ==> fl
+
+Input: array of strings
+Output: string
+
+# Algo
+- Create a method which accepts an array of strings
+- Iterate through the initial word, checking to see if the prefex characters are the same as the other strings
+  - If so, grow the length of the prefex you are checking
+  - Otherwise, return the last prefix
+
+=end
+
+def common_prefix(array)
+  return '' if array[0][0] != array[1][0]
+  prefixes = []
+  first_word = array[0]
+  1.upto(first_word.size) do |prefix_size|
+    prefix = first_word.chars.first(prefix_size).join
+    prefixes[prefix_size - 1] = [prefix]
+  end
+  array.each_with_index do |word, index|
+    1.upto(word.size) do |prefix_size|
+      prefix = word.chars.first(prefix_size).join
+      prefixes[prefix_size - 1] << prefix
+    end
+  end
+  common_prefixes = prefixes.select { |array| array.all?(array[0])}
+  common_prefixes[-1].first
+end
+
+
+p common_prefix(["flower", "flow", "flight"]) == "fl"
+p common_prefix(["dog", "racecar", "car"]) == ""
+p common_prefix(["interspecies", "interstellar", "interstate"]) == "inters"
+p common_prefix(["throne", "dungeon"]) == ""
+p common_prefix(["throne", "throne"]) == "throne"
