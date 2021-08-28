@@ -37,8 +37,21 @@ def find_all_substrings(string)
   subs
 end
 
-p greatest_product("123834539327238239583") == 3240
-p greatest_product("395831238345393272382") == 3240
-p greatest_product("92494737828244222221111111532909999") == 5292
-p greatest_product("92494737828244222221111111532909999") == 5292
-p greatest_product("02494037820244202221011110532909999") == 0
+# p greatest_product("123834539327238239583") == 3240
+# p greatest_product("395831238345393272382") == 3240
+# p greatest_product("92494737828244222221111111532909999") == 5292
+# p greatest_product("92494737828244222221111111532909999") == 5292
+# p greatest_product("02494037820244202221011110532909999") == 0
+
+def find_substrings(string)
+  counter = 0
+  results = []
+  0.upto(string.size) do |idx1|
+    idx1.upto(string.size - 1 ) do |idx2|
+      results << string[idx1..idx2]
+    end
+  end
+  p results
+end
+
+ find_substrings("123834539327238239583")
