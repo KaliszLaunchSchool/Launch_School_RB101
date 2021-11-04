@@ -77,7 +77,11 @@ Helper method
 - sum the cubes
 =end
 
+def revrot(string, int)
+  return "" if int > string.length
+  
 
+end
 
 
 # p revrot("1234", 0) == ""
