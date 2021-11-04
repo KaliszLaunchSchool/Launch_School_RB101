@@ -25,7 +25,60 @@ revrot("", 8) --> ""
 revrot("123456779", 0) --> "" 
 revrot("563000655734469485", 4) --> "0365065073456944"
 
+# Problem
+- Create a method which accepts 2 parameters (string of digits, an integer)
+- Split rhe string into chunks of the integer's size
+- The chunks should be modified as follows:
+  - If the sum of the cube of every digit in the chunk % 2 = 0
+    - Reverse that chunk
+  - Otherwise, rotate the chunk to the left by one
+- Put the chunks together and return the result
+
+If the integer or size of the chunk is <=0 or if the string is empty return ""
+If the integer is greater than the length of the string (impossible to chunk of the integer's size), return ""
+
+# Example
+revrot("123456987654", 6) --> "234561876549"
+123456: cubes = 1 8 27 64 125 216 = 441, so rotate == 234561
+987654: 729 512 343 216 125 64 = 1989 so rotate = 876549
+
+revrot("123456987653", 6) --> "234561356789"
+123456: cubes = 1 8 27 64 125 216 = 441, so rotate == 234561
+987653: 729 512 343 216 125 27 = 1952 so reverse = 876549
+
+revrot("66443875", 4) --> "44668753"
+4466
+
+# p revrot("664438769", 8) == "67834466"
+66443876 9 == rotate and '' ==> 67834466
+
+# Data
+String
+Integer
+Array
+
+# Algorithm
+- Create a method which accepts 2 parameters (string, integer)
+- check to see if the int is bigger than the string size
+  - if so, return ""
+- Split the string into an array with strings the size of the integer
+  - Split the string into characters
+- Iterate through the array
+  - If the string size is less than the integer, return ""
+  - Otherwise, Call the sum of the cubes
+    - If the sum of the cubes is even, reverse the chunk
+    - Otherwise, rotate the chunk to the left by 1
+- Join the array
+- Return the string
+
+Helper method
+- turn the string into integers
+- cube the integers
+- sum the cubes
 =end
+
+
+
 
 # p revrot("1234", 0) == ""
 # p revrot("", 0) == ""
