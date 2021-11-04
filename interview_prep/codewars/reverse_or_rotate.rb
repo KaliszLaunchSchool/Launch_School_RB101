@@ -80,17 +80,19 @@ def revrot(string, int)
   return "" if int > string.length
 
   ary_of_nums = string.chars
+
   ary_of_chunks = []
   str = ""
   ary_of_nums.each do |num|
-    if str.length + 1 == int
+    if int > str.length
+      str << num
+    else
       ary_of_chunks << str
       str = ""
       str << num
-    else
-      str << num
     end
   end
+  ary_of_chunks << str if str.length == int
   p ary_of_chunks
 
   mutated_chunks = []
