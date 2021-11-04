@@ -98,7 +98,10 @@ def revrot(string, int)
 end
 
 def sum_of_cubes(str)
-  integers = str.chars.map {|i| i.to_i}
+  integers = str.chars.map do |i| 
+    i = i.to_i
+    i = i * i * i
+  end
   p integers
 end
 
