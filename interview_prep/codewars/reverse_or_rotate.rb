@@ -93,7 +93,7 @@ def revrot(string, int)
 
   mutated_chunks = []
 
-  ary_of_chunks.map do |chunk|
+  ary_of_chunks.each do |chunk|
     sum = sum_of_cubes(chunk)
     if sum.even?
       chunk.reverse
@@ -103,8 +103,8 @@ def revrot(string, int)
       nums << first_char
       chunk = nums.join
     end
+    mutated_chunks << chunk
   end
-  mutated_chunks << chunk
   mutated_chunks.join
 end
 
