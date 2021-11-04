@@ -83,13 +83,15 @@ def revrot(string, int)
   ary_of_chunks = []
   str = ""
   ary_of_nums.each do |num|
-    if str.length < int
-       str << num
-    else
+    if str.length + 1 == int
       ary_of_chunks << str
       str = ""
+      str << num
+    else
+      str << num
     end
   end
+  p ary_of_chunks
 
   mutated_chunks = []
 
@@ -105,6 +107,7 @@ def revrot(string, int)
     end
     mutated_chunks << chunk
   end
+  p mutated_chunks
   mutated_chunks.join
 end
 
@@ -120,8 +123,8 @@ end
 # p revrot("1234", 0) == ""
 # p revrot("", 0) == ""
 # p revrot("1234", 5) == ""
-p revrot("73304 99108 72815 764", 5) == "330479108928157"
-# p revrot("123456987654", 6) == "234561876549"
+# p revrot("733049910872815764", 5) == "330479108928157"
+p revrot("123456 987654", 6) == "234561 876549"
 # p revrot("123456987653", 6) == "234561356789"
 # p revrot("66443875", 4) == "44668753"
 # p revrot("66443875", 8) == "64438756"
