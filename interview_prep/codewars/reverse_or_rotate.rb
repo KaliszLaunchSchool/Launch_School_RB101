@@ -93,7 +93,7 @@ def revrot(string, int)
 
   ary_of_chunks.map do |chunk|
     sum = sum_of_cubes(chunk)
-    sum
+    p sum
   end
 end
 
@@ -102,7 +102,7 @@ def sum_of_cubes(str)
     i = i.to_i
     i = i * i * i
   end
-  p integers
+  integers.sum
 end
 
 
