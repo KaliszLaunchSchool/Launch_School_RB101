@@ -104,7 +104,7 @@ def revrot(string, int)
       chunk = nums.join
     end
   end
-
+  mutated_chunks << chunk
   mutated_chunks.join
 end
 
