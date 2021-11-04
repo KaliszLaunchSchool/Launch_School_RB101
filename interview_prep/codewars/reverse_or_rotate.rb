@@ -62,7 +62,6 @@ Array
 - check to see if the int is bigger than the string size
   - if so, return ""
 - Split the string into an array with strings the size of the integer
-  - Split the string into characters
 - Iterate through the array
   - If the string size is less than the integer, return ""
   - Otherwise, Call the sum of the cubes
@@ -79,7 +78,7 @@ Helper method
 
 def revrot(string, int)
   return "" if int > string.length
-  
+
   ary_of_nums = string.chars
   ary_of_chunks = []
   str = ""
@@ -91,7 +90,16 @@ def revrot(string, int)
       str = ""
     end
   end
-  ary_of_chunks
+
+  ary_of_chunks.map do |chunk|
+    sum = sum_of_cubes(chunk)
+    sum
+  end
+end
+
+def sum_of_cubes(str)
+  integers = str.chars.map {|i| i.to_i}
+  p integers
 end
 
 
