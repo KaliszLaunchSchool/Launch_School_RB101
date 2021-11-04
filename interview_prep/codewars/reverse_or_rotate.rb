@@ -25,53 +25,7 @@ revrot("", 8) --> ""
 revrot("123456779", 0) --> "" 
 revrot("563000655734469485", 4) --> "0365065073456944"
 
-# Problem
-- Create a method that accepts 2 parameters: a string of digits and a size
-- Split the string into chunks of the given size (if there are remaining digits after the split that are less than size, ignore them)
-  - If you take the cube of each digit of the chunk, sum those and that number divided by 2 is 0
-    - Reverse the chunk
-  -Otherwise, rotate the chunk to the left by 1 position (first digit becomes the last)
-- Take the modified chunks, combine them, return that string
-- Return "" if size <= 0, str is empty, or if size > length of original string
-
-# Examples
-"733049910872815764", 5 
-73304 99108 72815 764
-33041 91089 28157 --> "330479108928157"
-"330479108928157"
 =end
-
-def revrot(string, sz)
-  return '' if sz <= 0 || string == '' || sz > string.size
-  chunks = []
-  index = 0
-  loop do
-    unless string[index, sz] == '' || string[index, sz].size < sz
-      chunks << string[index, sz]
-    end
-    index += sz + 1
-    break if index > string.size
-  end
-
-  chunks = chunks.map do |chunk| 
-    if reverse?(chunk) 
-      chunk.reverse
-    else
-      chunk.chars.rotate.join
-    end
-  end
-  p chunks.join
-end
-
-def reverse?(chunk)
-  nums = [] 
-  chunk.chars.each {|digit| nums << digit.to_i ** 3}
-  if nums.sum % 2 == 0
-    return true
-  else 
-    return false
-  end
-end
 
 # p revrot("1234", 0) == ""
 # p revrot("", 0) == ""
