@@ -98,7 +98,7 @@ def revrot(string, int)
   ary_of_chunks.each do |chunk|
     sum = sum_of_cubes(chunk)
     if sum.even?
-      chunk.reverse
+      chunk.reverse!
     else
       nums = chunk.chars
       first_char = nums.shift
@@ -124,7 +124,7 @@ end
 # p revrot("", 0) == ""
 # p revrot("1234", 5) == ""
 # p revrot("733049910872815764", 5) == "330479108928157"
-p revrot("123456 987654", 6) == "234561 876549"
+p revrot("123456987654", 6) == "234561876549"
 # p revrot("123456987653", 6) == "234561356789"
 # p revrot("66443875", 4) == "44668753"
 # p revrot("66443875", 8) == "64438756"
