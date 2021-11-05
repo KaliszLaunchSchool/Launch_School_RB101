@@ -89,10 +89,7 @@ def revrot(string, int)
     if sum.even?
       chunk.reverse!
     else
-      nums = chunk.chars
-      first_char = nums.shift
-      nums << first_char
-      chunk = nums.join
+      chunk = rotate_str(chunk)
     end
     mutated_chunks << chunk
   end
@@ -123,6 +120,12 @@ def sum_of_cubes(str)
   integers.sum
 end
 
+def rotate_str(chunk)
+  nums = chunk.chars
+  first_char = nums.shift
+  nums << first_char
+  chunk = nums.join
+end
 
 p revrot("1234", 0) == ""
 p revrot("", 0) == ""
