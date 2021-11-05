@@ -80,10 +80,10 @@ def revrot(string, int)
   return "" if int > string.length || int == 0
 
   ary_of_nums = string.chars
-
   ary_of_chunks = into_chunks(ary_of_nums, int)
 
   mutated_chunks = []
+  
   ary_of_chunks.each do |chunk|
     sum = sum_of_cubes(chunk)
     if sum.even?
