@@ -81,21 +81,9 @@ def revrot(string, int)
 
   ary_of_nums = string.chars
 
-  ary_of_chunks = []
-  str = ""
-  ary_of_nums.each do |num|
-    if int > str.length
-      str << num
-    else
-      ary_of_chunks << str
-      str = ""
-      str << num
-    end
-  end
-  ary_of_chunks << str if str.length == int
+  ary_of_chunks = into_chunks(ary_of_nums, int)
 
   mutated_chunks = []
-
   ary_of_chunks.each do |chunk|
     sum = sum_of_cubes(chunk)
     if sum.even?
@@ -109,6 +97,22 @@ def revrot(string, int)
     mutated_chunks << chunk
   end
   mutated_chunks.join
+end
+
+def into_chunks(ary_of_nums, int)
+  ary_of_chunks = []
+  str = ""
+  ary_of_nums.each do |num|
+    if int > str.length
+      str << num
+    else
+      ary_of_chunks << str
+      str = ""
+      str << num
+    end
+  end
+  ary_of_chunks << str if str.length == int
+  ary_of_chunks
 end
 
 def sum_of_cubes(str)
