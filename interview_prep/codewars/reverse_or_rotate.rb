@@ -76,55 +76,131 @@ Helper method
 - sum the cubes
 =end
 
-def revrot(string, int)
-  return "" if int > string.length || int == 0
+# def revrot(string, int)
+#   return "" if int > string.length || int == 0
 
-  ary_of_nums = string.chars
-  ary_of_chunks = into_chunks(ary_of_nums, int)
+#   ary_of_nums = string.chars
+#   ary_of_chunks = into_chunks(ary_of_nums, int)
 
-  mutated_chunks = []
+#   mutated_chunks = []
   
-  ary_of_chunks.each do |chunk|
-    sum = sum_of_cubes(chunk)
-    if sum.even?
-      chunk.reverse!
-    else
-      chunk = rotate_str(chunk)
-    end
-    mutated_chunks << chunk
+#   ary_of_chunks.each do |chunk|
+#     sum = sum_of_cubes(chunk)
+#     if sum.even?
+#       chunk.reverse!
+#     else
+#       chunk = rotate_str(chunk)
+#     end
+#     mutated_chunks << chunk
+#   end
+#   mutated_chunks.join
+# end
+
+# def into_chunks(ary_of_nums, int)
+#   ary_of_chunks = []
+#   str = ""
+#   ary_of_nums.each do |num|
+#     if int > str.length
+#       str << num
+#     else
+#       ary_of_chunks << str
+#       str = ""
+#       str << num
+#     end
+#   end
+#   ary_of_chunks << str if str.length == int
+#   ary_of_chunks
+# end
+
+# def sum_of_cubes(str)
+#   integers = str.chars.map do |i| 
+#     i = i.to_i
+#     i = i * i * i
+#   end
+#   integers.sum
+# end
+
+# def rotate_str(chunk)
+#   nums = chunk.chars
+#   first_char = nums.shift
+#   nums << first_char
+#   chunk = nums.join
+# end
+
+
+=begin
+The input is a string str of digits. Cut the string into chunks (a chunk here is a substring of 
+the initial string) of size sz (ignore the last chunk if its size is less than sz).
+
+If a chunk represents an integer such as the sum of the cubes of its digits is divisible by 2, 
+reverse that chunk; otherwise rotate it to the left by one position. Put together these modified 
+chunks and return the result as a string.
+
+If
+
+sz is <= 0 or if str is empty return ""
+sz is greater (>) than the length of str it is impossible to take a chunk of size sz hence 
+return "".
+
+# Problem
+- Create a mthod which takes a string of digits and chunks it into the size indicated
+- Looking at the chunk:
+  - If the sum of the cubes of its digits % 2 == 0
+    - Reverse the chunk
+  - Else, rotate it to the left by 1 
+  - If chunks are left over that aren't the correct size, drop them
+- Put the chunks back together and return a string
+- Return '' if string is empty, or the size is greater than string elength or side <=0
+
+# Example
+"733049910872815764", 5 == "330479108928157"
+73304 99108 72815 764
+
+# Data
+Integer, string, array
+
+# Algo
+- Split the string into chunks of the proper size
+- Itereate through the chunks
+- Ignore any chunks which are not the appropriate size
+- Helper method: Find the sum of the cubes of the digits
+- If even
+  - Reverse the chunk
+- Otherwise, 
+ - rotate to the left by onee
+=end
+
+def revrot(string, size)
+  return '' if size <=0  || string.empty? || string.length < size
+  new_string = ''
+  array = []
+  first = 0
+  last = size - 1 
+  loop do
+    break if last > string.length - 1 
+    array << string[first..last]
+    first = last + 1
+    last = first + size - 1
   end
-  mutated_chunks.join
+  array = array.map do |string|
+     if sum_of_cubes(string) % 2 == 0
+      string = string.reverse
+     else
+      string = string.chars
+      last_char = string.shift
+      string.push(last_char)
+      string = string.join
+     end
+  end
+  array.join
 end
 
-def into_chunks(ary_of_nums, int)
-  ary_of_chunks = []
-  str = ""
-  ary_of_nums.each do |num|
-    if int > str.length
-      str << num
-    else
-      ary_of_chunks << str
-      str = ""
-      str << num
-    end
+def sum_of_cubes(string)
+  string = string.chars.map do |char|
+    char = char.to_i
+    char = char * char * char
   end
-  ary_of_chunks << str if str.length == int
-  ary_of_chunks
-end
-
-def sum_of_cubes(str)
-  integers = str.chars.map do |i| 
-    i = i.to_i
-    i = i * i * i
-  end
-  integers.sum
-end
-
-def rotate_str(chunk)
-  nums = chunk.chars
-  first_char = nums.shift
-  nums << first_char
-  chunk = nums.join
+  string.sum
 end
 
 p revrot("1234", 0) == ""
