@@ -34,6 +34,8 @@ def find_outlier(array)
     majority = 'even'
   elsif array[0].even? && array[2].even? 
     majority = 'even'
+  elsif array[1].even? && array[2].even? 
+    majority = 'even'
   else 
     majority = 'odd'
   end
