@@ -41,7 +41,7 @@ def max_sequence(array)
     array.each_cons(size) do |sub|
       subs << sub.sum
     end
-  ends
+  end
   if subs.max < 0 
     return 0
   else 
