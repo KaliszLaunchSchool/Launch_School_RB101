@@ -39,16 +39,13 @@ def max_sequence(array)
   return 0 if array.empty?
   1.upto(array.length) do |size|
     array.each_cons(size) do |sub|
-      subs << sub
+      subs << sub.sum
     end
-  end
-  sums = subs.map do |sub|
-    sub.sum
-  end 
-  if sums.max < 0 
+  ends
+  if subs.max < 0 
     return 0
   else 
-    sums.max
+    subs.max
   end
 end 
 
